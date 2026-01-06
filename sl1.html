@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sociolinguistics Revision Quiz</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+            padding: 25px 20px;
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6fa5 100%);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            margin-bottom: 12px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .instructions {
+            background-color: white;
+            border-radius: 10px;
+            padding: 22px;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+        }
+        
+        .instructions ul {
+            padding-left: 22px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .quiz-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .question:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .question-number {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 1.2rem;
+            background-color: #f1f8ff;
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+        
+        .lecture-tag {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .lecture-sl1 {
+            background-color: #e8f4fc;
+            color: #2c7bb6;
+        }
+        
+        .lecture-sl2 {
+            background-color: #f0e6fa;
+            color: #7b2cb6;
+        }
+        
+        .lecture-sl3 {
+            background-color: #e6faf0;
+            color: #2cb67b;
+        }
+        
+        .lecture-sl4 {
+            background-color: #faf0e6;
+            color: #b67b2c;
+        }
+        
+        .lecture-sl5 {
+            background-color: #fae6e6;
+            color: #b62c2c;
+        }
+        
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 1.15rem;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option {
+            padding: 15px 18px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+        
+        .option:hover {
+            background-color: #edf2f7;
+            border-color: #3498db;
+            transform: translateY(-2px);
+        }
+        
+        .option.selected {
+            background-color: #e3f2fd;
+            border-color: #2196f3;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.2);
+        }
+        
+        .option.correct {
+            background-color: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .option.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        .true-false-options {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .true-false-btn {
+            flex: 1;
+            padding: 16px;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+        }
+        
+        .true-false-btn:hover {
+            background-color: #edf2f7;
+            border-color: #3498db;
+            transform: translateY(-2px);
+        }
+        
+        .true-false-btn.selected {
+            background-color: #e3f2fd;
+            border-color: #2196f3;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.2);
+        }
+        
+        .true-false-btn.correct {
+            background-color: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .true-false-btn.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        .feedback {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 1rem;
+            display: none;
+            line-height: 1.6;
+        }
+        
+        .feedback.correct {
+            background-color: #d4edda;
+            border-left: 5px solid #28a745;
+            color: #155724;
+        }
+        
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            border-left: 5px solid #dc3545;
+            color: #721c24;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            padding: 16px 32px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            min-width: 180px;
+            box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            box-shadow: 0 6px 12px rgba(108, 117, 125, 0.3);
+        }
+        
+        .results-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        
+        .results-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .results-header h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .score-display {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #3498db;
+            margin: 20px 0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .score-message {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+        
+        .score-excellent {
+            background-color: #d4edda;
+            color: #155724;
+            border-left: 5px solid #28a745;
+        }
+        
+        .score-good {
+            background-color: #fff3cd;
+            color: #856404;
+            border-left: 5px solid #ffc107;
+        }
+        
+        .score-fair {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 5px solid #dc3545;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            padding: 25px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .stat-box {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .lecture-breakdown {
+            margin-top: 30px;
+        }
+        
+        .lecture-breakdown h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+        
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .breakdown-item {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .breakdown-lecture {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .breakdown-score {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #3498db;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .controls, .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .true-false-options {
+                flex-direction: column;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 25px;
+            }
+            
+            .score-display {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .quiz-container, .results-container, .instructions {
+                padding: 20px 15px;
+            }
+            
+            .question-text {
+                font-size: 1.1rem;
+            }
+            
+            .option {
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📚 Sociolinguistics Revision Quiz</h1>
+        <p class="subtitle">5 Random Questions Per Attempt | Immediate Feedback | Mobile-Friendly</p>
+    </div>
+    
+
+    
+    <div class="quiz-container" id="quiz-container">
+        <!-- Questions will appear here dynamically -->
+    </div>
+    
+    <div class="controls">
+        <button class="btn" onclick="submitQuiz()">Submit Answers</button>
+        <button class="btn btn-secondary" onclick="loadQuiz()">New Quiz</button>
+    </div>
+    
+    <div class="results-container" id="results-container">
+        <div class="results-header">
+            <h2>Quiz Results</h2>
+            <div class="score-display" id="score-display">0/5</div>
+            <div class="score-message" id="score-message"></div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-value" id="correct-count">0</div>
+                <div class="stat-label">Correct</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="incorrect-count">0</div>
+                <div class="stat-label">Incorrect</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="percentage">0%</div>
+                <div class="stat-label">Score</div>
+            </div>
+        </div>
+        
+        <div class="lecture-breakdown">
+            <h3>Performance by Lecture</h3>
+            <div class="breakdown-grid" id="breakdown-grid">
+                <!-- Lecture breakdown will appear here -->
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="btn" onclick="loadQuiz()">Try Another Quiz</button>
+            <button class="btn btn-secondary" onclick="reviewAnswers()">Review Answers</button>
+        </div>
+    </div>
+
+    <script>
+        // Question pool with 100 questions (20 per lecture)
+        const questionPool = [
+            // SL1 Questions (20 questions)
+            {
+                id: 1,
+                lecture: "SL1",
+                type: "mc",
+                text: "What is the main focus of sociolinguistics?",
+                options: ["Language structure only", "Relationship between language and society", "Historical language change", "Phonetics and phonology"],
+                correct: 1,
+                feedback: "✅ Correct! Sociolinguistics studies how language interacts with social factors."
+            },
+            {
+                id: 2,
+                lecture: "SL1",
+                type: "mc",
+                text: "Who is NOT considered a founding figure of sociolinguistics?",
+                options: ["William Labov", "Noam Chomsky", "Dell Hymes", "Basil Bernstein"],
+                correct: 1,
+                feedback: "✅ Correct! Noam Chomsky is associated with generative grammar, not sociolinguistics."
+            },
+            {
+                id: 3,
+                lecture: "SL1",
+                type: "tf",
+                text: "Macro-sociolinguistics focuses on individual speech patterns.",
+                correct: false,
+                feedback: "❌ False. Macro-sociolinguistics studies language in relation to large social structures."
+            },
+            {
+                id: 4,
+                lecture: "SL1",
+                type: "mc",
+                text: "According to Labov, what is 'prior to the individual'?",
+                options: ["Grammar", "The community", "The idiolect", "Writing system"],
+                correct: 1,
+                feedback: "✅ Correct! Labov emphasized that the community shapes language before the individual."
+            },
+            {
+                id: 5,
+                lecture: "SL1",
+                type: "tf",
+                text: "Whitney believed speech is a personal possession.",
+                correct: false,
+                feedback: "❌ False. Whitney said speech is a social possession, not individual."
+            },
+            {
+                id: 6,
+                lecture: "SL1",
+                type: "mc",
+                text: "Which concept refers to an individual's unique way of speaking?",
+                options: ["Dialect", "Idiolect", "Register", "Accent"],
+                correct: 1,
+                feedback: "✅ Correct! Idiolect refers to an individual's unique speech patterns."
+            },
+            {
+                id: 7,
+                lecture: "SL1",
+                type: "tf",
+                text: "Micro-sociolinguistics examines language use in large social groups.",
+                correct: false,
+                feedback: "❌ False. Micro-sociolinguistics focuses on individual and small group interactions."
+            },
+            {
+                id: 8,
+                lecture: "SL1",
+                type: "mc",
+                text: "What does the term 'speech community' refer to?",
+                options: ["People who speak the same language", "A group sharing communication norms", "All citizens of a country", "Professional linguists"],
+                correct: 1,
+                feedback: "✅ Correct! A speech community shares norms for language use and interpretation."
+            },
+            {
+                id: 9,
+                lecture: "SL1",
+                type: "tf",
+                text: "William Labov is known for his work on diglossia.",
+                correct: false,
+                feedback: "❌ False. Charles Ferguson introduced the concept of diglossia."
+            },
+            {
+                id: 10,
+                lecture: "SL1",
+                type: "mc",
+                text: "According to Whitney (1867), what connects a word with an idea?",
+                options: ["Its origin", "Its phonetic form", "Mutual intelligibility in society", "Its length"],
+                correct: 2,
+                feedback: "✅ Correct! Whitney emphasized mutual intelligibility within a society."
+            },
+            {
+                id: 11,
+                lecture: "SL1",
+                type: "tf",
+                text: "Sociolinguistics only studies spoken language, not written language.",
+                correct: false,
+                feedback: "❌ False. Sociolinguistics examines both spoken and written language in social context."
+            },
+            {
+                id: 12,
+                lecture: "SL1",
+                type: "mc",
+                text: "Which of these is a macro-level topic in sociolinguistics?",
+                options: ["Individual pronunciation", "Language dominance in society", "Personal vocabulary", "Speech errors"],
+                correct: 1,
+                feedback: "✅ Correct! Language dominance is a macro-level topic examining large-scale social patterns."
+            },
+            {
+                id: 13,
+                lecture: "SL1",
+                type: "tf",
+                text: "Basil Bernstein developed the theory of communicative competence.",
+                correct: false,
+                feedback: "❌ False. Dell Hymes developed the theory of communicative competence."
+            },
+            {
+                id: 14,
+                lecture: "SL1",
+                type: "mc",
+                text: "What is the 'central dogma' of sociolinguistics according to Labov?",
+                options: ["Language is innate", "The individual creates language", "The community is prior to the individual", "All languages are equal"],
+                correct: 2,
+                feedback: "✅ Correct! Labov argued that the community shapes language before the individual."
+            },
+            {
+                id: 15,
+                lecture: "SL1",
+                type: "tf",
+                text: "Sociolinguistics emerged as a field in the early 20th century.",
+                correct: false,
+                feedback: "❌ False. Sociolinguistics emerged as a distinct field in the 1960s."
+            },
+            {
+                id: 16,
+                lecture: "SL1",
+                type: "mc",
+                text: "Which researcher focused on language code differences between social classes?",
+                options: ["William Labov", "Basil Bernstein", "Dell Hymes", "Joshua Fishman"],
+                correct: 1,
+                feedback: "✅ Correct! Basil Bernstein studied elaborated and restricted codes in different social classes."
+            },
+            {
+                id: 17,
+                lecture: "SL1",
+                type: "tf",
+                text: "John Gumperz emphasized the importance of interaction in sociolinguistics.",
+                correct: true,
+                feedback: "✅ True! Gumperz focused on interactional sociolinguistics and conversational inference."
+            },
+            {
+                id: 18,
+                lecture: "SL1",
+                type: "mc",
+                text: "What does the sociology of language primarily study?",
+                options: ["Individual speech patterns", "Society through language", "Phonetic variation", "Grammar rules"],
+                correct: 1,
+                feedback: "✅ Correct! Sociology of language examines society through the lens of language."
+            },
+            {
+                id: 19,
+                lecture: "SL1",
+                type: "tf",
+                text: "Charles Ferguson introduced the concept of multilingualism.",
+                correct: false,
+                feedback: "❌ False. Joshua Fishman is known for his work on multilingualism."
+            },
+            {
+                id: 20,
+                lecture: "SL1",
+                type: "mc",
+                text: "According to variationist sociolinguistics, language variation is:",
+                options: ["A sign of linguistic decay", "An essential aspect of language function", "A problem to eliminate", "Only found in non-standard dialects"],
+                correct: 1,
+                feedback: "✅ Correct! Variation is seen as a normal and essential aspect of language."
+            },
+            
+            // SL2 Questions (20 questions)
+            {
+                id: 21,
+                lecture: "SL2",
+                type: "mc",
+                text: "What makes scientific knowledge reliable according to Chalmers (1982)?",
+                options: ["Tradition", "Objective proof", "Popularity", "Simplicity"],
+                correct: 1,
+                feedback: "✅ Correct! Scientific knowledge must be objectively proven and verifiable."
+            },
+            {
+                id: 22,
+                lecture: "SL2",
+                type: "mc",
+                text: "Who is known for variationist sociolinguistics and statistical analysis?",
+                options: ["John Gumperz", "William Labov", "Joshua Fishman", "Basil Bernstein"],
+                correct: 1,
+                feedback: "✅ Correct! William Labov pioneered quantitative methods in sociolinguistics."
+            },
+            {
+                id: 23,
+                lecture: "SL2",
+                type: "tf",
+                text: "Sociolinguistics is considered a 'hard science' like physics or chemistry.",
+                correct: false,
+                feedback: "❌ False. Sociolinguistics is a social science, studying human behavior which is more variable."
+            },
+            {
+                id: 24,
+                lecture: "SL2",
+                type: "mc",
+                text: "What is 'junk science' according to Neuman (2014)?",
+                options: ["All social science research", "Research that uses statistical methods", "A PR term criticizing legitimate research", "Research in physical sciences only"],
+                correct: 2,
+                feedback: "✅ Correct! 'Junk science' is a PR term used to discredit research findings one disagrees with."
+            },
+            {
+                id: 25,
+                lecture: "SL2",
+                type: "tf",
+                text: "Objectivity means completely eliminating all personal biases in research.",
+                correct: false,
+                feedback: "❌ False. Complete elimination is impossible, but researchers aim to minimize biases."
+            },
+            {
+                id: 26,
+                lecture: "SL2",
+                type: "mc",
+                text: "What does 'quantitative literacy' or 'numeracy' refer to?",
+                options: ["Reading scientific papers", "Understanding statistical data presentation", "Speaking multiple languages", "Writing research proposals"],
+                correct: 1,
+                feedback: "✅ Correct! Numeracy involves understanding how data are collected and presented statistically."
+            },
+            {
+                id: 27,
+                lecture: "SL2",
+                type: "tf",
+                text: "Scientific knowledge must be based on concrete, factual observation.",
+                correct: true,
+                feedback: "✅ True! Empirical observation is a cornerstone of scientific methodology."
+            },
+            {
+                id: 28,
+                lecture: "SL2",
+                type: "mc",
+                text: "According to May, Williams, and Wiggins (2002), science represents:",
+                options: ["Absolute truth", "A body of knowledge assumed to represent truth", "Personal opinions", "Philosophical speculation"],
+                correct: 1,
+                feedback: "✅ Correct! Science produces knowledge assumed to represent truth about phenomena."
+            },
+            {
+                id: 29,
+                lecture: "SL2",
+                type: "tf",
+                text: "Sociolinguistics cannot be scientific because it studies variable human behavior.",
+                correct: false,
+                feedback: "❌ False. Sociolinguistics uses scientific methods to study patterns in language variation."
+            },
+            {
+                id: 30,
+                lecture: "SL2",
+                type: "mc",
+                text: "What is a key difference between natural and social sciences?",
+                options: ["Social sciences are not systematic", "Natural sciences study predictable phenomena", "Only natural sciences use data", "Social sciences don't require objectivity"],
+                correct: 1,
+                feedback: "✅ Correct! Natural sciences often study more predictable physical phenomena."
+            },
+            {
+                id: 31,
+                lecture: "SL2",
+                type: "tf",
+                text: "Labov's work is considered unscientific because it studies social variables.",
+                correct: false,
+                feedback: "❌ False. Labov's quantitative approach is considered a scientific study of language variation."
+            },
+            {
+                id: 32,
+                lecture: "SL2",
+                type: "mc",
+                text: "What does 'scientific literacy' according to Laugksch (2000) include?",
+                options: ["Memorizing facts", "Understanding and applying scientific concepts", "Only laboratory skills", "Writing complex equations"],
+                correct: 1,
+                feedback: "✅ Correct! Scientific literacy involves understanding, applying, and using scientific processes."
+            },
+            {
+                id: 33,
+                lecture: "SL2",
+                type: "tf",
+                text: "All fields that use scientific methods should be called 'sciences'.",
+                correct: false,
+                feedback: "❌ False. Some argue that only fields studying natural phenomena should be called sciences."
+            },
+            {
+                id: 34,
+                lecture: "SL2",
+                type: "mc",
+                text: "Why is controlling cultural biases important in sociolinguistics?",
+                options: ["To prove hypotheses", "To maintain objectivity", "To simplify analysis", "To avoid ethical issues"],
+                correct: 1,
+                feedback: "✅ Correct! Controlling biases helps maintain objectivity in research."
+            },
+            {
+                id: 35,
+                lecture: "SL2",
+                type: "tf",
+                text: "Empirical observation in sociolinguistics involves only audio recording.",
+                correct: false,
+                feedback: "❌ False. Empirical observation includes various data collection methods like interviews, surveys, and recordings."
+            },
+            {
+                id: 36,
+                lecture: "SL2",
+                type: "mc",
+                text: "What does verifiability mean in scientific research?",
+                options: ["Results can be obtained again under same conditions", "Research is popular", "Findings are simple", "Methods are traditional"],
+                correct: 0,
+                feedback: "✅ Correct! Verifiability means others can replicate the study under similar conditions."
+            },
+            {
+                id: 37,
+                lecture: "SL2",
+                type: "tf",
+                text: "Quantitative methods are not suitable for studying language variation.",
+                correct: false,
+                feedback: "❌ False. Quantitative methods are essential for identifying patterns in language variation."
+            },
+            {
+                id: 38,
+                lecture: "SL2",
+                type: "mc",
+                text: "What is the main challenge in making sociolinguistics 'scientific'?",
+                options: ["Human behavior variability", "Lack of research methods", "No available data", "Simple research questions"],
+                correct: 0,
+                feedback: "✅ Correct! Human behavior is complex and variable, making prediction difficult."
+            },
+            {
+                id: 39,
+                lecture: "SL2",
+                type: "tf",
+                text: "The term 'pseudoscience' refers to fields that use scientific methods incorrectly.",
+                correct: true,
+                feedback: "✅ True! Pseudoscience refers to claims presented as scientific but lacking evidence or proper methodology."
+            },
+            {
+                id: 40,
+                lecture: "SL2",
+                type: "mc",
+                text: "What distinguishes scientific knowledge from everyday knowledge?",
+                options: ["Complexity", "Objectivity and systematic methods", "Length of explanation", "Use of technical terms"],
+                correct: 1,
+                feedback: "✅ Correct! Scientific knowledge is characterized by objectivity and systematic methodology."
+            },
+            
+            // SL3 Questions (20 questions)
+            {
+                id: 41,
+                lecture: "SL3",
+                type: "mc",
+                text: "What is an 'idiolect'?",
+                options: ["A regional dialect", "An individual's unique speech patterns", "A professional jargon", "A national language"],
+                correct: 1,
+                feedback: "✅ Correct! Idiolect refers to an individual's personal dialect or speech habits."
+            },
+            {
+                id: 42,
+                lecture: "SL3",
+                type: "mc",
+                text: "Which term is an umbrella term for language varieties?",
+                options: ["Dialect", "Accent", "Register", "Variety"],
+                correct: 3,
+                feedback: "✅ Correct! 'Variety' is a neutral umbrella term covering dialects, accents, registers, etc."
+            },
+            {
+                id: 43,
+                lecture: "SL3",
+                type: "tf",
+                text: "Accent refers only to pronunciation differences.",
+                correct: true,
+                feedback: "✅ True! Accent specifically refers to pronunciation features that identify regional or social origin."
+            },
+            {
+                id: 44,
+                lecture: "SL3",
+                type: "mc",
+                text: "What is a 'register' in sociolinguistics?",
+                options: ["A list of words", "Language variety for specific contexts", "A pronunciation guide", "A grammar rulebook"],
+                correct: 1,
+                feedback: "✅ Correct! Register is a language variety used in a particular social context or situation."
+            },
+            {
+                id: 45,
+                lecture: "SL3",
+                type: "tf",
+                text: "Mandarin and Cantonese are mutually intelligible spoken varieties.",
+                correct: false,
+                feedback: "❌ False. Mandarin and Cantonese are not mutually intelligible in spoken form despite both being called 'Chinese'."
+            },
+            {
+                id: 46,
+                lecture: "SL3",
+                type: "mc",
+                text: "What does 'mutual intelligibility' refer to?",
+                options: ["Speakers understanding each other", "Similar grammar rules", "Shared vocabulary", "Common writing system"],
+                correct: 0,
+                feedback: "✅ Correct! Mutual intelligibility means speakers of different varieties can understand each other."
+            },
+            {
+                id: 47,
+                lecture: "SL3",
+                type: "tf",
+                text: "Norwegian and Swedish are considered dialects of the same language.",
+                correct: false,
+                feedback: "❌ False. Norwegian and Swedish are considered separate languages despite high mutual intelligibility."
+            },
+            {
+                id: 48,
+                lecture: "SL3",
+                type: "mc",
+                text: "According to Wardhaugh (2006), how do common people often view dialects?",
+                options: ["Prestigious varieties", "Non-prestigious local varieties", "Formal speech", "Academic language"],
+                correct: 1,
+                feedback: "✅ Correct! Many people view dialects as non-prestigious local varieties of a 'real' language."
+            },
+            {
+                id: 49,
+                lecture: "SL3",
+                type: "tf",
+                text: "The distinction between language and dialect is purely linguistic.",
+                correct: false,
+                feedback: "❌ False. The distinction is often political or social rather than purely linguistic."
+            },
+            {
+                id: 50,
+                lecture: "SL3",
+                type: "mc",
+                text: "What famous saying highlights the political nature of language/dialect distinctions?",
+                options: ["Language is power", "A language is a dialect with an army and navy", "Dialects are languages without passports", "All languages are equal"],
+                correct: 1,
+                feedback: "✅ Correct! This saying emphasizes that political power often determines what is called a 'language'."
+            },
+            {
+                id: 51,
+                lecture: "SL3",
+                type: "tf",
+                text: "All languages with many speakers develop dialects.",
+                correct: true,
+                feedback: "✅ True! Crystal notes that languages with many speakers over large areas typically develop dialects."
+            },
+            {
+                id: 52,
+                lecture: "SL3",
+                type: "mc",
+                text: "Which pair represents mutually intelligible varieties considered separate languages?",
+                options: ["Mandarin and Cantonese", "Norwegian and Swedish", "British and American English", "Classical and Moroccan Arabic"],
+                correct: 1,
+                feedback: "✅ Correct! Norwegian and Swedish are highly mutually intelligible but considered separate languages."
+            },
+            {
+                id: 53,
+                lecture: "SL3",
+                type: "tf",
+                text: "Register is determined by the relationship between speakers.",
+                correct: true,
+                feedback: "✅ True! Register varies based on social context, including relationships between speakers."
+            },
+            {
+                id: 54,
+                lecture: "SL3",
+                type: "mc",
+                text: "What is the main advantage of using 'variety' as a term?",
+                options: ["It's more precise", "It's a neutral umbrella term", "It's more technical", "It's easier to spell"],
+                correct: 1,
+                feedback: "✅ Correct! 'Variety' is neutral and avoids value judgments associated with 'dialect' or 'language'."
+            },
+            {
+                id: 55,
+                lecture: "SL3",
+                type: "tf",
+                text: "Arabic has no dialectal variation across the 22 countries where it's spoken.",
+                correct: false,
+                feedback: "❌ False. Arabic has significant dialectal variation across different countries and regions."
+            },
+            {
+                id: 56,
+                lecture: "SL3",
+                type: "mc",
+                text: "What does Crystal (2008) say about dialects?",
+                options: ["Only small languages have dialects", "Any language with many speakers develops dialects", "Dialects are incorrect forms", "Dialects don't have grammar"],
+                correct: 1,
+                feedback: "✅ Correct! Crystal notes that languages with many speakers over large areas naturally develop dialects."
+            },
+            {
+                id: 57,
+                lecture: "SL3",
+                type: "tf",
+                text: "Accent includes grammar and vocabulary differences.",
+                correct: false,
+                feedback: "❌ False. Accent refers specifically to pronunciation, not grammar or vocabulary."
+            },
+            {
+                id: 58,
+                lecture: "SL3",
+                type: "mc",
+                text: "Why might sociolinguists prefer 'variety' over 'dialect'?",
+                options: ["It sounds more academic", "It avoids negative connotations", "It's shorter", "It's a newer term"],
+                correct: 1,
+                feedback: "✅ Correct! 'Variety' avoids the negative connotations sometimes associated with 'dialect'."
+            },
+            {
+                id: 59,
+                lecture: "SL3",
+                type: "tf",
+                text: "An individual's idiolect remains constant throughout their life.",
+                correct: false,
+                feedback: "❌ False. Idiolects can change over time due to various social and personal factors."
+            },
+            {
+                id: 60,
+                lecture: "SL3",
+                type: "mc",
+                text: "What is an example of a register?",
+                options: ["Southern American English", "Legal English", "Cockney accent", "Personal vocabulary"],
+                correct: 1,
+                feedback: "✅ Correct! Legal English is a register used in specific professional contexts."
+            },
+            
+            // SL4 Questions (20 questions)
+            {
+                id: 61,
+                lecture: "SL4",
+                type: "mc",
+                text: "What is a 'speech community' according to Crystal (2008)?",
+                options: ["People in the same country", "A group sharing a spoken language variety", "Only educated speakers", "People with the same accent"],
+                correct: 1,
+                feedback: "✅ Correct! A speech community shares a spoken language or language variety."
+            },
+            {
+                id: 62,
+                lecture: "SL4",
+                type: "mc",
+                text: "What concept emphasizes relationships between groups rather than fixed boundaries?",
+                options: ["Speech community", "Social network", "Dialect", "Register"],
+                correct: 1,
+                feedback: "✅ Correct! Social networks focus on relationships and interactions between groups."
+            },
+            {
+                id: 63,
+                lecture: "SL4",
+                type: "tf",
+                text: "A speech community must be geographically defined.",
+                correct: false,
+                feedback: "❌ False. Speech communities can be defined socially, not just geographically."
+            },
+            {
+                id: 64,
+                lecture: "SL4",
+                type: "mc",
+                text: "Who introduced the concept of 'community of practice'?",
+                options: ["Labov and Bernstein", "Lave and Wenger", "Chomsky and Saussure", "Fishman and Gumperz"],
+                correct: 1,
+                feedback: "✅ Correct! Jean Lave and Etienne Wenger introduced this concept in 1991."
+            },
+            {
+                id: 65,
+                lecture: "SL4",
+                type: "tf",
+                text: "Social networks theory comes from sociology, not linguistics.",
+                correct: true,
+                feedback: "✅ True! Social networks theory originated in sociology before being applied to linguistics."
+            },
+            {
+                id: 66,
+                lecture: "SL4",
+                type: "mc",
+                text: "What is a key problem with defining speech communities?",
+                options: ["Lack of speakers", "Defining clear boundaries", "No research methods", "All speakers are identical"],
+                correct: 1,
+                feedback: "✅ Correct! Defining clear boundaries for speech communities is challenging."
+            },
+            {
+                id: 67,
+                lecture: "SL4",
+                type: "tf",
+                text: "Communities of practice only exist in professional settings.",
+                correct: false,
+                feedback: "❌ False. Communities of practice can form around any shared activity or interest."
+            },
+            {
+                id: 68,
+                lecture: "SL4",
+                type: "mc",
+                text: "What do social networks help explain in sociolinguistics?",
+                options: ["Grammar rules", "How linguistic features spread", "Language origins", "Writing systems"],
+                correct: 1,
+                feedback: "✅ Correct! Social networks help explain how linguistic innovations spread through communities."
+            },
+            {
+                id: 69,
+                lecture: "SL4",
+                type: "tf",
+                text: "Rapport and Overing (2000) see society as only geographically defined groups.",
+                correct: false,
+                feedback: "❌ False. They emphasize face-to-face interaction rather than geographical boundaries."
+            },
+            {
+                id: 70,
+                lecture: "SL4",
+                type: "mc",
+                text: "What is a common criteria for identifying a speech community?",
+                options: ["Shared communication norms", "Same political views", "Identical income levels", "Common religion"],
+                correct: 0,
+                feedback: "✅ Correct! Shared norms for communication are key to defining speech communities."
+            },
+            {
+                id: 71,
+                lecture: "SL4",
+                type: "tf",
+                text: "The concept of 'grouping' perfectly captures individual complexity.",
+                correct: false,
+                feedback: "❌ False. Grouping simplifies complex individual identities and behaviors."
+            },
+            {
+                id: 72,
+                lecture: "SL4",
+                type: "mc",
+                text: "How does 'community of practice' explain professional language use?",
+                options: ["Through shared activities", "Through genetic factors", "Through geographical proximity", "Through political affiliation"],
+                correct: 0,
+                feedback: "✅ Correct! Shared professional activities lead to distinctive language use patterns."
+            },
+            {
+                id: 73,
+                lecture: "SL4",
+                type: "tf",
+                text: "Stolley (2005) believes society is confined to geographical areas.",
+                correct: false,
+                feedback: "❌ False. Stolley notes that globalization means society is no longer confined geographically."
+            },
+            {
+                id: 74,
+                lecture: "SL4",
+                type: "mc",
+                text: "What is problematic about fixed group boundaries in sociolinguistics?",
+                options: ["They're too expensive to study", "They ignore individual complexity", "They're always wrong", "They change too quickly"],
+                correct: 1,
+                feedback: "✅ Correct! Fixed boundaries oversimplify the complex ways individuals belong to multiple groups."
+            },
+            {
+                id: 75,
+                lecture: "SL4",
+                type: "tf",
+                text: "Social networks only include family relationships.",
+                correct: false,
+                feedback: "❌ False. Social networks include all types of relationships, not just family."
+            },
+            {
+                id: 76,
+                lecture: "SL4",
+                type: "mc",
+                text: "According to Wenger (1998), practice includes:",
+                options: ["Only professional activities", "Doing in historical and social context", "Individual hobbies only", "Theoretical knowledge only"],
+                correct: 1,
+                feedback: "✅ Correct! Practice involves doing in historical and social contexts that give meaning."
+            },
+            {
+                id: 77,
+                lecture: "SL4",
+                type: "tf",
+                text: "Speech communities are always smaller than societies.",
+                correct: true,
+                feedback: "✅ True! Speech communities are subsets of larger societies."
+            },
+            {
+                id: 78,
+                lecture: "SL4",
+                type: "mc",
+                text: "What do communities of practice help members develop?",
+                options: ["Financial wealth", "Common understanding of practices", "Political power", "Geographical territory"],
+                correct: 1,
+                feedback: "✅ Correct! Through shared activities, members develop shared understandings."
+            },
+            {
+                id: 79,
+                lecture: "SL4",
+                type: "tf",
+                text: "Social network theory is similar to system theories with web-like interactions.",
+                correct: true,
+                feedback: "✅ True! Both emphasize interconnected, web-like relationships between elements."
+            },
+            {
+                id: 80,
+                lecture: "SL4",
+                type: "mc",
+                text: "Why is the concept of 'group' crucial in sociolinguistics?",
+                options: ["It enables systematic study", "It's politically correct", "It's traditional", "It's required by funding"],
+                correct: 0,
+                feedback: "✅ Correct! Grouping enables systematic study of manageable samples."
+            },
+            
+            // SL5 Questions (20 questions)
+            {
+                id: 81,
+                lecture: "SL5",
+                type: "mc",
+                text: "What drives language change according to sociolinguistics?",
+                options: ["Only internal grammar changes", "Social dynamics and factors", "Linguistic laws only", "Random mutations"],
+                correct: 1,
+                feedback: "✅ Correct! Language change is driven by social dynamics and factors."
+            },
+            {
+                id: 82,
+                lecture: "SL5",
+                type: "mc",
+                text: "Who developed the theory of social networks applied to language change?",
+                options: ["William Labov", "Mark Granovetter", "Jean Lave", "Etienne Wenger"],
+                correct: 1,
+                feedback: "✅ Correct! Mark Granovetter developed social network theory in sociology."
+            },
+            {
+                id: 83,
+                lecture: "SL5",
+                type: "tf",
+                text: "Language change only occurs within isolated groups, not between them.",
+                correct: false,
+                feedback: "❌ False. Language change occurs through interactions both within and between groups."
+            },
+            {
+                id: 84,
+                lecture: "SL5",
+                type: "mc",
+                text: "What type of social ties help spread linguistic innovations?",
+                options: ["Only strong family ties", "Only weak acquaintance ties", "Both strong and weak ties", "No social ties matter"],
+                correct: 2,
+                feedback: "✅ Correct! Both strong and weak ties play roles in language change, with weak ties often spreading innovations."
+            },
+            {
+                id: 85,
+                lecture: "SL5",
+                type: "tf",
+                text: "Communities of practice view language as just a set of rules.",
+                correct: false,
+                feedback: "❌ False. Communities of practice see language as social activity shaped by participation."
+            },
+            {
+                id: 86,
+                lecture: "SL5",
+                type: "mc",
+                text: "What is NOT typically a driver of language change?",
+                options: ["Social class", "Age differences", "Fixed grammar rules", "Geographical separation"],
+                correct: 2,
+                feedback: "✅ Correct! Fixed, unchanging grammar rules would prevent change, not drive it."
+            },
+            {
+                id: 87,
+                lecture: "SL5",
+                type: "tf",
+                text: "Language change studies show languages are static systems.",
+                correct: false,
+                feedback: "❌ False. Languages are dynamic systems that constantly evolve."
+            },
+            {
+                id: 88,
+                lecture: "SL5",
+                type: "mc",
+                text: "How does age influence language change?",
+                options: ["Older people always resist change", "Younger generations introduce innovations", "Age has no effect", "Only middle-aged people change language"],
+                correct: 1,
+                feedback: "✅ Correct! Younger generations often introduce and spread linguistic innovations."
+            },
+            {
+                id: 89,
+                lecture: "SL5",
+                type: "tf",
+                text: "Social networks only affect vocabulary, not pronunciation or grammar.",
+                correct: false,
+                feedback: "❌ False. Social networks affect all aspects of language including pronunciation and grammar."
+            },
+            {
+                id: 90,
+                lecture: "SL5",
+                type: "mc",
+                text: "What does community of practice theory emphasize about learning?",
+                options: ["Passive reception", "Active participation", "Isolated study", "Genetic predisposition"],
+                correct: 1,
+                feedback: "✅ Correct! Learning involves active participation, negotiation, and meaning-making."
+            },
+            {
+                id: 91,
+                lecture: "SL5",
+                type: "tf",
+                text: "Globalization has slowed down language change in the 21st century.",
+                correct: false,
+                feedback: "❌ False. Globalization and social media have accelerated language change."
+            },
+            {
+                id: 92,
+                lecture: "SL5",
+                type: "mc",
+                text: "Why is studying both micro and macro levels important for language change?",
+                options: ["Only micro level matters", "They provide complete understanding", "It's traditional", "Funding requires both"],
+                correct: 1,
+                feedback: "✅ Correct! Both levels provide a more complete understanding of language change processes."
+            },
+            {
+                id: 93,
+                lecture: "SL5",
+                type: "tf",
+                text: "Strong social ties always accelerate language change.",
+                correct: false,
+                feedback: "❌ False. Strong ties often reinforce existing patterns, while weak ties spread innovations."
+            },
+            {
+                id: 94,
+                lecture: "SL5",
+                type: "mc",
+                text: "How does identity relate to language change?",
+                options: ["No relationship", "People use language to construct identity", "Identity prevents change", "Only national identity matters"],
+                correct: 1,
+                feedback: "✅ Correct! Language is a means through which individuals construct and negotiate identities."
+            },
+            {
+                id: 95,
+                lecture: "SL5",
+                type: "tf",
+                text: "Language change can be studied by comparing different generations.",
+                correct: true,
+                feedback: "✅ True! Comparing language use across generations reveals patterns of change."
+            },
+            {
+                id: 96,
+                lecture: "SL5",
+                type: "mc",
+                text: "What role do social networks play in explaining speed of linguistic change?",
+                options: ["No role", "They explain why some changes spread quickly", "They only explain vocabulary", "They prevent change"],
+                correct: 1,
+                feedback: "✅ Correct! Network structure helps explain why some innovations spread quickly while others don't."
+            },
+            {
+                id: 97,
+                lecture: "SL5",
+                type: "tf",
+                text: "The study of language change is not important for understanding society.",
+                correct: false,
+                feedback: "❌ False. Language change reveals how society changes and how people adapt."
+            },
+            {
+                id: 98,
+                lecture: "SL5",
+                type: "mc",
+                text: "Which factor has accelerated language change in recent decades?",
+                options: ["Social media", "Less travel", "Stricter education", "Fewer languages"],
+                correct: 0,
+                feedback: "✅ Correct! Social media has dramatically accelerated language change through rapid spread of innovations."
+            },
+            {
+                id: 99,
+                lecture: "SL5",
+                type: "tf",
+                text: "Communities of practice only exist in workplace settings.",
+                correct: false,
+                feedback: "❌ False. Communities of practice form around any shared endeavor, not just work."
+            },
+            {
+                id: 100,
+                lecture: "SL5",
+                type: "mc",
+                text: "What do sociolinguists study to understand language change mechanisms?",
+                options: ["Only historical texts", "Social factors and interactions", "Only grammar books", "Brain scans only"],
+                correct: 1,
+                feedback: "✅ Correct! Sociolinguists examine social factors and interactions to understand language change."
+            }
+        ];
+
+        let currentQuestions = [];
+        let userAnswers = {};
+        let quizSubmitted = false;
+
+        // Function to get 5 random questions from the pool
+        function getRandomQuestions() {
+            // Create a copy of the question pool
+            const shuffled = [...questionPool].sort(() => 0.5 - Math.random());
+            // Return first 5 questions
+            return shuffled.slice(0, 5);
+        }
+
+        // Function to load a new quiz
+        function loadQuiz() {
+            currentQuestions = getRandomQuestions();
+            userAnswers = {};
+            quizSubmitted = false;
+            
+            // Hide results and show quiz container
+            document.getElementById('results-container').style.display = 'none';
+            document.getElementById('quiz-container').style.display = 'block';
+            
+            // Clear previous quiz
+            const quizContainer = document.getElementById('quiz-container');
+            quizContainer.innerHTML = '';
+            
+            // Add each question to the container
+            currentQuestions.forEach((question, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.className = 'question';
+                questionElement.id = `question-${index}`;
+                
+                // Add question header with number and lecture tag
+                const questionHeader = document.createElement('div');
+                questionHeader.className = 'question-header';
+                
+                const questionNumber = document.createElement('div');
+                questionNumber.className = 'question-number';
+                questionNumber.textContent = `Question ${index + 1}`;
+                
+                const lectureTag = document.createElement('div');
+                lectureTag.className = `lecture-tag lecture-${question.lecture.toLowerCase()}`;
+                lectureTag.textContent = question.lecture;
+                
+                questionHeader.appendChild(questionNumber);
+                questionHeader.appendChild(lectureTag);
+                questionElement.appendChild(questionHeader);
+                
+                // Add question text
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.textContent = question.text;
+                questionElement.appendChild(questionText);
+                
+                if (question.type === 'mc') {
+                    // Multiple choice question
+                    const optionsDiv = document.createElement('div');
+                    optionsDiv.className = 'options';
+                    
+                    question.options.forEach((option, optionIndex) => {
+                        const optionDiv = document.createElement('div');
+                        optionDiv.className = 'option';
+                        optionDiv.textContent = `${String.fromCharCode(65 + optionIndex)}. ${option}`;
+                        optionDiv.dataset.index = optionIndex;
+                        optionDiv.onclick = () => selectAnswer(index, optionIndex);
+                        
+                        optionsDiv.appendChild(optionDiv);
+                    });
+                    
+                    questionElement.appendChild(optionsDiv);
+                } else {
+                    // True/False question
+                    const tfDiv = document.createElement('div');
+                    tfDiv.className = 'true-false-options';
+                    
+                    const trueBtn = document.createElement('div');
+                    trueBtn.className = 'true-false-btn';
+                    trueBtn.textContent = 'True';
+                    trueBtn.dataset.value = 'true';
+                    trueBtn.onclick = () => selectAnswer(index, true);
+                    
+                    const falseBtn = document.createElement('div');
+                    falseBtn.className = 'true-false-btn';
+                    falseBtn.textContent = 'False';
+                    falseBtn.dataset.value = 'false';
+                    falseBtn.onclick = () => selectAnswer(index, false);
+                    
+                    tfDiv.appendChild(trueBtn);
+                    tfDiv.appendChild(falseBtn);
+                    questionElement.appendChild(tfDiv);
+                }
+                
+                // Add feedback div (initially hidden)
+                const feedbackDiv = document.createElement('div');
+                feedbackDiv.className = 'feedback';
+                feedbackDiv.id = `feedback-${index}`;
+                questionElement.appendChild(feedbackDiv);
+                
+                quizContainer.appendChild(questionElement);
+            });
+        }
+
+        // Function to select an answer
+        function selectAnswer(questionIndex, answer) {
+            if (quizSubmitted) return;
+            
+            userAnswers[questionIndex] = answer;
+            
+            const questionElement = document.getElementById(`question-${questionIndex}`);
+            const question = currentQuestions[questionIndex];
+            
+            if (question.type === 'mc') {
+                // Remove selected class from all options
+                const options = questionElement.querySelectorAll('.option');
+                options.forEach(option => {
+                    option.classList.remove('selected');
+                });
+                
+                // Add selected class to chosen option
+                options[answer].classList.add('selected');
+            } else {
+                // True/False question
+                const trueBtn = questionElement.querySelector('.true-false-btn[data-value="true"]');
+                const falseBtn = questionElement.querySelector('.true-false-btn[data-value="false"]');
+                
+                trueBtn.classList.remove('selected');
+                falseBtn.classList.remove('selected');
+                
+                if (answer === true) {
+                    trueBtn.classList.add('selected');
+                } else {
+                    falseBtn.classList.add('selected');
+                }
+            }
+            
+            // Hide any previous feedback
+            const feedbackDiv = document.getElementById(`feedback-${questionIndex}`);
+            feedbackDiv.style.display = 'none';
+            feedbackDiv.classList.remove('correct', 'incorrect');
+        }
+
+        // Function to submit the quiz
+        function submitQuiz() {
+            // Check if all questions are answered
+            const unanswered = currentQuestions.map((_, index) => index).filter(index => userAnswers[index] === undefined);
+            
+            if (unanswered.length > 0) {
+                alert(`Please answer all questions before submitting. You haven't answered questions: ${unanswered.map(i => i + 1).join(', ')}`);
+                return;
+            }
+            
+            quizSubmitted = true;
+            
+            let correctCount = 0;
+            let lectureBreakdown = {};
+            
+            // Check answers and show feedback
+            currentQuestions.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = question.type === 'mc' 
+                    ? userAnswer === question.correct
+                    : userAnswer === question.correct;
+                
+                if (isCorrect) correctCount++;
+                
+                // Track correct answers by lecture
+                if (!lectureBreakdown[question.lecture]) {
+                    lectureBreakdown[question.lecture] = { correct: 0, total: 0 };
+                }
+                lectureBreakdown[question.lecture].total++;
+                if (isCorrect) lectureBreakdown[question.lecture].correct++;
+                
+                // Show feedback
+                const feedbackDiv = document.getElementById(`feedback-${index}`);
+                feedbackDiv.textContent = question.feedback;
+                feedbackDiv.classList.add(isCorrect ? 'correct' : 'incorrect');
+                feedbackDiv.style.display = 'block';
+                
+                // Highlight correct/incorrect answers
+                if (question.type === 'mc') {
+                    const questionElement = document.getElementById(`question-${index}`);
+                    const options = questionElement.querySelectorAll('.option');
+                    
+                    options.forEach((option, optionIndex) => {
+                        if (optionIndex === question.correct) {
+                            option.classList.add('correct');
+                        } else if (optionIndex === userAnswer && !isCorrect) {
+                            option.classList.add('incorrect');
+                        }
+                        option.style.pointerEvents = 'none';
+                    });
+                } else {
+                    // True/False question
+                    const questionElement = document.getElementById(`question-${index}`);
+                    const trueBtn = questionElement.querySelector('.true-false-btn[data-value="true"]');
+                    const falseBtn = questionElement.querySelector('.true-false-btn[data-value="false"]');
+                    
+                    if (question.correct === true) {
+                        trueBtn.classList.add('correct');
+                        if (userAnswer === false) falseBtn.classList.add('incorrect');
+                    } else {
+                        falseBtn.classList.add('correct');
+                        if (userAnswer === true) trueBtn.classList.add('incorrect');
+                    }
+                    
+                    trueBtn.style.pointerEvents = 'none';
+                    falseBtn.style.pointerEvents = 'none';
+                }
+            });
+            
+            // Calculate score percentage
+            const percentage = Math.round((correctCount / currentQuestions.length) * 100);
+            
+            // Display results
+            displayResults(correctCount, percentage, lectureBreakdown);
+        }
+
+        // Function to display quiz results
+        function displayResults(correctCount, percentage, lectureBreakdown) {
+            // Update score display
+            document.getElementById('score-display').textContent = `${correctCount}/${currentQuestions.length}`;
+            document.getElementById('correct-count').textContent = correctCount;
+            document.getElementById('incorrect-count').textContent = currentQuestions.length - correctCount;
+            document.getElementById('percentage').textContent = `${percentage}%`;
+            
+            // Set score message with appropriate styling
+            const scoreMessage = document.getElementById('score-message');
+            scoreMessage.className = 'score-message'; // Reset class
+            
+            if (percentage === 100) {
+                scoreMessage.textContent = "Perfect Score! You've mastered sociolinguistics!";
+                scoreMessage.classList.add('score-excellent');
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Excellent! You have a strong understanding of sociolinguistics.";
+                scoreMessage.classList.add('score-excellent');
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Good job! You have a solid foundation in sociolinguistics.";
+                scoreMessage.classList.add('score-good');
+            } else if (percentage >= 40) {
+                scoreMessage.textContent = "Fair. Review the lectures to improve your understanding.";
+                scoreMessage.classList.add('score-fair');
+            } else {
+                scoreMessage.textContent = "Keep studying! Review the lecture materials and try again.";
+                scoreMessage.classList.add('score-fair');
+            }
+            
+            // Update lecture breakdown
+            const breakdownGrid = document.getElementById('breakdown-grid');
+            breakdownGrid.innerHTML = '';
+            
+            // Sort lectures for consistent display
+            const sortedLectures = Object.keys(lectureBreakdown).sort();
+            
+            sortedLectures.forEach(lecture => {
+                const breakdown = lectureBreakdown[lecture];
+                const breakdownItem = document.createElement('div');
+                breakdownItem.className = 'breakdown-item';
+                
+                const lectureName = document.createElement('div');
+                lectureName.className = 'breakdown-lecture';
+                lectureName.textContent = lecture;
+                
+                const lectureScore = document.createElement('div');
+                lectureScore.className = 'breakdown-score';
+                lectureScore.textContent = `${breakdown.correct}/${breakdown.total}`;
+                
+                breakdownItem.appendChild(lectureName);
+                breakdownItem.appendChild(lectureScore);
+                breakdownGrid.appendChild(breakdownItem);
+            });
+            
+            // Show results container and hide quiz container
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('results-container').style.display = 'block';
+            
+            // Scroll to results
+            document.getElementById('results-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Function to review answers (scrolls back to quiz)
+        function reviewAnswers() {
+            document.getElementById('results-container').style.display = 'none';
+            document.getElementById('quiz-container').style.display = 'block';
+            document.getElementById('quiz-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize the quiz on page load
+        window.onload = loadQuiz;
+    </script>
+</body>
+</html>
