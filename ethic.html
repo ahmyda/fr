@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethics & Deontology - Master Revision Hub</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #4a6491;
+            --accent-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --light-bg: #f8f9fa;
+            --dark-text: #2c3e50;
+            --medium-text: #34495e;
+            --light-text: #7f8c8d;
+            --border-color: #e9ecef;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-hover: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark-text);
+            line-height: 1.6;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::after {
+            content: "⚖️";
+            position: absolute;
+            font-size: 60px;
+            opacity: 0.15;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        h1 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.4;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        
+        /* Navigation */
+        .navigation {
+            background-color: white;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .nav-tabs {
+            display: flex;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 5px;
+        }
+        
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .nav-btn {
+            background-color: transparent;
+            color: var(--medium-text);
+            border: none;
+            padding: 14px 16px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            position: relative;
+            flex-shrink: 0;
+            min-height: 50px;
+        }
+        
+        .nav-btn:hover, .nav-btn:active {
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+        }
+        
+        .nav-btn.active {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            background-color: #f8fafc;
+        }
+        
+        .nav-btn::before {
+            content: attr(data-icon);
+            margin-right: 6px;
+            font-size: 1rem;
+        }
+        
+        /* Main Content */
+        .content-wrapper {
+            flex: 1;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        .content-section {
+            padding: 25px 20px;
+            animation: fadeIn 0.5s ease-out;
+            max-width: 100%;
+            overflow-wrap: break-word;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        h2::before {
+            content: attr(data-icon);
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            padding-left: 10px;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        /* Lecture Cards */
+        .lecture-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .lecture-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        }
+        
+        .lecture-card:active {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-color);
+        }
+        
+        .lecture-header {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .lecture-title {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+        
+        .lecture-tag {
+            background: var(--accent-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            align-self: flex-start;
+        }
+        
+        .key-concept {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e8f4fc 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .key-concept-title {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .key-concept-title::before {
+            content: "🎯";
+            margin-right: 8px;
+        }
+        
+        .example-container {
+            background: linear-gradient(135deg, #f9f7ff 0%, #f0f4ff 100%);
+            border: 1px solid #dce5ff;
+            border-radius: 10px;
+            padding: 18px;
+            margin: 18px 0;
+            position: relative;
+        }
+        
+        .example-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        .example-header::before {
+            content: "💡";
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+        
+        .practical-tip {
+            background: #fff9e6;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 18px 0;
+            font-size: 0.9rem;
+        }
+        
+        .practical-tip::before {
+            content: "📌 Practical Tip: ";
+            font-weight: bold;
+            color: #e67e22;
+        }
+        
+        /* Quiz Styles */
+        .quiz-header {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .quiz-stats {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .stat-box {
+            background: var(--light-bg);
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+            min-width: 80px;
+        }
+        
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--light-text);
+            margin-top: 3px;
+        }
+        
+        .quiz-container {
+            background: var(--light-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .question {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s;
+        }
+        
+        .question.correct {
+            border-left-color: var(--success-color);
+            background-color: #f0fff4;
+        }
+        
+        .question.incorrect {
+            border-left-color: var(--danger-color);
+            background-color: #fff0f0;
+        }
+        
+        .question-number {
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 12px;
+            display: block;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .question-number::before {
+            content: "❓";
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+        
+        .scenario-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+            font-size: 0.9rem;
+        }
+        
+        .scenario-box::before {
+            content: "⚖️ Scenario:";
+            font-weight: bold;
+            color: #e65100;
+            font-style: normal;
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .option {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            min-height: 60px;
+        }
+        
+        .option:active {
+            background: #f8fafc;
+            border-color: var(--accent-color);
+            transform: translateX(2px);
+        }
+        
+        .option.selected {
+            background: #e3f2fd;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        .option.correct-option {
+            background: #e8f5e9;
+            border-color: var(--success-color);
+        }
+        
+        .option.incorrect-option {
+            background: #ffebee;
+            border-color: var(--danger-color);
+        }
+        
+        .option input {
+            margin-right: 12px;
+            margin-top: 3px;
+        }
+        
+        .option-label {
+            font-weight: 600;
+            margin-right: 8px;
+            color: var(--secondary-color);
+            flex-shrink: 0;
+        }
+        
+        .true-false-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .true-false-btn {
+            padding: 16px;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            background-color: white;
+            color: var(--medium-text);
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.2s;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 50px;
+        }
+        
+        .true-false-btn:active {
+            background-color: #f8fafc;
+            border-color: var(--accent-color);
+        }
+        
+        .true-false-btn.selected-true {
+            background-color: var(--success-color);
+            color: white;
+            border-color: var(--success-color);
+        }
+        
+        .true-false-btn.selected-false {
+            background-color: var(--danger-color);
+            color: white;
+            border-color: var(--danger-color);
+        }
+        
+        .quiz-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: stretch;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border-color);
+        }
+        
+        .quiz-btn {
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 50px;
+        }
+        
+        .quiz-btn:active {
+            transform: translateY(-2px);
+        }
+        
+        .new-quiz-btn {
+            background: linear-gradient(135deg, var(--success-color), #2ecc71);
+            color: white;
+        }
+        
+        .new-quiz-btn:active {
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+        }
+        
+        .submit-btn:active {
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+        
+        .reset-btn {
+            background: white;
+            color: var(--medium-text);
+            border: 2px solid var(--border-color);
+        }
+        
+        .reset-btn:active {
+            background: var(--light-bg);
+            border-color: var(--accent-color);
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            margin: 15px 0;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        /* Quick Review */
+        .review-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .review-box {
+            padding: 20px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px 20px;
+            background: var(--light-bg);
+            color: var(--medium-text);
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Scroll-to-top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--secondary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+        }
+        
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .scroll-top:active {
+            transform: scale(0.95);
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 360px) {
+            .lecture-card {
+                padding: 15px;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+            }
+            
+            h3 {
+                font-size: 1.1rem;
+            }
+            
+            .quiz-container {
+                padding: 15px;
+            }
+            
+            .question {
+                padding: 15px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                max-width: 768px;
+                margin: 20px auto;
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: var(--shadow);
+                min-height: auto;
+            }
+            
+            header {
+                padding: 30px 25px;
+            }
+            
+            header::after {
+                font-size: 80px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.05rem;
+            }
+            
+            .content-section {
+                padding: 30px 25px;
+            }
+            
+            .lecture-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 25px;
+            }
+            
+            .quiz-controls {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .review-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .true-false-container {
+                flex-direction: row;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll to top button -->
+    <div class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()">↑</div>
+    
+    <div class="container">
+        <header>
+            <h1>Ethics & Deontology Master Revision Hub</h1>
+            <p class="subtitle">Comprehensive interactive guide for mastering ethical principles in academia with dynamic quizzes and real-world applications</p>
+        </header>
+        
+        <nav class="navigation">
+            <div class="nav-tabs">
+                <button class="nav-btn active" data-target="summaries" data-icon="📚">Lecture Summaries</button>
+                <button class="nav-btn" data-target="quiz-concepts" data-icon="🧠">Concepts Quiz</button>
+                <button class="nav-btn" data-target="quiz-scenarios" data-icon="⚖️">Scenarios Quiz</button>
+                <button class="nav-btn" data-target="quick-review" data-icon="📝">Quick Review</button>
+            </div>
+        </nav>
+        
+        <div class="content-wrapper">
+            <!-- Lecture Summaries Section -->
+            <section id="summaries" class="content-section">
+                <h2 data-icon="📚">Comprehensive Lecture Summaries</h2>
+                <p style="margin-bottom: 20px; color: var(--medium-text); font-size: 1rem;">Detailed explanations of all key concepts with practical examples and real-world applications.</p>
+                
+                <div class="lecture-grid">
+                    <!-- ET1 Card -->
+                    <div class="lecture-card">
+                        <div class="lecture-header">
+                            <div>
+                                <div class="lecture-title">ET1: Introduction to Ethics & Deontology</div>
+                                <div style="color: var(--light-text); font-size: 0.9rem;">Foundational Concepts</div>
+                            </div>
+                            <span class="lecture-tag">Theoretical Foundation</span>
+                        </div>
+                        
+                        <div class="key-concept">
+                            <div class="key-concept-title">Core Distinctions</div>
+                            <p><strong>Ethics</strong>: Systematic philosophical study of right/wrong based on moral values. It asks "Why should we act this way?" and involves critical reasoning.</p>
+                            <p><strong>Morality</strong>: The actual standards and norms of behavior accepted by a society or group. It's the "what" of behavior.</p>
+                            <p><strong>Deontology</strong>: Duty-based ethics focusing on rules, obligations, and principles regardless of outcomes (Kantian ethics).</p>
+                        </div>
+                        
+                        <div class="example-container">
+                            <div class="example-header">Real-World Application</div>
+                            <div class="example-text">
+                                <p><strong>Medical Ethics Dilemma:</strong> A doctor has a patient who needs an expensive treatment. Ethically, they consider justice in healthcare access. Morally, society expects doctors to help. Deontologically, their duty is to provide the best care possible, regardless of cost considerations or outcomes for the hospital.</p>
+                                <p><strong>Academic Context:</strong> When a student asks for a deadline extension, the professor ethically balances compassion with fairness, morally follows academic norms, and deontologically upholds institutional rules.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="practical-tip">
+                            Remember: Ethics provides the reasoning framework, morality provides the content, and deontology provides the rule-based approach to decision-making.
+                        </div>
+                        
+                        <h3>Key Philosophers & Concepts</h3>
+                        <ul style="padding-left: 20px; margin: 12px 0;">
+                            <li><strong>Immanuel Kant:</strong> Categorical Imperative - "Act only according to that maxim whereby you can at the same time will that it should become a universal law."</li>
+                            <li><strong>Virtue Ethics (Aristotle):</strong> Focus on character development and virtues like honesty, courage, wisdom.</li>
+                            <li><strong>Utilitarianism (Bentham/Mill):</strong> Greatest good for the greatest number (contrasts with deontology).</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- ET2 Card -->
+                    <div class="lecture-card">
+                        <div class="lecture-header">
+                            <div>
+                                <div class="lecture-title">ET2: Codes of Ethics in Academia</div>
+                                <div style="color: var(--light-text); font-size: 0.9rem;">APA, MLA & Research Integrity</div>
+                            </div>
+                            <span class="lecture-tag">Professional Standards</span>
+                        </div>
+                        
+                        <div class="key-concept">
+                            <div class="key-concept-title">Ethical Frameworks in Research</div>
+                            <p><strong>APA Ethics</strong> (Psychology/Social Sciences): Emphasizes authorship integrity, confidentiality, informed consent, and conflict of interest disclosure.</p>
+                            <p><strong>MLA Ethics</strong> (Humanities): Focuses on intellectual property, proper attribution, source integrity, and respectful engagement with texts.</p>
+                            <p><strong>Research Integrity Triad:</strong> Honesty (truthful reporting), Objectivity (unbiased approach), Transparency (open methodology).</p>
+                        </div>
+                        
+                        <div class="example-container">
+                            <div class="example-header">Case Study: Research Ethics</div>
+                            <div class="example-text">
+                                <p><strong>Scenario:</strong> A psychology researcher studying workplace stress must:</p>
+                                <ol style="margin-left: 20px; margin-top: 8px;">
+                                    <li>Get informed consent from participants (APA requirement)</li>
+                                    <li>Protect participant anonymity in publications</li>
+                                    <li>Disclose if study is funded by a corporation with vested interests</li>
+                                    <li>Report ALL findings, including data that contradicts hypothesis</li>
+                                    <li>Acknowledge all contributors appropriately in authorship</li>
+                                </ol>
+                                <p><strong>Violation Example:</strong> The infamous Wakefield case (1998) where data was manipulated to falsely link vaccines to autism, violating all ethical principles.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="practical-tip">
+                            Always ask: "Would my research methods and reporting withstand public scrutiny?" If unsure, consult ethical guidelines or institutional review boards.
+                        </div>
+                        
+                        <h3>Types of Plagiarism</h3>
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 8px; margin: 12px 0;">
+                            <div style="background: #fff0f0; padding: 10px; border-radius: 6px; border-left: 3px solid #e74c3c; font-size: 0.9rem;">
+                                <strong>Direct:</strong> Copy-paste without quotes/citation
+                            </div>
+                            <div style="background: #fff0f0; padding: 10px; border-radius: 6px; border-left: 3px solid #e74c3c; font-size: 0.9rem;">
+                                <strong>Self-Plagiarism:</strong> Reusing own work without disclosure
+                            </div>
+                            <div style="background: #fff0f0; padding: 10px; border-radius: 6px; border-left: 3px solid #e74c3c; font-size: 0.9rem;">
+                                <strong>Paraphrasing:</strong> Rewording without credit
+                            </div>
+                            <div style="background: #fff0f0; padding: 10px; border-radius: 6px; border-left: 3px solid #e74c3c; font-size: 0.9rem;">
+                                <strong>Mosaic:</strong> Mixing sources without citation
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ET3 Card -->
+                    <div class="lecture-card">
+                        <div class="lecture-header">
+                            <div>
+                                <div class="lecture-title">ET3: Teaching & Mentorship Ethics</div>
+                                <div style="color: var(--light-text); font-size: 0.9rem;">Pedagogical Responsibilities</div>
+                            </div>
+                            <span class="lecture-tag">Professional Practice</span>
+                        </div>
+                        
+                        <div class="key-concept">
+                            <div class="key-concept-title">Four Pillars of Teaching Ethics</div>
+                            <p><strong>Justice/Fairness:</strong> Equitable treatment, transparent grading, equal opportunities for all students regardless of background.</p>
+                            <p><strong>Autonomy:</strong> Respecting student independence, encouraging critical thinking, allowing choice in learning paths.</p>
+                            <p><strong>Beneficence:</strong> Acting in students' best interests, promoting their intellectual and personal growth.</p>
+                            <p><strong>Non-maleficence:</strong> Avoiding harm through biased teaching, unfair evaluation, or neglect.</p>
+                        </div>
+                        
+                        <div class="example-container">
+                            <div class="example-header">Classroom Application</div>
+                            <div class="example-text">
+                                <p><strong>Justice in Action:</strong> A professor creates detailed rubrics for assignments and applies them consistently to all students. They offer multiple forms of assessment to accommodate different learning styles.</p>
+                                <p><strong>Boundary Management:</strong> A teacher maintains professional distance by:</p>
+                                <ul style="margin-left: 20px; margin-top: 8px;">
+                                    <li>Not accepting friend requests from current students</li>
+                                    <li>Avoiding one-on-one meetings behind closed doors</li>
+                                    <li>Declining expensive gifts that could imply favoritism</li>
+                                    <li>Keeping communication primarily through institutional channels</li>
+                                </ul>
+                                <p><strong>Mentorship Ethics:</strong> A thesis advisor provides constructive feedback, respects the student's research direction, acknowledges power dynamics, and avoids exploiting the relationship.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="practical-tip">
+                            When facing ethical dilemmas in teaching, ask: "What would a completely impartial observer consider fair?" This helps overcome personal biases.
+                        </div>
+                        
+                        <h3>Common Ethical Challenges</h3>
+                        <ul style="padding-left: 20px; margin: 12px 0;">
+                            <li><strong>Grading Dilemmas:</strong> Balancing compassion for personal circumstances with maintenance of academic standards</li>
+                            <li><strong>Favoritism:</strong> Unconscious preference for certain students based on personality, background, or performance</li>
+                            <li><strong>Confidentiality:</strong> Handling sensitive student information appropriately</li>
+                            <li><strong>Conflict of Interest:</strong> When personal relationships or external pressures influence professional judgment</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- ET4 Card -->
+                    <div class="lecture-card">
+                        <div class="lecture-header">
+                            <div>
+                                <div class="lecture-title">ET4: AI in Academic Ethics</div>
+                                <div style="color: var(--light-text); font-size: 0.9rem;">Emerging Technologies</div>
+                            </div>
+                            <span class="lecture-tag">Contemporary Issues</span>
+                        </div>
+                        
+                        <div class="key-concept">
+                            <div class="key-concept-title">AI Ethics Framework</div>
+                            <p><strong>Beneficence:</strong> AI should enhance learning, accessibility, and efficiency.</p>
+                            <p><strong>Non-maleficence:</strong> Prevent AI from causing academic dishonesty, bias, or harm.</p>
+                            <p><strong>Justice:</strong> Ensure AI tools are accessible and don't disadvantage certain groups.</p>
+                            <p><strong>Autonomy:</strong> Maintain human oversight and prevent over-reliance on AI.</p>
+                            <p><strong>Transparency:</strong> Disclose AI use and make processes understandable.</p>
+                        </div>
+                        
+                        <div class="example-container">
+                            <div class="example-header">AI Use Cases & Ethics</div>
+                            <div class="example-text">
+                                <p><strong>Ethical Uses:</strong></p>
+                                <ul style="margin-left: 20px;">
+                                    <li>Brainstorming research ideas with ChatGPT</li>
+                                    <li>Using Grammarly for language polishing</li>
+                                    <li>AI transcription for lectures (accessibility)</li>
+                                    <li>Plagiarism detection software</li>
+                                    <li>Personalized learning recommendations</li>
+                                </ul>
+                                
+                                <p><strong>Unethical Uses:</strong></p>
+                                <ul style="margin-left: 20px;">
+                                    <li>Submitting AI-generated essays as original work</li>
+                                    <li>Using AI during closed-book exams</li>
+                                    <li>Creating fake references or data</li>
+                                    <li>Bypassing learning objectives entirely</li>
+                                    <li>Using facial recognition for attendance without consent</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="practical-tip">
+                            Treat AI like a calculator: It's a tool to enhance thinking, not replace it. Always verify AI outputs and maintain final human judgment.
+                        </div>
+                        
+                        <h3>Critical AI Concerns</h3>
+                        <div style="background: #fff0f0; padding: 15px; border-radius: 8px; margin: 12px 0; font-size: 0.9rem;">
+                            <p><strong>Bias Amplification:</strong> AI trained on biased data produces discriminatory outcomes (e.g., grading essays lower if written in non-native patterns).</p>
+                            <p><strong>Accountability Gap:</strong> Who is responsible when AI makes errors? Answer: Developers, institutions, and users—NOT the AI itself.</p>
+                            <p><strong>Privacy Erosion:</strong> AI systems collecting vast amounts of personal data without adequate protection.</p>
+                            <p><strong>Authenticity Crisis:</strong> Difficulty distinguishing human from AI-generated work undermines assessment validity.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Concepts Quiz Section -->
+            <section id="quiz-concepts" class="content-section" style="display: none;">
+                <h2 data-icon="🧠">Core Concepts Quiz</h2>
+                <p style="margin-bottom: 20px; color: var(--medium-text);">Test your understanding of ethical principles and definitions with 5 randomly selected questions.</p>
+                
+                <div class="quiz-header">
+                    <div>
+                        <h3 style="margin: 0; border: none; padding: 0; font-size: 1.2rem;">Knowledge Assessment</h3>
+                        <p style="color: var(--light-text); margin-top: 5px; font-size: 0.9rem;">Randomized questions from all four lectures</p>
+                    </div>
+                    <div class="quiz-stats">
+                        <div class="stat-box">
+                            <div class="stat-value" id="concepts-total">5</div>
+                            <div class="stat-label">Questions</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="concepts-answered">0</div>
+                            <div class="stat-label">Answered</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="concepts-progress"></div>
+                </div>
+                
+                <div class="quiz-container">
+                    <div id="concepts-questions">
+                        <!-- Questions will be generated here -->
+                    </div>
+                    
+                    <div class="quiz-controls">
+                        <button class="quiz-btn new-quiz-btn" onclick="generateNewQuiz('concepts')">
+                            <span>🎲</span> New Random Quiz
+                        </button>
+                        <button class="quiz-btn reset-btn" onclick="resetQuiz('concepts')">
+                            <span>🔄</span> Reset Answers
+                        </button>
+                        <button class="quiz-btn submit-btn" onclick="submitQuiz('concepts')">
+                            <span>📤</span> Submit Quiz
+                        </button>
+                    </div>
+                    
+                    <div id="concepts-results" class="quiz-container" style="display: none; margin-top: 30px;">
+                        <!-- Results will appear here -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Scenarios Quiz Section -->
+            <section id="quiz-scenarios" class="content-section" style="display: none;">
+                <h2 data-icon="⚖️">Ethical Scenarios Quiz</h2>
+                <p style="margin-bottom: 20px; color: var(--medium-text);">Apply ethical principles to real-world situations with 5 randomly selected scenarios.</p>
+                
+                <div class="quiz-header">
+                    <div>
+                        <h3 style="margin: 0; border: none; padding: 0; font-size: 1.2rem;">Application Assessment</h3>
+                        <p style="color: var(--light-text); margin-top: 5px; font-size: 0.9rem;">Practice ethical decision-making</p>
+                    </div>
+                    <div class="quiz-stats">
+                        <div class="stat-box">
+                            <div class="stat-value" id="scenarios-total">5</div>
+                            <div class="stat-label">Scenarios</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="scenarios-answered">0</div>
+                            <div class="stat-label">Answered</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="scenarios-progress"></div>
+                </div>
+                
+                <div class="quiz-container">
+                    <div id="scenarios-questions">
+                        <!-- Questions will be generated here -->
+                    </div>
+                    
+                    <div class="quiz-controls">
+                        <button class="quiz-btn new-quiz-btn" onclick="generateNewQuiz('scenarios')">
+                            <span>🎲</span> New Random Quiz
+                        </button>
+                        <button class="quiz-btn reset-btn" onclick="resetQuiz('scenarios')">
+                            <span>🔄</span> Reset Answers
+                        </button>
+                        <button class="quiz-btn submit-btn" onclick="submitQuiz('scenarios')">
+                            <span>📤</span> Submit Quiz
+                        </button>
+                    </div>
+                    
+                    <div id="scenarios-results" class="quiz-container" style="display: none; margin-top: 30px;">
+                        <!-- Results will appear here -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Quick Review Section -->
+            <section id="quick-review" class="content-section" style="display: none;">
+                <h2 data-icon="📝">Quick Review & Key Takeaways</h2>
+                <p style="margin-bottom: 20px; color: var(--medium-text);">Essential points to remember for exams and professional practice.</p>
+                
+                <div class="review-grid">
+                    <div class="review-box" style="background: linear-gradient(135deg, #e3f2fd, #bbdefb);">
+                        <h3 style="color: #1565c0;">🎯 Must-Know Definitions</h3>
+                        <ul style="margin-top: 12px; padding-left: 20px; font-size: 0.9rem;">
+                            <li><strong>Ethics:</strong> Philosophical study of morality</li>
+                            <li><strong>Morality:</strong> Society's standards of behavior</li>
+                            <li><strong>Deontology:</strong> Duty/rules-based ethics</li>
+                            <li><strong>Academic Integrity:</strong> Honesty, trust, fairness, respect, responsibility, courage</li>
+                            <li><strong>Plagiarism:</strong> Using others' work without attribution</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="review-box" style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9);">
+                        <h3 style="color: #2e7d32;">⚖️ Ethical Principles</h3>
+                        <ul style="margin-top: 12px; padding-left: 20px; font-size: 0.9rem;">
+                            <li><strong>Justice:</strong> Fairness and equality</li>
+                            <li><strong>Autonomy:</strong> Respect for independence</li>
+                            <li><strong>Beneficence:</strong> Doing good</li>
+                            <li><strong>Non-maleficence:</strong> Avoiding harm</li>
+                            <li><strong>Transparency:</strong> Openness and clarity</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="review-box" style="background: linear-gradient(135deg, #fff3e0, #ffe0b2);">
+                        <h3 style="color: #ef6c00;">⚠️ Common Violations</h3>
+                        <ul style="margin-top: 12px; padding-left: 20px; font-size: 0.9rem;">
+                            <li>Plagiarism (all types)</li>
+                            <li>Data fabrication/falsification</li>
+                            <li>Favoritism in teaching</li>
+                            <li>Undisclosed conflicts of interest</li>
+                            <li>Misuse of AI in assessments</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <h3>📋 Decision-Making Framework</h3>
+                    <div class="review-box" style="margin-top: 15px;">
+                        <div style="text-align: center; margin-bottom: 15px; font-size: 2rem;">🤔</div>
+                        <h4 style="margin: 0 0 10px 0; color: var(--primary-color); text-align: center;">When facing ethical dilemmas:</h4>
+                        <ol style="padding-left: 20px; font-size: 0.9rem;">
+                            <li><strong>Identify</strong> the ethical issue</li>
+                            <li><strong>Apply</strong> relevant ethical principles</li>
+                            <li><strong>Consider</strong> all stakeholders</li>
+                            <li><strong>Consult</strong> codes/policies</li>
+                            <li><strong>Decide</strong> with integrity</li>
+                            <li><strong>Document</strong> your reasoning</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <h3>🎓 Exam Preparation Tips</h3>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 15px;">
+                        <div class="review-box">
+                            <strong>1. Know the Philosophers</strong>
+                            <p style="margin-top: 8px; font-size: 0.85rem; color: var(--medium-text);">Kant (deontology), Aristotle (virtue), Mill (utilitarianism)</p>
+                        </div>
+                        <div class="review-box">
+                            <strong>2. Distinguish Ethics/Morality</strong>
+                            <p style="margin-top: 8px; font-size: 0.85rem; color: var(--medium-text);">Ethics = study, Morality = practice</p>
+                        </div>
+                        <div class="review-box">
+                            <strong>3. Apply Principles</strong>
+                            <p style="margin-top: 8px; font-size: 0.85rem; color: var(--medium-text);">Use justice, autonomy, beneficence, non-maleficence</p>
+                        </div>
+                        <div class="review-box">
+                            <strong>4. Case Analysis</strong>
+                            <p style="margin-top: 8px; font-size: 0.85rem; color: var(--medium-text);">Practice with scenarios before exams</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <div class="footer-content">
+                <p style="font-size: 1.1rem; margin-bottom: 10px;"><strong>University Ziane Achour, Djelfa</strong></p>
+                <p style="font-size: 0.9rem;">Faculty of Letters and Languages | English Division</p>
+                <p style="font-size: 0.9rem;">Course: Ethics and Deontology | Course Tutor: Dr. Ouafa Ouarniki</p>
+                <p style="margin-top: 15px; color: var(--light-text); font-size: 0.85rem;">Interactive Revision Tool for Master Two Students - Didactics</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Enhanced Question Banks
+        const coreConceptsQuestions = [
+            {
+                id: 'q1',
+                question: 'What is the PRIMARY distinction between ethics and morality?',
+                options: [
+                    'Ethics studies morality; morality is practiced standards',
+                    'Morality studies ethics; ethics is practiced standards',
+                    'Ethics is personal; morality is societal',
+                    'They are identical concepts'
+                ],
+                correct: 0,
+                explanation: 'Ethics is the philosophical study and analysis of moral principles (the "why"), while morality consists of the actual standards and norms that guide behavior in a society (the "what"). For example, "don\'t plagiarize" is a moral rule; studying why plagiarism is wrong is ethics.',
+                category: 'ET1'
+            },
+            {
+                id: 'q2',
+                question: 'According to Kantian deontology, what makes an action ethical?',
+                options: [
+                    'Its positive consequences for the majority',
+                    'Following duty and universalizable principles',
+                    'Developing virtuous character traits',
+                    'Obeying cultural norms and traditions'
+                ],
+                correct: 1,
+                explanation: 'Kant believed actions are ethical when done from duty according to universalizable maxims (rules that everyone should follow). Outcomes don\'t matter—only the intention to follow moral law.',
+                category: 'ET1'
+            },
+            {
+                id: 'q3',
+                type: 'tf',
+                question: 'Self-plagiarism is acceptable if you are reusing your own previously published work.',
+                correct: false,
+                explanation: 'Self-plagiarism presents old work as new and original, deceiving readers and publishers. It violates academic integrity even though it\'s your own work, as it misrepresents the novelty of your contribution.',
+                category: 'ET2'
+            },
+            {
+                id: 'q4',
+                question: 'Which APA ethical principle requires researchers to protect participant identities?',
+                options: [
+                    'Informed Consent',
+                    'Confidentiality',
+                    'Objectivity',
+                    'Transparency'
+                ],
+                correct: 1,
+                explanation: 'Confidentiality in APA ethics requires protecting participants\' identities and personal information, often through anonymization or pseudonymization of data.',
+                category: 'ET2'
+            },
+            {
+                id: 'q5',
+                question: 'What does "non-maleficence" mean in teaching ethics?',
+                options: [
+                    'Actively promoting student success',
+                    'Treating all students equally',
+                    'Avoiding harm to students',
+                    'Respecting student independence'
+                ],
+                correct: 2,
+                explanation: 'Non-maleficence means "do no harm." In teaching, this means avoiding biased instruction, unfair grading, public humiliation, or neglect that could harm students academically or emotionally.',
+                category: 'ET3'
+            },
+            {
+                id: 'q6',
+                question: 'A teacher uses the same detailed rubric for all students. Which ethical principle does this demonstrate?',
+                options: [
+                    'Autonomy',
+                    'Beneficence',
+                    'Justice',
+                    'Non-maleficence'
+                ],
+                correct: 2,
+                explanation: 'Justice requires fairness and equal treatment. Transparent, consistent rubrics ensure all students are evaluated by the same standards, promoting fairness.',
+                category: 'ET3'
+            },
+            {
+                id: 'q7',
+                type: 'tf',
+                question: 'AI can be held morally responsible for its actions and decisions.',
+                correct: false,
+                explanation: 'AI lacks consciousness, intentionality, and moral agency. Responsibility always lies with humans: developers, institutions, and users who create, deploy, and utilize AI systems.',
+                category: 'ET4'
+            },
+            {
+                id: 'q8',
+                question: 'What is the main ethical concern with biased training data in AI systems?',
+                options: [
+                    'Slower processing speeds',
+                    'Discrimination against certain groups',
+                    'Higher computational costs',
+                    'Complex user interfaces'
+                ],
+                correct: 1,
+                explanation: 'Biased training data leads to algorithmic discrimination, where AI systems perpetuate and amplify existing societal biases against marginalized groups.',
+                category: 'ET4'
+            },
+            {
+                id: 'q9',
+                question: 'Which ethical framework focuses on the outcomes or consequences of actions?',
+                options: [
+                    'Deontology',
+                    'Virtue Ethics',
+                    'Utilitarianism',
+                    'Divine Command Theory'
+                ],
+                correct: 2,
+                explanation: 'Utilitarianism evaluates actions based on their consequences, specifically whether they produce the greatest good for the greatest number.',
+                category: 'ET1'
+            },
+            {
+                id: 'q10',
+                question: 'Ghost authorship in research refers to:',
+                options: [
+                    'Authors who make minimal contributions',
+                    'Contributors not listed as authors',
+                    'Fictional authors created for publications',
+                    'Authors who write anonymously'
+                ],
+                correct: 1,
+                explanation: 'Ghost authorship occurs when someone who made significant contributions to research is not credited as an author, violating authorship ethics.',
+                category: 'ET2'
+            }
+        ];
+        
+        const scenarioQuestions = [
+            {
+                id: 's1',
+                scenario: 'You are grading final papers and notice two submissions are remarkably similar. Both students deny collaboration, claiming independent work. What is the MOST ethical first step?',
+                options: [
+                    'Fail both students immediately for academic dishonesty',
+                    'Confront them together and demand a confession',
+                    'Investigate further by comparing with their previous work and looking for distinctive patterns',
+                    'Give both average grades as a compromise'
+                ],
+                correct: 2,
+                explanation: 'Ethical response requires investigation before accusation. Compare with previous work, look for writing style patterns, and gather evidence. Jumping to conclusions without evidence violates principles of fairness and due process.',
+                category: 'ET3',
+                principles: ['Justice', 'Non-maleficence']
+            },
+            {
+                id: 's2',
+                scenario: 'A pharmaceutical company funds your research on their new drug. They ask to review findings before publication and suggest "refinements." What do you do?',
+                options: [
+                    'Agree—funding is essential for research',
+                    'Allow review but make changes only if scientifically valid',
+                    'Decline—this compromises research independence',
+                    'Publish without acknowledging their funding'
+                ],
+                correct: 2,
+                explanation: 'Allowing funders to influence results creates conflict of interest and compromises research integrity. Maintain independence or seek alternative funding. Always disclose funding sources transparently.',
+                category: 'ET2',
+                principles: ['Integrity', 'Transparency', 'Objectivity']
+            },
+            {
+                id: 's3',
+                scenario: 'A struggling student reveals their parent is terminally ill, affecting their studies. They beg for a passing grade. What is the ethical balance?',
+                options: [
+                    'Pass them—compassion overrules standards',
+                    'Fail them—no exceptions to rules',
+                    'Offer legitimate accommodations (extensions, counseling referral) while maintaining standards',
+                    'Give an incomplete grade indefinitely'
+                ],
+                correct: 2,
+                explanation: 'Balance compassion with integrity. Offer support (extensions, counseling) while maintaining academic standards. Changing grades without merit devalues the degree and is unfair to other students.',
+                category: 'ET3',
+                principles: ['Beneficence', 'Justice', 'Non-maleficence']
+            },
+            {
+                id: 's4',
+                scenario: 'You use ChatGPT to generate an essay outline, then write the essay yourself using the outline. Your university has no specific AI policy. How do you proceed?',
+                options: [
+                    'Submit without mentioning AI—it was just an outline',
+                    'Cite ChatGPT in references as you would any source',
+                    'Acknowledge AI assistance in an author\'s note',
+                    'Avoid using AI entirely to prevent any issues'
+                ],
+                correct: 2,
+                explanation: 'When in doubt, transparency is best. Acknowledge AI assistance even if not required. This maintains academic honesty and allows instructors to understand your process. As AI policies evolve, transparency is the safest approach.',
+                category: 'ET4',
+                principles: ['Transparency', 'Honesty', 'Integrity']
+            },
+            {
+                id: 's5',
+                scenario: 'You discover a respected colleague has plagiarized portions of their latest publication. What is your ethical responsibility?',
+                options: [
+                    'Confront them privately first',
+                    'Report immediately to authorities',
+                    'Ignore it—not your responsibility',
+                    'Discuss with other colleagues first'
+                ],
+                correct: 0,
+                explanation: 'Start with private confrontation—they may correct it themselves. If unresolved, escalation may be necessary. Ignoring serious misconduct violates your duty to uphold academic integrity.',
+                category: 'ET2',
+                principles: ['Integrity', 'Responsibility', 'Courage']
+            },
+            {
+                id: 's6',
+                scenario: 'An AI grading system consistently gives lower scores to essays with non-standard English. As a teacher, what should you do?',
+                options: [
+                    'Trust the AI—it\'s objective',
+                    'Adjust all grades upward manually',
+                    'Review AI-graded papers for bias and use human grading',
+                    'Tell students to improve their English'
+                ],
+                correct: 2,
+                explanation: 'Algorithmic bias requires human intervention. Review affected papers, consider alternative assessments, and advocate for system improvements. Blindly trusting biased AI harms students unfairly.',
+                category: 'ET4',
+                principles: ['Justice', 'Non-maleficence', 'Fairness']
+            },
+            {
+                id: 's7',
+                scenario: 'A student from a wealthy family offers you an expensive gift after receiving a high grade. What do you do?',
+                options: [
+                    'Accept gratefully—it\'s a kind gesture',
+                    'Decline politely, explaining ethical boundaries',
+                    'Accept but donate it to the department',
+                    'Report the student for attempted bribery'
+                ],
+                correct: 1,
+                explanation: 'Politely decline and explain teacher-student boundaries. Accepting gifts creates appearance of favoritism or quid pro quo, compromising professional integrity.',
+                category: 'ET3',
+                principles: ['Integrity', 'Professional boundaries', 'Justice']
+            },
+            {
+                id: 's8',
+                scenario: 'You find perfect data supporting your hypothesis, but it comes from an unverifiable online source. What do you do?',
+                options: [
+                    'Use it—the data speaks for itself',
+                    'Include it with a note about the source',
+                    'Seek verifiable sources or collect new data',
+                    'Modify the data slightly to make it original'
+                ],
+                correct: 2,
+                explanation: 'Research integrity requires verifiable data. Using unverifiable sources compromises credibility. Either find credible sources or acknowledge limitations if such data must be used.',
+                category: 'ET2',
+                principles: ['Honesty', 'Integrity', 'Rigor']
+            }
+        ];
+        
+        // Navigation functionality
+        document.querySelectorAll('.nav-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+                // Hide all content sections
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                // Show corresponding section
+                const targetId = this.getAttribute('data-target');
+                document.getElementById(targetId).style.display = 'block';
+                
+                // Generate quizzes if navigating to them
+                if (targetId === 'quiz-concepts' && !window.conceptsGenerated) {
+                    generateNewQuiz('concepts');
+                }
+                if (targetId === 'quiz-scenarios' && !window.scenariosGenerated) {
+                    generateNewQuiz('scenarios');
+                }
+                
+                // Scroll to top of the section
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        
+        // Track quiz state
+        let currentConceptsQuiz = [];
+        let currentScenariosQuiz = [];
+        let userAnswers = {
+            concepts: [],
+            scenarios: []
+        };
+        
+        // Generate new random quiz
+        function generateNewQuiz(quizType) {
+            const isConcepts = quizType === 'concepts';
+            const questionBank = isConcepts ? coreConceptsQuestions : scenarioQuestions;
+            const quizContainer = document.getElementById(`${quizType}-questions`);
+            const resultsContainer = document.getElementById(`${quizType}-results`);
+            
+            // Hide results
+            resultsContainer.style.display = 'none';
+            resultsContainer.innerHTML = '';
+            
+            // Select 5 random questions
+            const shuffled = [...questionBank].sort(() => 0.5 - Math.random());
+            const selectedQuestions = shuffled.slice(0, 5);
+            
+            // Store current quiz
+            if (isConcepts) {
+                currentConceptsQuiz = selectedQuestions;
+                userAnswers.concepts = new Array(selectedQuestions.length).fill(null);
+                window.conceptsGenerated = true;
+            } else {
+                currentScenariosQuiz = selectedQuestions;
+                userAnswers.scenarios = new Array(selectedQuestions.length).fill(null);
+                window.scenariosGenerated = true;
+            }
+            
+            // Update stats
+            updateQuizStats(quizType, 0);
+            
+            // Generate quiz HTML
+            quizContainer.innerHTML = '';
+            selectedQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.id = `${quizType}-q${index}`;
+                questionDiv.setAttribute('data-index', index);
+                
+                let questionHTML = `
+                    <span class="question-number">Question ${index + 1} 
+                    <span style="font-size: 0.85rem; color: var(--light-text); margin-left: 8px; font-weight: normal;">${q.category}</span>
+                    </span>
+                `;
+                
+                // Add scenario if present
+                if (q.scenario) {
+                    questionHTML += `<div class="scenario-box">${q.scenario}</div>`;
+                    if (q.principles) {
+                        questionHTML += `<div style="margin: 8px 0; font-size: 0.85rem; color: var(--secondary-color);">
+                            <strong>Relevant principles:</strong> ${q.principles.join(', ')}
+                        </div>`;
+                    }
+                }
+                
+                // Add question text
+                questionHTML += `<p style="font-size: 1rem; margin: 12px 0;">${q.question}</p>`;
+                
+                // Generate options based on type
+                if (q.type === 'tf') {
+                    const isTrueSelected = userAnswers[quizType][index] === true;
+                    const isFalseSelected = userAnswers[quizType][index] === false;
+                    
+                    questionHTML += `
+                        <div class="true-false-container">
+                            <button type="button" class="true-false-btn ${isTrueSelected ? 'selected-true' : ''}" 
+                                    onclick="selectTrueFalse('${quizType}', ${index}, true)">
+                                <span>✅</span> True
+                            </button>
+                            <button type="button" class="true-false-btn ${isFalseSelected ? 'selected-false' : ''}" 
+                                    onclick="selectTrueFalse('${quizType}', ${index}, false)">
+                                <span>❌</span> False
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    questionHTML += '<div class="options-grid">';
+                    const optionLabels = ['A', 'B', 'C', 'D'];
+                    q.options.forEach((option, optIndex) => {
+                        const isSelected = userAnswers[quizType][index] === optIndex;
+                        questionHTML += `
+                            <div class="option ${isSelected ? 'selected' : ''}" 
+                                 onclick="selectOption('${quizType}', ${index}, ${optIndex})" 
+                                 id="${quizType}-q${index}-opt${optIndex}">
+                                <span class="option-label">${optionLabels[optIndex]}</span>
+                                <div>${option}</div>
+                            </div>
+                        `;
+                    });
+                    questionHTML += '</div>';
+                }
+                
+                questionDiv.innerHTML = questionHTML;
+                quizContainer.appendChild(questionDiv);
+            });
+            
+            // Reset progress bar
+            document.getElementById(`${quizType}-progress`).style.width = '0%';
+        }
+        
+        // Select option for MCQ
+        function selectOption(quizType, qIndex, optIndex) {
+            const questionDiv = document.getElementById(`${quizType}-q${qIndex}`);
+            const options = questionDiv.querySelectorAll('.option');
+            
+            // Remove selected class from all options
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            const selectedOpt = document.getElementById(`${quizType}-q${qIndex}-opt${optIndex}`);
+            selectedOpt.classList.add('selected');
+            
+            // Store answer
+            userAnswers[quizType][qIndex] = optIndex;
+            
+            // Update stats
+            updateQuizStats(quizType);
+        }
+        
+        // Select True/False
+        function selectTrueFalse(quizType, qIndex, value) {
+            const questionDiv = document.getElementById(`${quizType}-q${qIndex}`);
+            const buttons = questionDiv.querySelectorAll('.true-false-btn');
+            
+            // Remove selected class from all buttons
+            buttons.forEach(btn => {
+                btn.classList.remove('selected-true', 'selected-false');
+            });
+            
+            // Add selected class to clicked button
+            const selectedBtn = value ? buttons[0] : buttons[1];
+            selectedBtn.classList.add(value ? 'selected-true' : 'selected-false');
+            
+            // Store answer
+            userAnswers[quizType][qIndex] = value;
+            
+            // Update stats
+            updateQuizStats(quizType);
+        }
+        
+        // Update quiz statistics
+        function updateQuizStats(quizType) {
+            const isConcepts = quizType === 'concepts';
+            const questions = isConcepts ? currentConceptsQuiz : currentScenariosQuiz;
+            let answered = 0;
+            
+            for (let i = 0; i < questions.length; i++) {
+                if (userAnswers[quizType][i] !== null && userAnswers[quizType][i] !== undefined) {
+                    answered++;
+                }
+            }
+            
+            // Update display
+            document.getElementById(`${quizType}-answered`).textContent = answered;
+            const progress = (answered / questions.length) * 100;
+            document.getElementById(`${quizType}-progress`).style.width = `${progress}%`;
+        }
+        
+        // Submit quiz
+        function submitQuiz(quizType) {
+            const isConcepts = quizType === 'concepts';
+            const questions = isConcepts ? currentConceptsQuiz : currentScenariosQuiz;
+            let score = 0;
+            let answered = 0;
+            let reviewHTML = '<h3 style="margin-top: 0; margin-bottom: 15px;">📋 Detailed Review</h3>';
+            
+            for (let i = 0; i < questions.length; i++) {
+                const questionDiv = document.getElementById(`${quizType}-q${i}`);
+                const userAnswer = userAnswers[quizType][i];
+                
+                // Determine if answer is correct
+                let isCorrect = false;
+                if (userAnswer !== null && userAnswer !== undefined) {
+                    answered++;
+                    
+                    if (questions[i].type === 'tf') {
+                        isCorrect = userAnswer === questions[i].correct;
+                    } else {
+                        isCorrect = userAnswer === questions[i].correct;
+                    }
+                    
+                    if (isCorrect) score++;
+                }
+                
+                // Update question styling
+                if (userAnswer !== null && userAnswer !== undefined) {
+                    questionDiv.classList.add(isCorrect ? 'correct' : 'incorrect');
+                    
+                    // Mark correct/incorrect options for MCQ
+                    if (questions[i].type !== 'tf') {
+                        const options = questionDiv.querySelectorAll('.option');
+                        options.forEach((opt, optIndex) => {
+                            if (optIndex === questions[i].correct) {
+                                opt.classList.add('correct-option');
+                            } else if (optIndex === userAnswer && !isCorrect) {
+                                opt.classList.add('incorrect-option');
+                            }
+                        });
+                    }
+                }
+                
+                // Build review item
+                reviewHTML += `
+                    <div class="question" style="margin-bottom: 15px; ${isCorrect ? 'border-left-color: var(--success-color); background-color: #f0fff4;' : 'border-left-color: var(--danger-color); background-color: #fff0f0;'}">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div style="font-size: 0.95rem;">
+                                <strong>Question ${i+1}:</strong> ${questions[i].scenario || questions[i].question}
+                            </div>
+                            <div style="font-size: 1.1rem;">
+                                ${userAnswer === null || userAnswer === undefined ? '❓' : (isCorrect ? '✅' : '❌')}
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 12px; font-size: 0.9rem;">
+                            <div><strong>Your answer:</strong> ${getAnswerText(questions[i], userAnswer)}</div>
+                            <div><strong>Correct answer:</strong> ${getAnswerText(questions[i], questions[i].correct)}</div>
+                        </div>
+                        
+                        <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin-top: 12px; border-left: 3px solid var(--accent-color); font-size: 0.9rem;">
+                            <div style="color: var(--secondary-color); font-weight: 600; margin-bottom: 8px; display: flex; align-items: center;">
+                                <span style="margin-right: 6px;">💡</span> Explanation
+                            </div>
+                            ${questions[i].explanation}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            const percentage = questions.length > 0 ? (score / questions.length) * 100 : 0;
+            
+            // Generate results display
+            let resultsHTML = `
+                <div style="text-align: center; padding: 20px 0;">
+                    <div style="font-size: 2rem; margin: 15px 0; font-weight: 700; color: ${percentage >= 80 ? 'var(--success-color)' : percentage >= 60 ? 'var(--warning-color)' : 'var(--danger-color)'}">
+                        ${score}/${questions.length}
+                    </div>
+                    
+                    <div style="font-size: 1.5rem; margin: 10px 0; font-weight: 700; color: ${percentage >= 80 ? 'var(--success-color)' : percentage >= 60 ? 'var(--warning-color)' : 'var(--danger-color)'}">
+                        ${percentage >= 90 ? 'Outstanding! 🎉' : 
+                          percentage >= 80 ? 'Excellent! 👍' : 
+                          percentage >= 60 ? 'Good Job! 👏' : 
+                          percentage >= 40 ? 'Keep Practicing! 📚' : 
+                          'Review Needed! 🔄'}
+                    </div>
+                    
+                    <div style="background: white; padding: 15px; border-radius: 10px; margin: 15px 0; font-size: 0.95rem;">
+                        <strong>Performance Analysis:</strong><br>
+                        ${percentage >= 90 ? 'You have mastered these concepts. Focus on application in complex scenarios.' : 
+                          percentage >= 80 ? 'Strong understanding. Review explanations for any missed questions.' : 
+                          percentage >= 60 ? 'Good foundation. Study explanations to improve weaker areas.' : 
+                          percentage >= 40 ? 'Basic understanding. Revisit lecture summaries and key concepts.' : 
+                          'Significant review needed. Focus on fundamental concepts before retesting.'}
+                        <br><br>
+                        <strong>Answered:</strong> ${answered}/${questions.length} questions
+                    </div>
+                </div>
+                
+                <div>
+                    ${reviewHTML}
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="quiz-btn new-quiz-btn" onclick="generateNewQuiz('${quizType}')" style="padding: 12px 25px; font-size: 0.95rem;">
+                        <span>🎲</span> Try Another Quiz
+                    </button>
+                </div>
+            `;
+            
+            // Display results
+            const resultsContainer = document.getElementById(`${quizType}-results`);
+            resultsContainer.innerHTML = resultsHTML;
+            resultsContainer.style.display = 'block';
+            
+            // Scroll to results
+            resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Helper function to get answer text
+        function getAnswerText(question, answer) {
+            if (answer === null || answer === undefined) return 'Not answered';
+            
+            if (question.type === 'tf') {
+                return answer === true ? 'True' : 'False';
+            }
+            
+            const optionLabels = ['A', 'B', 'C', 'D'];
+            return `${optionLabels[answer]}: ${question.options[answer]}`;
+        }
+        
+        // Reset quiz
+        function resetQuiz(quizType) {
+            const isConcepts = quizType === 'concepts';
+            const questions = isConcepts ? currentConceptsQuiz : currentScenariosQuiz;
+            
+            // Reset user answers
+            userAnswers[quizType] = new Array(questions.length).fill(null);
+            
+            for (let i = 0; i < questions.length; i++) {
+                const questionDiv = document.getElementById(`${quizType}-q${i}`);
+                
+                // Reset styling
+                questionDiv.classList.remove('correct', 'incorrect');
+                
+                if (questions[i].type === 'tf') {
+                    // Reset buttons
+                    const buttons = questionDiv.querySelectorAll('.true-false-btn');
+                    buttons.forEach(btn => {
+                        btn.classList.remove('selected-true', 'selected-false');
+                    });
+                } else {
+                    // Reset options
+                    const options = questionDiv.querySelectorAll('.option');
+                    options.forEach(opt => {
+                        opt.classList.remove('selected', 'correct-option', 'incorrect-option');
+                    });
+                }
+            }
+            
+            // Reset stats
+            updateQuizStats(quizType);
+            
+            // Hide results
+            const resultsContainer = document.getElementById(`${quizType}-results`);
+            resultsContainer.style.display = 'none';
+            resultsContainer.innerHTML = '';
+        }
+        
+        // Scroll to top functionality
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generate initial quizzes
+            generateNewQuiz('concepts');
+            generateNewQuiz('scenarios');
+            
+            // Ensure only the first section is visible
+            document.querySelectorAll('.content-section').forEach((section, index) => {
+                if (index > 0) {
+                    section.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
