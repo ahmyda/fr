@@ -174,120 +174,159 @@
         
         h3 {
             color: var(--secondary-color);
-            margin-top: 25px;
+            margin-top: 30px;
             margin-bottom: 15px;
             font-size: 1.2rem;
             padding-left: 10px;
             border-left: 4px solid var(--accent-color);
         }
         
-        /* Lecture Cards */
-        .lecture-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
+        /* Lecture Summaries - Continuous Content */
+        .lecture-content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
             margin-top: 20px;
         }
         
-        .lecture-card {
+        .lecture-part {
             background: white;
             border-radius: 12px;
-            padding: 20px;
+            padding: 25px;
             border: 1px solid var(--border-color);
-            transition: all 0.3s;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
         }
         
-        .lecture-card:active {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--accent-color);
+        .lecture-part::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
         }
         
         .lecture-header {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .lecture-title {
             color: var(--primary-color);
-            font-size: 1.3rem;
-            font-weight: 600;
+            font-size: 1.4rem;
+            font-weight: 700;
             margin-bottom: 5px;
             line-height: 1.3;
+        }
+        
+        .lecture-subtitle {
+            color: var(--light-text);
+            font-size: 0.95rem;
+            font-style: italic;
         }
         
         .lecture-tag {
             background: var(--accent-color);
             color: white;
-            padding: 4px 12px;
+            padding: 5px 15px;
             border-radius: 20px;
             font-size: 0.8rem;
-            font-weight: 500;
+            font-weight: 600;
             align-self: flex-start;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .key-concept {
             background: linear-gradient(135deg, #f0f7ff 0%, #e8f4fc 100%);
-            padding: 15px;
+            padding: 20px;
             border-radius: 10px;
-            margin: 15px 0;
+            margin: 20px 0;
             border-left: 4px solid var(--accent-color);
         }
         
         .key-concept-title {
             color: var(--secondary-color);
-            font-weight: 600;
-            margin-bottom: 8px;
+            font-weight: 700;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
+            font-size: 1.1rem;
         }
         
         .key-concept-title::before {
             content: "🎯";
-            margin-right: 8px;
+            margin-right: 10px;
         }
         
         .example-container {
             background: linear-gradient(135deg, #f9f7ff 0%, #f0f4ff 100%);
             border: 1px solid #dce5ff;
             border-radius: 10px;
-            padding: 18px;
-            margin: 18px 0;
+            padding: 20px;
+            margin: 25px 0;
             position: relative;
         }
         
         .example-header {
             display: flex;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             color: var(--secondary-color);
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.1rem;
         }
         
         .example-header::before {
             content: "💡";
-            margin-right: 8px;
-            font-size: 1rem;
+            margin-right: 10px;
+            font-size: 1.1rem;
         }
         
         .practical-tip {
             background: #fff9e6;
             border: 1px solid #ffeaa7;
             border-radius: 10px;
-            padding: 15px;
-            margin: 18px 0;
-            font-size: 0.9rem;
+            padding: 18px;
+            margin: 25px 0;
+            font-size: 0.95rem;
+            position: relative;
         }
         
         .practical-tip::before {
             content: "📌 Practical Tip: ";
             font-weight: bold;
             color: #e67e22;
+        }
+        
+        /* Lists styling */
+        ul, ol {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        
+        li strong {
+            color: var(--secondary-color);
+        }
+        
+        /* Info boxes */
+        .info-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 3px solid var(--accent-color);
+            font-size: 0.9rem;
         }
         
         /* Quiz Styles */
@@ -557,7 +596,7 @@
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-colorv));
             width: 0%;
             transition: width 0.5s ease;
         }
@@ -625,8 +664,8 @@
         
         /* Mobile optimizations */
         @media (max-width: 360px) {
-            .lecture-card {
-                padding: 15px;
+            .lecture-part {
+                padding: 20px;
             }
             
             h2 {
@@ -646,6 +685,7 @@
             }
         }
         
+        /* Tablet and Desktop Styles */
         @media (min-width: 768px) {
             .container {
                 max-width: 768px;
@@ -676,9 +716,12 @@
                 padding: 30px 25px;
             }
             
-            .lecture-grid {
-                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-                gap: 25px;
+            .lecture-content {
+                gap: 50px;
+            }
+            
+            .lecture-part {
+                padding: 30px;
             }
             
             .quiz-controls {
@@ -693,6 +736,18 @@
             
             .true-false-container {
                 flex-direction: row;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1000px;
+            }
+            
+            .lecture-content {
+                max-width: 900px;
+                margin-left: auto;
+                margin-right: auto;
             }
         }
     </style>
@@ -717,207 +772,265 @@
         </nav>
         
         <div class="content-wrapper">
-            <!-- Lecture Summaries Section -->
+            <!-- Lecture Summaries Section - Continuous Content -->
             <section id="summaries" class="content-section">
                 <h2 data-icon="📚">Comprehensive Lecture Summaries</h2>
-                <p style="margin-bottom: 20px; color: var(--medium-text); font-size: 1rem;">Detailed explanations of all key concepts with practical examples and real-world applications.</p>
+                <p style="margin-bottom: 25px; color: var(--medium-text); font-size: 1.05rem;">Detailed explanations of all key concepts with practical examples and real-world applications.</p>
                 
-                <div class="lecture-grid">
-                    <!-- ET1 Card -->
-                    <div class="lecture-card">
+                <div class="lecture-content">
+                    <!-- ET1 Content -->
+                    <div class="lecture-part">
                         <div class="lecture-header">
-                            <div>
-                                <div class="lecture-title">ET1: Introduction to Ethics & Deontology</div>
-                                <div style="color: var(--light-text); font-size: 0.9rem;">Foundational Concepts</div>
-                            </div>
                             <span class="lecture-tag">Theoretical Foundation</span>
+                            <div class="lecture-title">ET1: Introduction to Ethics & Deontology</div>
+                            <div class="lecture-subtitle">Foundational Concepts and Philosophical Frameworks</div>
                         </div>
                         
                         <div class="key-concept">
                             <div class="key-concept-title">Core Distinctions</div>
-                            <p><strong>Ethics</strong>: Systematic philosophical study of right/wrong based on moral values. It asks "Why should we act this way?" and involves critical reasoning.</p>
-                            <p><strong>Morality</strong>: The actual standards and norms of behavior accepted by a society or group. It's the "what" of behavior.</p>
-                            <p><strong>Deontology</strong>: Duty-based ethics focusing on rules, obligations, and principles regardless of outcomes (Kantian ethics).</p>
+                            <p><strong>Ethics</strong> is the systematic philosophical study of right and wrong based on moral values. It asks "Why should we act this way?" and involves critical reasoning about moral principles.</p>
+                            <p><strong>Morality</strong> refers to the actual standards and norms of behavior accepted by a society or group. It's the "what" of behavior—the concrete rules and expectations that guide actions in practice.</p>
+                            <p><strong>Deontology</strong> is a duty-based ethical approach that focuses on rules, obligations, and principles regardless of outcomes. Associated with Immanuel Kant's philosophy, it emphasizes doing what is right because it is one's duty.</p>
                         </div>
                         
                         <div class="example-container">
                             <div class="example-header">Real-World Application</div>
                             <div class="example-text">
-                                <p><strong>Medical Ethics Dilemma:</strong> A doctor has a patient who needs an expensive treatment. Ethically, they consider justice in healthcare access. Morally, society expects doctors to help. Deontologically, their duty is to provide the best care possible, regardless of cost considerations or outcomes for the hospital.</p>
-                                <p><strong>Academic Context:</strong> When a student asks for a deadline extension, the professor ethically balances compassion with fairness, morally follows academic norms, and deontologically upholds institutional rules.</p>
+                                <p><strong>Medical Ethics Dilemma:</strong> A doctor has a patient who needs an expensive treatment that the hospital can barely afford. From an ethical perspective, they consider justice in healthcare access. Morally, society expects doctors to help those in need. Deontologically, their duty is to provide the best care possible for their patient, regardless of cost considerations or outcomes for the hospital budget.</p>
+                                <p><strong>Academic Context:</strong> When a student asks for a deadline extension due to personal circumstances, the professor ethically balances compassion with fairness to other students, morally follows academic norms about accommodations, and deontologically upholds institutional rules while considering their duty to student success.</p>
                             </div>
                         </div>
                         
                         <div class="practical-tip">
-                            Remember: Ethics provides the reasoning framework, morality provides the content, and deontology provides the rule-based approach to decision-making.
+                            Remember this distinction: Ethics provides the reasoning framework, morality provides the content (rules and norms), and deontology provides the rule-based approach to decision-making that prioritizes duties over consequences.
                         </div>
                         
                         <h3>Key Philosophers & Concepts</h3>
-                        <ul style="padding-left: 20px; margin: 12px 0;">
-                            <li><strong>Immanuel Kant:</strong> Categorical Imperative - "Act only according to that maxim whereby you can at the same time will that it should become a universal law."</li>
-                            <li><strong>Virtue Ethics (Aristotle):</strong> Focus on character development and virtues like honesty, courage, wisdom.</li>
-                            <li><strong>Utilitarianism (Bentham/Mill):</strong> Greatest good for the greatest number (contrasts with deontology).</li>
+                        <ul>
+                            <li><strong>Immanuel Kant (1724-1804):</strong> Developed the Categorical Imperative - "Act only according to that maxim whereby you can at the same time will that it should become a universal law." Emphasized duty, reason, and human dignity.</li>
+                            <li><strong>Aristotle's Virtue Ethics:</strong> Focuses on character development and cultivating virtues like honesty, courage, wisdom, and justice. Asks "What kind of person should I be?" rather than "What should I do?"</li>
+                            <li><strong>Utilitarianism (Jeremy Bentham & John Stuart Mill):</strong> Emphasizes outcomes - the greatest good for the greatest number. This consequentialist approach contrasts sharply with deontology's rule-based focus.</li>
+                            <li><strong>Divine Command Theory:</strong> What is moral is determined by what God commands. Right actions align with divine will as revealed through scripture or religious authority.</li>
                         </ul>
+                        
+                        <h3>Ethical Decision-Making Frameworks</h3>
+                        <div class="info-box">
+                            <p><strong>Kant's Three Formulations of the Categorical Imperative:</strong></p>
+                            <ol>
+                                <li>Act only according to maxims you can will to become universal laws</li>
+                                <li>Treat humanity never merely as a means but always as an end</li>
+                                <li>Act as if you were a lawmaking member of a kingdom of ends</li>
+                            </ol>
+                        </div>
                     </div>
                     
-                    <!-- ET2 Card -->
-                    <div class="lecture-card">
+                    <!-- ET2 Content -->
+                    <div class="lecture-part">
                         <div class="lecture-header">
-                            <div>
-                                <div class="lecture-title">ET2: Codes of Ethics in Academia</div>
-                                <div style="color: var(--light-text); font-size: 0.9rem;">APA, MLA & Research Integrity</div>
-                            </div>
                             <span class="lecture-tag">Professional Standards</span>
+                            <div class="lecture-title">ET2: Codes of Ethics in Academia</div>
+                            <div class="lecture-subtitle">APA, MLA & Research Integrity Standards</div>
                         </div>
                         
                         <div class="key-concept">
                             <div class="key-concept-title">Ethical Frameworks in Research</div>
-                            <p><strong>APA Ethics</strong> (Psychology/Social Sciences): Emphasizes authorship integrity, confidentiality, informed consent, and conflict of interest disclosure.</p>
-                            <p><strong>MLA Ethics</strong> (Humanities): Focuses on intellectual property, proper attribution, source integrity, and respectful engagement with texts.</p>
-                            <p><strong>Research Integrity Triad:</strong> Honesty (truthful reporting), Objectivity (unbiased approach), Transparency (open methodology).</p>
+                            <p><strong>APA Ethics</strong> (Psychology/Social Sciences): Emphasizes authorship integrity, confidentiality, informed consent, and conflict of interest disclosure. Governs research involving human participants with specific guidelines for protection.</p>
+                            <p><strong>MLA Ethics</strong> (Humanities): Focuses on intellectual property, proper attribution, source integrity, and respectful engagement with texts. Governs citation practices and scholarly writing standards.</p>
+                            <p><strong>Research Integrity Triad:</strong> Honesty (truthful reporting), Objectivity (unbiased approach), Transparency (open methodology). These three principles form the foundation of all ethical research practices.</p>
                         </div>
                         
                         <div class="example-container">
                             <div class="example-header">Case Study: Research Ethics</div>
                             <div class="example-text">
-                                <p><strong>Scenario:</strong> A psychology researcher studying workplace stress must:</p>
-                                <ol style="margin-left: 20px; margin-top: 8px;">
-                                    <li>Get informed consent from participants (APA requirement)</li>
-                                    <li>Protect participant anonymity in publications</li>
+                                <p><strong>Scenario:</strong> A psychology researcher studying workplace stress must adhere to multiple ethical requirements:</p>
+                                <ol>
+                                    <li>Get informed consent from all participants (APA requirement), explaining risks and benefits</li>
+                                    <li>Protect participant anonymity in publications through de-identification</li>
                                     <li>Disclose if study is funded by a corporation with vested interests</li>
                                     <li>Report ALL findings, including data that contradicts hypothesis</li>
-                                    <li>Acknowledge all contributors appropriately in authorship</li>
+                                    <li>Acknowledge all contributors appropriately in authorship based on actual contribution</li>
+                                    <li>Store data securely and confidentially</li>
+                                    <li>Obtain IRB (Institutional Review Board) approval before beginning research</li>
                                 </ol>
-                                <p><strong>Violation Example:</strong> The infamous Wakefield case (1998) where data was manipulated to falsely link vaccines to autism, violating all ethical principles.</p>
+                                <p><strong>Historical Violation Example:</strong> The infamous Wakefield case (1998) where data was manipulated to falsely link MMR vaccines to autism. This violated nearly all ethical principles: data fabrication, failure to disclose conflicts of interest, harm to participants, and publication of fraudulent results that damaged public health.</p>
                             </div>
                         </div>
                         
                         <div class="practical-tip">
-                            Always ask: "Would my research methods and reporting withstand public scrutiny?" If unsure, consult ethical guidelines or institutional review boards.
+                            Always ask: "Would my research methods and reporting withstand public scrutiny?" If uncertain, consult ethical guidelines, institutional review boards, or senior colleagues. When in doubt, prioritize participant welfare and research integrity over publication pressure.
                         </div>
                         
-                        <h3>Types of Plagiarism</h3>
-                        <div style="display: grid; grid-template-columns: 1fr; gap: 8px; margin: 12px 0;">
-                            <div style="background: #fff0f0; padding: 10px; border-radius: 6px; border-left: 3px solid #e74c3c; font-size: 0.9rem;">
-                                <strong>Direct:</strong> Copy-paste without quotes/citation
+                        <h3>Types of Academic Misconduct</h3>
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 10px; margin: 15px 0;">
+                            <div style="background: #fff0f0; padding: 12px; border-radius: 8px; border-left: 3px solid #e74c3c; font-size: 0.9rem;">
+                                <strong>Direct Plagiarism:</strong> Copying text verbatim without quotation marks or proper citation
                             </div>
-                            <div style="background: #fff0f0; padding: 10px; border-radius: 6px; border-left: 3px solid #e74c3c; font-size: 0.9rem;">
-                                <strong>Self-Plagiarism:</strong> Reusing own work without disclosure
+                            <div style="background: #fff0f0; padding: 12px; border-radius: 8px; border-left: 3px solid #e74c3c; font-size: 0.9rem;">
+                                <strong>Self-Plagiarism:</strong> Reusing your own previously published work without disclosure or appropriate citation
                             </div>
-                            <div style="background: #fff0f0; padding: 10px; border-radius: 6px; border-left: 3px solid #e74c3c; font-size: 0.9rem;">
-                                <strong>Paraphrasing:</strong> Rewording without credit
+                            <div style="background: #fff0f0; padding: 12px; border-radius: 8px; border-left: 3px solid #e74c3c; font-size: 0.9rem;">
+                                <strong>Paraphrasing Plagiarism:</strong> Rewording others' ideas without proper attribution
                             </div>
-                            <div style="background: #fff0f0; padding: 10px; border-radius: 6px; border-left: 3px solid #e74c3c; font-size: 0.9rem;">
-                                <strong>Mosaic:</strong> Mixing sources without citation
+                            <div style="background: #fff0f0; padding: 12px; border-radius: 8px; border-left: 3px solid #e74c3c; font-size: 0.9rem;">
+                                <strong>Mosaic Plagiarism:</strong> Mixing copied phrases from multiple sources without citation
+                            </div>
+                            <div style="background: #fff0f0; padding: 12px; border-radius: 8px; border-left: 3px solid #e74c3c; font-size: 0.9rem;">
+                                <strong>Data Fabrication/Falsification:</strong> Creating or altering research data
+                            </div>
+                            <div style="background: #fff0f0; padding: 12px; border-radius: 8px; border-left: 3px solid #e74c3c; font-size: 0.9rem;">
+                                <strong>Ghost/Guest Authorship:</strong> Inappropriate attribution of authorship
                             </div>
                         </div>
+                        
+                        <h3>APA Ethical Principles</h3>
+                        <ul>
+                            <li><strong>Beneficence and Nonmaleficence:</strong> Strive to benefit those with whom you work and take care to do no harm</li>
+                            <li><strong>Fidelity and Responsibility:</strong> Establish relationships of trust; uphold professional standards</li>
+                            <li><strong>Integrity:</strong> Promote accuracy, honesty, and truthfulness</li>
+                            <li><strong>Justice:</strong> Recognize that all persons are entitled to access and benefit from psychology</li>
+                            <li><strong>Respect for People's Rights and Dignity:</strong> Respect privacy, confidentiality, and self-determination</li>
+                        </ul>
                     </div>
                     
-                    <!-- ET3 Card -->
-                    <div class="lecture-card">
+                    <!-- ET3 Content -->
+                    <div class="lecture-part">
                         <div class="lecture-header">
-                            <div>
-                                <div class="lecture-title">ET3: Teaching & Mentorship Ethics</div>
-                                <div style="color: var(--light-text); font-size: 0.9rem;">Pedagogical Responsibilities</div>
-                            </div>
                             <span class="lecture-tag">Professional Practice</span>
+                            <div class="lecture-title">ET3: Teaching & Mentorship Ethics</div>
+                            <div class="lecture-subtitle">Pedagogical Responsibilities and Boundary Management</div>
                         </div>
                         
                         <div class="key-concept">
                             <div class="key-concept-title">Four Pillars of Teaching Ethics</div>
-                            <p><strong>Justice/Fairness:</strong> Equitable treatment, transparent grading, equal opportunities for all students regardless of background.</p>
-                            <p><strong>Autonomy:</strong> Respecting student independence, encouraging critical thinking, allowing choice in learning paths.</p>
-                            <p><strong>Beneficence:</strong> Acting in students' best interests, promoting their intellectual and personal growth.</p>
-                            <p><strong>Non-maleficence:</strong> Avoiding harm through biased teaching, unfair evaluation, or neglect.</p>
+                            <p><strong>Justice/Fairness:</strong> Equitable treatment of all students, transparent grading practices, equal opportunities regardless of background, and consistent application of rules and expectations.</p>
+                            <p><strong>Autonomy:</strong> Respecting student independence and agency, encouraging critical thinking rather than rote learning, allowing choice in learning paths when possible, and fostering self-directed learning.</p>
+                            <p><strong>Beneficence:</strong> Acting in students' best educational interests, promoting their intellectual and personal growth, providing timely and constructive feedback, and creating supportive learning environments.</p>
+                            <p><strong>Non-maleficence:</strong> Avoiding harm through biased teaching, unfair evaluation, public humiliation, neglect, or creating hostile learning environments. "First, do no harm" applies to teaching as much as medicine.</p>
                         </div>
                         
                         <div class="example-container">
-                            <div class="example-header">Classroom Application</div>
+                            <div class="example-header">Classroom Application Examples</div>
                             <div class="example-text">
-                                <p><strong>Justice in Action:</strong> A professor creates detailed rubrics for assignments and applies them consistently to all students. They offer multiple forms of assessment to accommodate different learning styles.</p>
-                                <p><strong>Boundary Management:</strong> A teacher maintains professional distance by:</p>
-                                <ul style="margin-left: 20px; margin-top: 8px;">
-                                    <li>Not accepting friend requests from current students</li>
-                                    <li>Avoiding one-on-one meetings behind closed doors</li>
-                                    <li>Declining expensive gifts that could imply favoritism</li>
+                                <p><strong>Justice in Action:</strong> A professor creates detailed rubrics for all assignments and applies them consistently to all students. They offer multiple forms of assessment (papers, presentations, projects) to accommodate different learning styles and provide flexibility for students with documented disabilities.</p>
+                                <p><strong>Boundary Management:</strong> Ethical teachers maintain appropriate professional distance by:</p>
+                                <ul>
+                                    <li>Not accepting friend requests from current students on social media</li>
+                                    <li>Avoiding one-on-one meetings behind closed doors (keep door open or meet in public spaces)</li>
+                                    <li>Declining expensive gifts that could imply favoritism or create obligations</li>
                                     <li>Keeping communication primarily through institutional channels</li>
+                                    <li>Disclosing and avoiding dual relationships (e.g., teaching family members)</li>
+                                    <li>Maintaining consistent professional demeanor regardless of personal feelings</li>
                                 </ul>
-                                <p><strong>Mentorship Ethics:</strong> A thesis advisor provides constructive feedback, respects the student's research direction, acknowledges power dynamics, and avoids exploiting the relationship.</p>
+                                <p><strong>Mentorship Ethics:</strong> A thesis advisor provides constructive feedback, respects the student's research direction while offering guidance, acknowledges power dynamics in the relationship, avoids exploiting the relationship for personal gain, and supports the student's professional development even when they disagree with methodological choices.</p>
                             </div>
                         </div>
                         
                         <div class="practical-tip">
-                            When facing ethical dilemmas in teaching, ask: "What would a completely impartial observer consider fair?" This helps overcome personal biases.
+                            When facing ethical dilemmas in teaching, ask: "What would a completely impartial observer consider fair?" This helps overcome personal biases and emotional attachments. Also consider: "How would I feel if this decision were publicly reported in the university newspaper?"
                         </div>
                         
-                        <h3>Common Ethical Challenges</h3>
-                        <ul style="padding-left: 20px; margin: 12px 0;">
-                            <li><strong>Grading Dilemmas:</strong> Balancing compassion for personal circumstances with maintenance of academic standards</li>
-                            <li><strong>Favoritism:</strong> Unconscious preference for certain students based on personality, background, or performance</li>
-                            <li><strong>Confidentiality:</strong> Handling sensitive student information appropriately</li>
-                            <li><strong>Conflict of Interest:</strong> When personal relationships or external pressures influence professional judgment</li>
+                        <h3>Common Ethical Challenges in Teaching</h3>
+                        <ul>
+                            <li><strong>Grading Dilemmas:</strong> Balancing compassion for students' personal circumstances (illness, family emergencies) with maintenance of academic standards and fairness to other students</li>
+                            <li><strong>Unconscious Favoritism:</strong> Subtle preference for certain students based on personality compatibility, shared backgrounds, or high performance</li>
+                            <li><strong>Confidentiality Breaches:</strong> Inadvertently disclosing sensitive student information (grades, disabilities, personal issues) to unauthorized parties</li>
+                            <li><strong>Conflict of Interest:</strong> When personal relationships, financial interests, or external pressures influence grading, recommendations, or treatment of students</li>
+                            <li><strong>Academic Freedom vs. Responsible Teaching:</strong> Balancing the right to teach controversial material with responsibility to create inclusive, respectful learning environments</li>
+                            <li><strong>Assessment Integrity:</strong> Ensuring exams and assignments fairly measure learning outcomes while preventing cheating</li>
                         </ul>
+                        
+                        <h3>Professional Boundaries Checklist</h3>
+                        <div class="info-box">
+                            <p><strong>Red Flags in Teacher-Student Relationships:</strong></p>
+                            <ul>
+                                <li>Meeting students socially outside academic contexts</li>
+                                <li>Discussing personal problems or seeking emotional support from students</li>
+                                <li>Giving special privileges to certain students</li>
+                                <li>Physical contact beyond handshakes (except in necessary circumstances like lab safety)</li>
+                                <li>Communicating via personal email/text rather than institutional channels</li>
+                                <li>Accepting gifts that exceed token value</li>
+                                <li>Discussing other students or colleagues inappropriately</li>
+                            </ul>
+                        </div>
                     </div>
                     
-                    <!-- ET4 Card -->
-                    <div class="lecture-card">
+                    <!-- ET4 Content -->
+                    <div class="lecture-part">
                         <div class="lecture-header">
-                            <div>
-                                <div class="lecture-title">ET4: AI in Academic Ethics</div>
-                                <div style="color: var(--light-text); font-size: 0.9rem;">Emerging Technologies</div>
-                            </div>
                             <span class="lecture-tag">Contemporary Issues</span>
+                            <div class="lecture-title">ET4: AI in Academic Ethics</div>
+                            <div class="lecture-subtitle">Emerging Technologies and Their Ethical Implications</div>
                         </div>
                         
                         <div class="key-concept">
-                            <div class="key-concept-title">AI Ethics Framework</div>
-                            <p><strong>Beneficence:</strong> AI should enhance learning, accessibility, and efficiency.</p>
-                            <p><strong>Non-maleficence:</strong> Prevent AI from causing academic dishonesty, bias, or harm.</p>
-                            <p><strong>Justice:</strong> Ensure AI tools are accessible and don't disadvantage certain groups.</p>
-                            <p><strong>Autonomy:</strong> Maintain human oversight and prevent over-reliance on AI.</p>
-                            <p><strong>Transparency:</strong> Disclose AI use and make processes understandable.</p>
+                            <div class="key-concept-title">AI Ethics Framework for Academia</div>
+                            <p><strong>Beneficence:</strong> AI should enhance learning, accessibility, research efficiency, and educational outcomes. It should support human intelligence rather than replace it.</p>
+                            <p><strong>Non-maleficence:</strong> Prevent AI from causing academic dishonesty, perpetuating bias, violating privacy, or creating dependency that undermines learning. Implement safeguards against misuse.</p>
+                            <p><strong>Justice:</strong> Ensure AI tools are accessible to all students regardless of socioeconomic status. Prevent algorithmic discrimination and ensure equitable benefits. Consider digital divide implications.</p>
+                            <p><strong>Autonomy:</strong> Maintain human oversight, critical thinking, and decision-making. Prevent over-reliance on AI that diminishes human agency and learning. Ensure users understand AI limitations.</p>
+                            <p><strong>Transparency:</strong> Disclose AI use clearly. Make AI processes understandable and explainable. Avoid "black box" systems in educational assessment.</p>
+                            <p><strong>Accountability:</strong> Establish clear responsibility for AI outputs and decisions. Humans, not AI systems, bear ultimate responsibility for academic work.</p>
                         </div>
                         
                         <div class="example-container">
-                            <div class="example-header">AI Use Cases & Ethics</div>
+                            <div class="example-header">AI Use Cases & Ethical Considerations</div>
                             <div class="example-text">
-                                <p><strong>Ethical Uses:</strong></p>
-                                <ul style="margin-left: 20px;">
-                                    <li>Brainstorming research ideas with ChatGPT</li>
-                                    <li>Using Grammarly for language polishing</li>
-                                    <li>AI transcription for lectures (accessibility)</li>
-                                    <li>Plagiarism detection software</li>
-                                    <li>Personalized learning recommendations</li>
+                                <p><strong>Ethical Uses of AI in Academia:</strong></p>
+                                <ul>
+                                    <li>Brainstorming research ideas with ChatGPT as a starting point</li>
+                                    <li>Using Grammarly for language polishing and grammar checking</li>
+                                    <li>AI transcription services for lecture accessibility</li>
+                                    <li>Plagiarism detection software to maintain academic integrity</li>
+                                    <li>Personalized learning recommendations based on student performance</li>
+                                    <li>Research assistance in literature reviews and data analysis</li>
+                                    <li>Accessibility tools for students with disabilities</li>
+                                    <li>Automated administrative tasks to free up teaching time</li>
                                 </ul>
                                 
-                                <p><strong>Unethical Uses:</strong></p>
-                                <ul style="margin-left: 20px;">
-                                    <li>Submitting AI-generated essays as original work</li>
-                                    <li>Using AI during closed-book exams</li>
-                                    <li>Creating fake references or data</li>
-                                    <li>Bypassing learning objectives entirely</li>
-                                    <li>Using facial recognition for attendance without consent</li>
+                                <p><strong>Unethical Uses of AI in Academia:</strong></p>
+                                <ul>
+                                    <li>Submitting AI-generated essays as original student work</li>
+                                    <li>Using AI during closed-book exams or prohibited assessments</li>
+                                    <li>Creating fake references, data, or research</li>
+                                    <li>Bypassing learning objectives entirely through AI completion</li>
+                                    <li>Using facial recognition for attendance without informed consent</li>
+                                    <li>Algorithmic grading without human verification and appeal processes</li>
+                                    <li>Surveillance technologies that violate student privacy</li>
+                                    <li>AI systems that reinforce existing biases in admissions or grading</li>
                                 </ul>
                             </div>
                         </div>
                         
                         <div class="practical-tip">
-                            Treat AI like a calculator: It's a tool to enhance thinking, not replace it. Always verify AI outputs and maintain final human judgment.
+                            Treat AI like a calculator: It's a tool to enhance thinking, not replace it. Always verify AI outputs, maintain final human judgment, and be transparent about AI assistance. Ask: "Am I using AI to supplement my learning or to replace it?" The former is ethical; the latter violates academic integrity.
                         </div>
                         
-                        <h3>Critical AI Concerns</h3>
-                        <div style="background: #fff0f0; padding: 15px; border-radius: 8px; margin: 12px 0; font-size: 0.9rem;">
-                            <p><strong>Bias Amplification:</strong> AI trained on biased data produces discriminatory outcomes (e.g., grading essays lower if written in non-native patterns).</p>
-                            <p><strong>Accountability Gap:</strong> Who is responsible when AI makes errors? Answer: Developers, institutions, and users—NOT the AI itself.</p>
-                            <p><strong>Privacy Erosion:</strong> AI systems collecting vast amounts of personal data without adequate protection.</p>
-                            <p><strong>Authenticity Crisis:</strong> Difficulty distinguishing human from AI-generated work undermines assessment validity.</p>
+                        <h3>Critical AI Concerns in Education</h3>
+                        <div style="background: #fff0f0; padding: 18px; border-radius: 10px; margin: 15px 0; font-size: 0.9rem;">
+                            <p><strong>Bias Amplification:</strong> AI trained on biased historical data produces discriminatory outcomes (e.g., grading essays lower if written in non-native English patterns, reinforcing gender or racial stereotypes in feedback).</p>
+                            <p><strong>Accountability Gap:</strong> Who is responsible when AI makes errors in grading, recommendations, or content? Clear answer: Developers, institutions deploying the AI, and users applying it—NOT the AI itself, which lacks moral agency.</p>
+                            <p><strong>Privacy Erosion:</strong> AI systems often require vast amounts of personal data (learning patterns, writing styles, interaction data) that may be inadequately protected or used for unintended purposes.</p>
+                            <p><strong>Authenticity Crisis:</strong> Difficulty distinguishing human from AI-generated work undermines assessment validity, credential meaning, and the value of educational certification.</p>
+                            <p><strong>Skill Erosion:</strong> Over-reliance on AI for writing, analysis, or problem-solving may atrophy fundamental academic skills that education aims to develop.</p>
+                            <p><strong>Equity Issues:</strong> Students with access to premium AI tools may gain unfair advantages, exacerbating existing educational inequalities based on socioeconomic status.</p>
                         </div>
+                        
+                        <h3>Developing an AI Use Policy</h3>
+                        <ul>
+                            <li><strong>Clarity:</strong> Explicitly state what AI uses are permitted, restricted, or prohibited</li>
+                            <li><strong>Transparency:</strong> Require disclosure of AI assistance in academic work</li>
+                            <li><strong>Pedagogical Alignment:</strong> Ensure AI use supports rather than undermines learning objectives</li>
+                            <li><strong>Assessment Adaptation:</strong> Modify assessments to evaluate skills AI cannot replicate (critical thinking, synthesis, original analysis)</li>
+                            <li><strong>Skill Development:</strong> Teach students how to use AI ethically and effectively as a professional tool</li>
+                            <li><strong>Ongoing Review:</strong> Regularly update policies as AI capabilities and ethical understanding evolve</li>
+                        </ul>
                     </div>
                 </div>
             </section>
             
             <!-- Concepts Quiz Section -->
             <section id="quiz-concepts" class="content-section" style="display: none;">
+                <!-- Quiz content remains the same as before -->
                 <h2 data-icon="🧠">Core Concepts Quiz</h2>
                 <p style="margin-bottom: 20px; color: var(--medium-text);">Test your understanding of ethical principles and definitions with 5 randomly selected questions.</p>
                 
@@ -967,6 +1080,7 @@
             
             <!-- Scenarios Quiz Section -->
             <section id="quiz-scenarios" class="content-section" style="display: none;">
+                <!-- Scenarios quiz content remains the same -->
                 <h2 data-icon="⚖️">Ethical Scenarios Quiz</h2>
                 <p style="margin-bottom: 20px; color: var(--medium-text);">Apply ethical principles to real-world situations with 5 randomly selected scenarios.</p>
                 
@@ -1016,6 +1130,7 @@
             
             <!-- Quick Review Section -->
             <section id="quick-review" class="content-section" style="display: none;">
+                <!-- Quick review content remains the same -->
                 <h2 data-icon="📝">Quick Review & Key Takeaways</h2>
                 <p style="margin-bottom: 20px; color: var(--medium-text);">Essential points to remember for exams and professional practice.</p>
                 
@@ -1104,6 +1219,7 @@
         </footer>
     </div>
 
+    <!-- JavaScript remains exactly the same as before -->
     <script>
         // Enhanced Question Banks
         const coreConceptsQuestions = [
