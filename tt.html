@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teaching Literary Texts - Summary & Quiz</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #2c3e50, #4a6491);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background-color: #34495e;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            background-color: #34495e;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .tab-btn:hover {
+            background-color: #2c3e50;
+        }
+        
+        .tab-btn.active {
+            background-color: #1a252f;
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        h3 {
+            color: #3498db;
+            margin: 20px 0 10px;
+        }
+        
+        .lecture-summary {
+            background-color: #f8f9fa;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .summary-point {
+            margin-bottom: 15px;
+            padding-left: 10px;
+        }
+        
+        .highlight {
+            background-color: #fffacd;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        .quiz-question {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .option {
+            margin: 8px 0;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            border: 1px solid #ddd;
+        }
+        
+        .option:hover {
+            background-color: #e8f4fc;
+        }
+        
+        .option.selected {
+            background-color: #d1ecf1;
+            border-color: #bee5eb;
+        }
+        
+        .option.correct {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        
+        .option.incorrect {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .feedback.correct {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        .quiz-results {
+            background-color: #e8f4fc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+        }
+        
+        .score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 10px 0;
+        }
+        
+        .lecture-reference {
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            border-top: 1px solid #ecf0f1;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            header {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tab-btn {
+                font-size: 1rem;
+                padding: 12px 5px;
+            }
+            
+            .tab-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Teaching Literary Texts</h1>
+            <div class="subtitle">Lecture Summaries and Knowledge Assessment</div>
+        </header>
+        
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab('summary')">Lecture Summary</button>
+            <button class="tab-btn" onclick="showTab('quiz')">Quiz</button>
+        </div>
+        
+        <section id="summary" class="tab-content active">
+            <h2>Lecture Summaries</h2>
+            
+            <div class="lecture-summary">
+                <h3>Lecture 1: Literature Review – Teaching Literary Texts</h3>
+                <div class="summary-point">
+                    <strong>Historical Overview:</strong> Literature teaching has evolved from the <span class="highlight">Grammar-Translation Method</span> (early 20th century) focusing on linguistic accuracy and moral instruction, to the <span class="highlight">Communicative Language Teaching</span> approach (1970s-80s) viewing literature as a means to enhance communicative competence and cultural awareness.
+                </div>
+                <div class="summary-point">
+                    <strong>Theoretical Frameworks:</strong> Key models include <span class="highlight">Language-Based Approach</span> (focus on linguistic features), <span class="highlight">Reader-Response Approach</span> (active reader role), <span class="highlight">Stylistic Approach</span> (linguistic + literary analysis), and <span class="highlight">Critical Literacy Approach</span> (questioning cultural assumptions).
+                </div>
+                <div class="summary-point">
+                    <strong>Significance:</strong> Literature fosters <span class="highlight">empathy, creativity, and critical thinking</span>, serving as both mirrors (reflecting learner's experiences) and windows (opening to different worlds).
+                </div>
+                <div class="lecture-reference">Based on Lecture 1: Literature Review – Teaching Literary Texts</div>
+            </div>
+            
+            <div class="lecture-summary">
+                <h3>Lecture 2: Qualities of Pupils' Literature</h3>
+                <div class="summary-point">
+                    <strong>Definition:</strong> Pupils' literature refers to texts chosen for suitability for young readers, shaped by <span class="highlight">accessibility, imagination, cultural values, and age-appropriate themes</span>.
+                </div>
+                <div class="summary-point">
+                    <strong>Historical Tension:</strong> Between <span class="highlight">didactic</span> (instructional, moral lessons) and <span class="highlight">idyllic</span> (aesthetic/escapist, celebrating childhood) functions.
+                </div>
+                <div class="summary-point">
+                    <strong>Key Qualities:</strong> Effective pupils' literature should have <span class="highlight">literary quality</span> (aesthetic richness), <span class="highlight">linguistic accessibility</span> (challenging but not overwhelming), <span class="highlight">cultural/emotional relevance</span>, <span class="highlight">pedagogical adaptability</span>, and <span class="highlight">inclusivity/representation</span>.
+                </div>
+                <div class="summary-point">
+                    <strong>Selection Criteria:</strong> Teachers should consider learners' <span class="highlight">age and proficiency</span>, <span class="highlight">cultural appropriateness</span>, <span class="highlight">thematic richness</span>, and potential for classroom activities.
+                </div>
+                <div class="lecture-reference">Based on Lecture 2: Qualities of Pupils' Literature</div>
+            </div>
+            
+            <div class="lecture-summary">
+                <h3>Lecture 3: Comprehensible Input</h3>
+                <div class="summary-point">
+                    <strong>Definition:</strong> <span class="highlight">Comprehensible Input (CI)</span> is language that learners can understand even if some elements are beyond their current level (i+1). In literature teaching, this means selecting, adapting, or scaffolding texts for comprehension.
+                </div>
+                <div class="summary-point">
+                    <strong>Theoretical Foundations:</strong> Based on <span class="highlight">Krashen's Monitor Model</span> (acquisition vs. learning) and <span class="highlight">Vygotsky's Zone of Proximal Development (ZPD)</span> (scaffolding supports comprehension).
+                </div>
+                <div class="summary-point">
+                    <strong>Scaffolding Types:</strong> Three main types: <span class="highlight">contextual</span> (historical background), <span class="highlight">linguistic</span> (simplified summaries, glossaries), and <span class="highlight">visual</span> (maps, images, videos).
+                </div>
+                <div class="summary-point">
+                    <strong>Application Strategies:</strong> <span class="highlight">Pre-reading</span> (introduce themes, vocabulary), <span class="highlight">During-reading</span> (simplified summaries, guided questions), and <span class="highlight">Post-reading</span> (creative rewriting, role-play).
+                </div>
+                <div class="lecture-reference">Based on Lecture 3: Comprehensible Input</div>
+            </div>
+            
+            <div class="lecture-summary">
+                <h3>Key Connections Across Lectures</h3>
+                <div class="summary-point">
+                    <strong>Evolution of Literature Teaching:</strong> From grammar-focused approaches to student-centered methods that value personal response and cultural context (Lecture 1).
+                </div>
+                <div class="summary-point">
+                    <strong>Text Selection Principles:</strong> Balancing linguistic accessibility with literary value is essential for both pupils' literature (Lecture 2) and comprehensible input (Lecture 3).
+                </div>
+                <div class="summary-point">
+                    <strong>Student-Centered Approaches:</strong> All three lectures emphasize the importance of <span class="highlight">student engagement</span>, whether through reader-response theory (Lecture 1), selecting relatable texts (Lecture 2), or using scaffolding for comprehension (Lecture 3).
+                </div>
+                <div class="summary-point">
+                    <strong>Teacher's Role:</strong> Evolving from authority to facilitator who guides interpretation, selects appropriate texts, and provides scaffolding for comprehension.
+                </div>
+            </div>
+        </section>
+        
+        <section id="quiz" class="tab-content">
+            <h2>Quiz: Teaching Literary Texts</h2>
+            <p>Test your understanding of the three lectures with this quiz. Five random questions will be selected from a pool of 50. Select your answer for each question, then check your results.</p>
+            
+            <div id="quiz-container"></div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" id="submit-quiz">Submit Quiz</button>
+                <button class="btn" id="new-quiz">New Random Questions</button>
+                <button class="btn" id="show-all">Show All Questions</button>
+            </div>
+            
+            <div class="quiz-results" id="quiz-results">
+                <h3>Quiz Results</h3>
+                <div class="score">Your Score: <span id="score-value">0</span>/5</div>
+                <p id="result-message"></p>
+                <button class="btn" id="review-answers">Review Answers</button>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Teaching Literary Texts Course Materials | Based on Lectures 1, 2, and 3</p>
+            <p>Use this resource for review and self-assessment of key concepts in literature teaching.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Tab navigation
+        function showTab(tabId) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            
+            // Activate clicked button
+            event.currentTarget.classList.add('active');
+            
+            // If quiz tab is selected, load a new quiz
+            if (tabId === 'quiz') {
+                loadRandomQuestions();
+            }
+        }
+        
+        // Quiz questions database
+        const quizQuestions = [
+            {
+                id: 1,
+                question: "Which approach to teaching literature emphasizes the active role of the reader in constructing meaning?",
+                options: [
+                    "Language-Based Approach",
+                    "Reader-Response Approach",
+                    "Stylistic Approach",
+                    "Critical Literacy Approach"
+                ],
+                correct: 1,
+                lecture: 1,
+                feedback: "  The Reader-Response Approach, developed by Rosenblatt (1978), emphasizes that meaning is constructed through the interaction between reader and text."
+            },
+            {
+                id: 2,
+                question: "According to Lecture 1, what was the primary focus of literature teaching in the early 20th century?",
+                options: [
+                    "Cultural awareness",
+                    "Communicative competence",
+                    "Linguistic accuracy and moral instruction",
+                    "Student personal response"
+                ],
+                correct: 2,
+                lecture: 1,
+                feedback: "  In the early 20th century, the Grammar-Translation Method dominated literature teaching, focusing on linguistic accuracy and moral instruction."
+            },
+            {
+                id: 3,
+                question: "Which scholar is associated with the Reader-Response Theory mentioned in Lecture 1?",
+                options: [
+                    "Stephen Krashen",
+                    "Louise Rosenblatt",
+                    "Mick Short",
+                    "Catherine Wallace"
+                ],
+                correct: 1,
+                lecture: 1,
+                feedback: "  Louise Rosenblatt developed the Reader-Response Theory in her 1978 work 'The Reader, the Text, the Poem.'"
+            },
+            {
+                id: 4,
+                question: "What does the Critical Literacy Approach encourage students to do?",
+                options: [
+                    "Memorize literary terms",
+                    "Analyze grammatical structures",
+                    "Question cultural and ideological assumptions in texts",
+                    "Focus on aesthetic appreciation only"
+                ],
+                correct: 2,
+                lecture: 1,
+                feedback: "  The Critical Literacy Approach (Wallace, 2003) encourages students to question cultural and ideological assumptions in texts."
+            },
+            {
+                id: 5,
+                question: "According to Lecture 1, what are the two functions of literary texts described by Nussbaum (2010)?",
+                options: [
+                    "Mirrors and windows",
+                    "Doors and keys",
+                    "Maps and compasses",
+                    "Bridges and ladders"
+                ],
+                correct: 0,
+                lecture: 1,
+                feedback: "  Nussbaum argues that literary texts serve as both mirrors (reflecting the learner's own experiences) and windows (opening onto different worlds and perspectives)."
+            },
+            {
+                id: 6,
+                question: "In Lecture 2, what are the two main historical components of children's literature?",
+                options: [
+                    "Realistic and fantastical",
+                    "Didactic and idyllic",
+                    "Classical and contemporary",
+                    "Oral and written"
+                ],
+                correct: 1,
+                lecture: 2,
+                feedback: "  The history of children's literature is marked by tension between the didactic (instructional) and idyllic (aesthetic/escapist) functions."
+            },
+            {
+                id: 7,
+                question: "According to Lecture 2, which of these is NOT a key feature of pupils' literature?",
+                options: [
+                    "Simple to moderately complex language",
+                    "Clear themes and relatable characters",
+                    "Extremely complex vocabulary",
+                    "Potential for student engagement"
+                ],
+                correct: 2,
+                lecture: 2,
+                feedback: "  Pupils' literature should have balanced vocabulary that is accessible, not extremely complex which would overwhelm young readers."
+            },
+            {
+                id: 8,
+                question: "What does Rosenblatt's transactional theory, mentioned in Lecture 2, suggest about meaning in literature?",
+                options: [
+                    "Meaning is fixed by the author",
+                    "Meaning emerges from the reader's engagement with the text",
+                    "Meaning is determined by cultural context alone",
+                    "Meaning is established by literary critics"
+                ],
+                correct: 1,
+                lecture: 2,
+                feedback: "  Rosenblatt's transactional theory posits that meaning emerges from the interaction between the reader and the text."
+            },
+            {
+                id: 9,
+                question: "According to Lecture 2, what should modern pupils' literature promote?",
+                options: [
+                    "Cultural stereotypes",
+                    "Diversity and avoid stereotypes",
+                    "Only Western cultural values",
+                    "Simplistic moral lessons"
+                ],
+                correct: 1,
+                lecture: 2,
+                feedback: "  Modern pupils' literature should promote diversity and avoid stereotypes, featuring characters and settings from various cultural backgrounds."
+            },
+            {
+                id: 10,
+                question: "In Lecture 2, what is one of the criteria for selecting literary texts for pupils?",
+                options: [
+                    "Complexity that challenges even native speakers",
+                    "Cultural appropriateness",
+                    "Length exceeding 300 pages",
+                    "Exclusively fantasy themes"
+                ],
+                correct: 1,
+                lecture: 2,
+                feedback: "  Teachers should consider cultural appropriateness when selecting texts for pupils, along with age/proficiency level and thematic richness."
+            },
+            {
+                id: 11,
+                question: "According to Lecture 3, what does 'i+1' represent in Krashen's Comprehensible Input hypothesis?",
+                options: [
+                    "Input that is too easy for learners",
+                    "Input that is exactly at the learner's level",
+                    "Input that is slightly beyond the learner's current level",
+                    "Input that is far beyond the learner's level"
+                ],
+                correct: 2,
+                lecture: 3,
+                feedback: "  'i+1' represents language input that is slightly beyond the learner's current level (i) but still comprehensible with context or support."
+            },
+            {
+                id: 12,
+                question: "Which theorist is associated with the Zone of Proximal Development (ZPD) mentioned in Lecture 3?",
+                options: [
+                    "Stephen Krashen",
+                    "Lev Vygotsky",
+                    "Louise Rosenblatt",
+                    "Mick Short"
+                ],
+                correct: 1,
+                lecture: 3,
+                feedback: "  Lev Vygotsky developed the concept of the Zone of Proximal Development (ZPD), which explains how learners can achieve more with support than they can alone."
+            },
+            {
+                id: 13,
+                question: "According to Lecture 3, what is the purpose of scaffolding in teaching literature?",
+                options: [
+                    "To make texts more difficult",
+                    "To provide support to help students reach comprehension",
+                    "To test students' independent reading skills",
+                    "To replace the original text entirely"
+                ],
+                correct: 1,
+                lecture: 3,
+                feedback: "  Scaffolding provides support to help students comprehend texts that would otherwise be too difficult, moving them from i+10 (too hard) to i+1 (just challenging enough)."
+            },
+            {
+                id: 14,
+                question: "Which of these is an example of linguistic scaffolding mentioned in Lecture 3?",
+                options: [
+                    "Showing maps of the story setting",
+                    "Pre-teaching tricky vocabulary",
+                    "Explaining historical context",
+                    "Having students role-play scenes"
+                ],
+                correct: 1,
+                lecture: 3,
+                feedback: "  Linguistic scaffolding includes pre-teaching tricky words, providing simplified summaries, and glossaries to help students comprehend the text."
+            },
+            {
+                id: 15,
+                question: "According to Lecture 3, what is a key benefit of using Comprehensible Input in literature teaching?",
+                options: [
+                    "Increased anxiety about reading",
+                    "Reduced anxiety and improved confidence",
+                    "Focus on grammar rules only",
+                    "Elimination of cultural context"
+                ],
+                correct: 1,
+                lecture: 3,
+                feedback: "  Comprehensible Input helps reduce anxiety (Affective Filter Hypothesis), supports language acquisition, and improves student confidence when engaging with literary texts."
+            },
+            {
+                id: 16,
+                question: "Which approach combines linguistic analysis with literary interpretation?",
+                options: [
+                    "Language-Based Approach",
+                    "Reader-Response Approach",
+                    "Stylistic Approach",
+                    "Critical Literacy Approach"
+                ],
+                correct: 2,
+                lecture: 1,
+                feedback: "  The Stylistic Approach (Short, 1996) combines linguistic analysis with literary interpretation to understand how language creates meaning."
+            },
+            {
+                id: 17,
+                question: "According to Lecture 1, what was a major shift in literature teaching with the rise of Communicative Language Teaching?",
+                options: [
+                    "Focus on translation exercises",
+                    "Viewing literature as a means to enhance communicative competence",
+                    "Emphasis on memorizing literary terms",
+                    "Exclusive use of classical texts"
+                ],
+                correct: 1,
+                lecture: 1,
+                feedback: "  With the rise of Communicative Language Teaching (CLT) in the 1970s-80s, literature began to be viewed as a means to enhance communicative competence and cultural awareness."
+            },
+            {
+                id: 18,
+                question: "In Lecture 2, what is emphasized as a crucial element in read-aloud books for younger readers?",
+                options: [
+                    "Complex sentence structures",
+                    "Rhythm and cadence",
+                    "Abstract philosophical themes",
+                    "Minimal illustrations"
+                ],
+                correct: 1,
+                lecture: 2,
+                feedback: "  For read-aloud books or those for younger readers, the flow of the text—the rhythm, imagery, and sound—is crucial for engagement and comprehension."
+            },
+            {
+                id: 19,
+                question: "According to Lecture 2, what should characterization in quality pupils' literature achieve?",
+                options: [
+                    "Characters should always be adults",
+                    "Characters must be believable and relatable",
+                    "Characters should avoid emotional reactions",
+                    "Characters must be based on historical figures"
+                ],
+                correct: 1,
+                lecture: 2,
+                feedback: "  Characters in quality pupils' literature must be believable and relatable, with emotional reactions that ring true to human experience."
+            },
+            {
+                id: 20,
+                question: "In Lecture 3, what is an example of a post-reading activity that applies CI principles?",
+                options: [
+                    "Memorizing vocabulary lists",
+                    "Creative rewriting of a scene in simple English",
+                    "Taking a multiple-choice test only",
+                    "Analyzing complex grammatical structures"
+                ],
+                correct: 1,
+                lecture: 3,
+                feedback: "  Post-reading activities like creative rewriting, retelling scenes in simple English, or role-play help reinforce comprehension through active engagement with the text."
+            },
+            {
+                id: 21,
+                question: "According to Lecture 1, who advocated using literary texts for authentic language exposure and personal response?",
+                options: [
+                    "Carter and Long",
+                    "Lazar (1993) and Collie and Slater (1987)",
+                    "Nussbaum (2010)",
+                    "Wallace (2003)"
+                ],
+                correct: 1,
+                lecture: 1,
+                feedback: "  Scholars such as Lazar (1993) and Collie and Slater (1987) advocated using literary texts for authentic language exposure and personal response during the CLT era."
+            },
+            {
+                id: 22,
+                question: "In Lecture 2, what is NOT listed as a type or genre in pupils' literature?",
+                options: [
+                    "Short stories",
+                    "Fables and folktales",
+                    "Academic journal articles",
+                    "Picture books"
+                ],
+                correct: 2,
+                lecture: 2,
+                feedback: "  Academic journal articles are not typically considered pupils' literature, which includes genres like short stories, fables, folktales, poems, novellas, and picture books."
+            },
+            {
+                id: 23,
+                question: "According to Lecture 3, what does the 'Monitor' in Krashen's Monitor Model do?",
+                options: [
+                    "Controls subconscious language acquisition",
+                    "Acts as an editor that uses grammar rules to correct speech",
+                    "Determines the difficulty level of texts",
+                    "Measures student progress"
+                ],
+                correct: 1,
+                lecture: 3,
+                feedback: "  The Monitor is like a small editor in your head that uses grammar rules to correct speech or writing, but it only works when you know the rule, have time, and focus on form."
+            },
+            {
+                id: 24,
+                question: "According to Lecture 1, what is a major research theme in teaching literary texts?",
+                options: [
+                    "Student Engagement",
+                    "Teacher Authority as Sole Interpreter",
+                    "Elimination of Cultural Context",
+                    "Focus on Grammar Translation Only"
+                ],
+                correct: 0,
+                lecture: 1,
+                feedback: "  Student engagement is a major research theme, with studies showing that connecting literature to students' experiences enhances motivation and comprehension."
+            },
+            {
+                id: 25,
+                question: "In Lecture 2, what is the contemporary responsibility of the selector of pupils' literature?",
+                options: [
+                    "Ensuring texts are always didactic",
+                    "Selecting only classic texts",
+                    "Ensuring diversity and fostering empathy",
+                    "Avoiding all fantasy elements"
+                ],
+                correct: 2,
+                lecture: 2,
+                feedback: "  The contemporary responsibility of the selector is ensuring diversity in texts and fostering empathy in young readers."
+            },
+            {
+                id: 26,
+                question: "According to Lecture 3, what is an example of visual scaffolding?",
+                options: [
+                    "Providing simplified summaries",
+                    "Pre-teaching vocabulary",
+                    "Showing maps or video clips",
+                    "Explaining historical context"
+                ],
+                correct: 2,
+                lecture: 3,
+                feedback: "  Visual scaffolding includes showing maps, character diagrams, short video clips, or illustrations of key scenes to support comprehension."
+            },
+            {
+                id: 27,
+                question: "Which approach focuses on linguistic features of the text to improve language skills?",
+                options: [
+                    "Language-Based Approach",
+                    "Reader-Response Approach",
+                    "Stylistic Approach",
+                    "Critical Literacy Approach"
+                ],
+                correct: 0,
+                lecture: 1,
+                feedback: "  The Language-Based Approach (Carter and Long, 1991) focuses on linguistic features of the text to improve language skills."
+            },
+            {
+                id: 28,
+                question: "According to Lecture 2, what should the plot of quality pupils' literature have?",
+                options: [
+                    "Complex, nonlinear structure",
+                    "Coherence and appropriate pacing",
+                    "Ambiguous ending with no resolution",
+                    "Multiple unrelated subplots"
+                ],
+                correct: 1,
+                lecture: 2,
+                feedback: "  The plot must maintain interest with coherence (clear beginning, middle, end) and pacing suitable for maintaining a child's attention."
+            },
+            {
+                id: 29,
+                question: "In Lecture 3, what is the main challenge with literary texts that CI helps address?",
+                options: [
+                    "They are always too easy",
+                    "They often contain archaic vocabulary and complex syntax",
+                    "They lack cultural references",
+                    "They are always contemporary"
+                ],
+                correct: 1,
+                lecture: 3,
+                feedback: "  Literary texts often contain archaic or rare vocabulary, cultural references, figurative language, and complex syntax that CI helps make comprehensible."
+            },
+            {
+                id: 30,
+                question: "According to Lecture 1, what does Nussbaum argue literature cultivates?",
+                options: [
+                    "Mathematical reasoning",
+                    "Scientific thinking",
+                    "Humanity and moral imagination",
+                    "Technical skills"
+                ],
+                correct: 2,
+                lecture: 1,
+                feedback: "  Nussbaum argues that literature cultivates humanity by developing the moral imagination necessary for democratic citizenship."
+            },
+            {
+                id: 31,
+                question: "In Lecture 2, what does 'idyllic' literature focus on?",
+                options: [
+                    "Teaching moral lessons",
+                    "Celebrating joy and imagination of childhood",
+                    "Social rules and skills",
+                    "Complex philosophical ideas"
+                ],
+                correct: 1,
+                lecture: 2,
+                feedback: "  Idyllic literature focuses on celebrating the joy, innocence, and imaginative potential of childhood, often through fantasy or pastoral settings."
+            },
+            {
+                id: 32,
+                question: "According to Lecture 3, what is the difference between acquisition and learning in Krashen's theory?",
+                options: [
+                    "Acquisition is conscious, learning is subconscious",
+                    "Acquisition is subconscious, learning is conscious",
+                    "Both are conscious processes",
+                    "Both are subconscious processes"
+                ],
+                correct: 1,
+                lecture: 3,
+                feedback: "  Acquisition is subconscious natural learning (like children learning their first language), while learning is conscious study of rules and grammar."
+            },
+            {
+                id: 33,
+                question: "According to Lecture 1, what role do teachers play in contemporary literature teaching?",
+                options: [
+                    "Sole authorities on text interpretation",
+                    "Facilitators who guide interpretation",
+                    "Providers of correct answers only",
+                    "Focus only on grammatical accuracy"
+                ],
+                correct: 1,
+                lecture: 1,
+                feedback: "  Contemporary teachers act as facilitators rather than authorities, guiding interpretation through questioning and dialogue."
+            },
+            {
+                id: 34,
+                question: "In Lecture 2, what is a key consideration for linguistic accessibility in pupils' literature?",
+                options: [
+                    "Language should challenge but not overwhelm",
+                    "Language should be as complex as possible",
+                    "Language should avoid all unfamiliar words",
+                    "Language should imitate academic writing"
+                ],
+                correct: 0,
+                lecture: 2,
+                feedback: "  Texts should support language development with language that challenges but does not overwhelm readers, according to Rosenblatt's transactional theory."
+            },
+            {
+                id: 35,
+                question: "According to Lecture 3, what strategy helps with figurative language in literary texts?",
+                options: [
+                    "Ignoring it as unimportant",
+                    "Pre-teaching with simple examples",
+                    "Avoiding texts with figurative language",
+                    "Focusing only on literal meaning"
+                ],
+                correct: 1,
+                lecture: 3,
+                feedback: "  Pre-teaching figurative language with simple examples is a strategy mentioned in Lecture 3 to help students comprehend literary texts."
+            },
+            {
+                id: 36,
+                question: "According to Lecture 1, what is essential for effective text selection?",
+                options: [
+                    "Focusing only on classical texts",
+                    "Balancing linguistic accessibility and literary value",
+                    "Choosing the most difficult texts available",
+                    "Avoiding contemporary texts"
+                ],
+                correct: 1,
+                lecture: 1,
+                feedback: "  Balancing linguistic accessibility and literary value is key for effective teaching according to Lecture 1."
+            },
+            {
+                id: 37,
+                question: "In Lecture 2, what should themes in quality pupils' literature do?",
+                options: [
+                    "Be appended as simple morals at the end",
+                    "Emerge organically from the action",
+                    "Be explicitly stated on every page",
+                    "Avoid emotional content"
+                ],
+                correct: 1,
+                lecture: 2,
+                feedback: "  Themes must emerge organically from the action rather than being appended as simple, forced morals at the end."
+            },
+            {
+                id: 38,
+                question: "According to Lecture 3, what does the Affective Filter Hypothesis relate to?",
+                options: [
+                    "Grammar accuracy",
+                    "Reducing anxiety in language learning",
+                    "Vocabulary memorization",
+                    "Literary analysis techniques"
+                ],
+                correct: 1,
+                lecture: 3,
+                feedback: "  The Affective Filter Hypothesis relates to how anxiety affects language acquisition, and CI helps reduce this anxiety."
+            },
+            {
+                id: 39,
+                question: "According to Lecture 1, what expanded the field of literature teaching in recent decades?",
+                options: [
+                    "Exclusive focus on grammar",
+                    "Reader-Response Theory, stylistics, and critical literacy",
+                    "Elimination of cultural context",
+                    "Return to translation methods only"
+                ],
+                correct: 1,
+                lecture: 1,
+                feedback: "  In recent decades, the field has expanded to include Reader-Response Theory, stylistics, and critical literacy, emphasizing student engagement and interpretation."
+            },
+            {
+                id: 40,
+                question: "In Lecture 2, what is emphasized about the setting in quality pupils' literature?",
+                options: [
+                    "It should be vague and undefined",
+                    "It must be fully realized and authentic to itself",
+                    "It should always be realistic contemporary settings",
+                    "It is less important than plot"
+                ],
+                correct: 1,
+                lecture: 2,
+                feedback: "  The setting, whether realistic or fantastical, must be fully realized and authentic to itself, allowing readers to inhabit the story world."
+            },
+            {
+                id: 41,
+                question: "According to Lecture 3, what is a during-reading strategy for applying CI?",
+                options: [
+                    "Providing simplified summaries",
+                    "Introducing themes before reading",
+                    "Creative rewriting after reading",
+                    "Avoiding all discussion during reading"
+                ],
+                correct: 0,
+                lecture: 3,
+                feedback: "  During-reading strategies include providing simplified summaries, guided questions, and pair/group meaning negotiation."
+            },
+            {
+                id: 42,
+                question: "According to Lecture 1, what was literature mainly analyzed for in early 20th century teaching?",
+                options: [
+                    "Cultural context and personal response",
+                    "Grammatical structures or moral lessons",
+                    "Political ideologies",
+                    "Aesthetic appreciation only"
+                ],
+                correct: 1,
+                lecture: 1,
+                feedback: "  In early 20th century teaching, students analyzed classical works mainly for grammatical structures or moral lessons."
+            },
+            {
+                id: 43,
+                question: "In Lecture 2, what is a characteristic of high-quality pupils' texts regarding imagery?",
+                options: [
+                    "Use descriptive language to create immersive experiences",
+                    "Avoid descriptive language for simplicity",
+                    "Use only abstract imagery",
+                    "Focus exclusively on visual imagery"
+                ],
+                correct: 0,
+                lecture: 2,
+                feedback: "  High-quality texts use descriptive language to create an immersive, sensory experience for the reader, moving beyond flat exposition."
+            },
+            {
+                id: 44,
+                question: "According to Lecture 3, what is the first step in the step-by-step example of moving from i+10 to i+1?",
+                options: [
+                    "Students fully understand the original text",
+                    "Original text is too hard (i+10)",
+                    "Scaffolding makes text too easy",
+                    "Students translate the text word-for-word"
+                ],
+                correct: 1,
+                lecture: 3,
+                feedback: "  The first step recognizes that the original text (like Shakespeare's language) is i+10—too hard for students without support."
+            },
+            {
+                id: 45,
+                question: "According to Lecture 1, what does the evolution of literature teaching demonstrate?",
+                options: [
+                    "A move from language-focused to student-centered practice",
+                    "A return to grammar-translation methods",
+                    "Elimination of cultural awareness",
+                    "Less emphasis on student engagement"
+                ],
+                correct: 0,
+                lecture: 1,
+                feedback: "  Literature teaching has evolved from a language-focused and moralistic exercise to a dynamic, student-centered, and culturally aware practice."
+            },
+            {
+                id: 46,
+                question: "In Lecture 2, what should the language in pupils' literature NOT be, according to Smedman?",
+                options: [
+                    "Clear and simple",
+                    "Chopped or flat",
+                    "Rhythmic and cadenced",
+                    "Accessible to age group"
+                ],
+                correct: 1,
+                lecture: 2,
+                feedback: "  The language should be accessible but not 'choppy or flat'—it should maintain literary quality while being age-appropriate."
+            },
+            {
+                id: 47,
+                question: "According to Lecture 3, what is an example of contextual scaffolding?",
+                options: [
+                    "Pre-teaching vocabulary",
+                    "Providing simplified summaries",
+                    "Explaining historical setting",
+                    "Showing video clips"
+                ],
+                correct: 2,
+                lecture: 3,
+                feedback: "  Contextual scaffolding includes explaining the historical setting, author background, and cultural context to support comprehension."
+            },
+            {
+                id: 48,
+                question: "According to Lecture 1, which scholars are associated with the Language-Based Approach?",
+                options: [
+                    "Carter and Long",
+                    "Rosenblatt",
+                    "Short",
+                    "Wallace"
+                ],
+                correct: 0,
+                lecture: 1,
+                feedback: "  Carter and Long (1991) developed the Language-Based Approach focusing on linguistic features of texts to improve language skills."
+            },
+            {
+                id: 49,
+                question: "In Lecture 2, what is the importance of 'vivid imagery' in pupils' literature?",
+                options: [
+                    "It makes texts longer",
+                    "It creates immersive, sensory experiences",
+                    "It simplifies vocabulary",
+                    "It reduces need for illustrations"
+                ],
+                correct: 1,
+                lecture: 2,
+                feedback: "  Vivid imagery uses descriptive language to create immersive, sensory experiences that engage readers beyond flat exposition."
+            },
+            {
+                id: 50,
+                question: "According to Lecture 3, what is one benefit of CI in literature teaching related to culture?",
+                options: [
+                    "Eliminates cultural references",
+                    "Focuses only on target culture",
+                    "Provides cultural and linguistic bridging",
+                    "Avoids all cultural context"
+                ],
+                correct: 2,
+                lecture: 3,
+                feedback: "  CI provides cultural and linguistic bridging, helping students access texts from different cultural contexts while developing language skills."
+            }
+        ];
+        
+        // Variables to track the quiz state
+        let currentQuestions = [];
+        let userAnswers = {};
+        let showAllQuestions = false;
+        
+        // Function to load 5 random questions
+        function loadRandomQuestions() {
+            // Reset state
+            userAnswers = {};
+            showAllQuestions = false;
+            
+            // Create a copy of all questions
+            let allQuestions = [...quizQuestions];
+            
+            // Shuffle the array
+            for (let i = allQuestions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [allQuestions[i], allQuestions[j]] = [allQuestions[j], allQuestions[i]];
+            }
+            
+            // Select first 5 questions
+            currentQuestions = allQuestions.slice(0, 5);
+            
+            // Display the questions
+            displayQuestions();
+            
+            // Hide results if showing
+            document.getElementById('quiz-results').style.display = 'none';
+        }
+        
+        // Function to display all questions
+        function loadAllQuestions() {
+            // Reset state
+            userAnswers = {};
+            showAllQuestions = true;
+            
+            // Use all questions
+            currentQuestions = [...quizQuestions];
+            
+            // Display the questions
+            displayQuestions();
+            
+            // Hide results if showing
+            document.getElementById('quiz-results').style.display = 'none';
+        }
+        
+        // Function to display questions
+        function displayQuestions() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+            
+            if (showAllQuestions) {
+                container.innerHTML = '<h3>All 50 Questions</h3><p>Answer all questions, then submit to check your answers.</p>';
+            } else {
+                container.innerHTML = '<h3>5 Random Questions</h3><p>Answer the questions below, then submit to check your score.</p>';
+            }
+            
+            // Create question elements
+            currentQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'quiz-question';
+                questionDiv.id = `question-${q.id}`;
+                
+                // Add lecture reference
+                const lectureRef = `Lecture ${q.lecture}`;
+                
+                // Question text
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.innerHTML = `<strong>Q${showAllQuestions ? q.id : index + 1}:</strong> ${q.question} <span class="lecture-reference">(${lectureRef})</span>`;
+                questionDiv.appendChild(questionText);
+                
+                // Options
+                q.options.forEach((option, optIndex) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'option';
+                    optionDiv.textContent = option;
+                    optionDiv.dataset.questionId = q.id;
+                    optionDiv.dataset.optionIndex = optIndex;
+                    
+                    // Check if this option was previously selected
+                    if (userAnswers[q.id] === optIndex) {
+                        optionDiv.classList.add('selected');
+                    }
+                    
+                    optionDiv.onclick = function() {
+                        selectOption(q.id, optIndex);
+                    };
+                    
+                    questionDiv.appendChild(optionDiv);
+                });
+                
+                // Feedback area (initially hidden)
+                const feedbackDiv = document.createElement('div');
+                feedbackDiv.className = 'feedback';
+                feedbackDiv.id = `feedback-${q.id}`;
+                questionDiv.appendChild(feedbackDiv);
+                
+                container.appendChild(questionDiv);
+            });
+        }
+        
+        // Function to handle option selection
+        function selectOption(questionId, optionIndex) {
+            // Store the user's answer
+            userAnswers[questionId] = optionIndex;
+            
+            // Update UI for this question
+            const questionDiv = document.getElementById(`question-${questionId}`);
+            const options = questionDiv.querySelectorAll('.option');
+            
+            // Remove selected class from all options in this question
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            options.forEach(opt => {
+                if (parseInt(opt.dataset.optionIndex) === optionIndex) {
+                    opt.classList.add('selected');
+                }
+            });
+            
+            // Hide any existing feedback for this question
+            const feedbackDiv = document.getElementById(`feedback-${questionId}`);
+            feedbackDiv.style.display = 'none';
+        }
+        
+        // Function to submit the quiz
+        function submitQuiz() {
+            let correctCount = 0;
+            const totalQuestions = currentQuestions.length;
+            
+            // Check each question
+            currentQuestions.forEach(q => {
+                const userAnswer = userAnswers[q.id];
+                const correctAnswer = q.correct;
+                const questionDiv = document.getElementById(`question-${q.id}`);
+                const options = questionDiv.querySelectorAll('.option');
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                
+                // Reset option styling
+                options.forEach(opt => {
+                    opt.classList.remove('correct', 'incorrect');
+                });
+                
+                // If user answered this question
+                if (userAnswer !== undefined) {
+                    // Mark correct answer
+                    options.forEach(opt => {
+                        if (parseInt(opt.dataset.optionIndex) === correctAnswer) {
+                            opt.classList.add('correct');
+                        }
+                    });
+                    
+                    // Mark user's answer if incorrect
+                    if (userAnswer !== correctAnswer) {
+                        options.forEach(opt => {
+                            if (parseInt(opt.dataset.optionIndex) === userAnswer) {
+                                opt.classList.add('incorrect');
+                            }
+                        });
+                    } else {
+                        correctCount++;
+                    }
+                    
+                    // Show feedback
+                    feedbackDiv.textContent = q.feedback;
+                    feedbackDiv.className = userAnswer === correctAnswer ? 'feedback correct' : 'feedback incorrect';
+                    feedbackDiv.style.display = 'block';
+                } else {
+                    // If user didn't answer, just show correct answer
+                    options.forEach(opt => {
+                        if (parseInt(opt.dataset.optionIndex) === correctAnswer) {
+                            opt.classList.add('correct');
+                        }
+                    });
+                    
+                    // Show feedback indicating question wasn't answered
+                    feedbackDiv.textContent = `You didn't answer this question. ${q.feedback}`;
+                    feedbackDiv.className = 'feedback incorrect';
+                    feedbackDiv.style.display = 'block';
+                }
+            });
+            
+            // Calculate percentage
+            const percentage = Math.round((correctCount / totalQuestions) * 100);
+            
+            // Display results
+            const resultsDiv = document.getElementById('quiz-results');
+            const scoreValue = document.getElementById('score-value');
+            const resultMessage = document.getElementById('result-message');
+            
+            scoreValue.textContent = `${correctCount}/${totalQuestions}`;
+            
+            // Set message based on performance
+            if (percentage >= 80) {
+                resultMessage.textContent = `Excellent! You scored ${percentage}%. You have a strong understanding of the lecture materials.`;
+            } else if (percentage >= 60) {
+                resultMessage.textContent = `Good job! You scored ${percentage}%. You understand the main concepts but could review some areas.`;
+            } else {
+                resultMessage.textContent = `You scored ${percentage}%. Consider reviewing the lecture summaries and trying the quiz again.`;
+            }
+            
+            resultsDiv.style.display = 'block';
+            
+            // Scroll to results
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Function to review answers (show all with correct answers highlighted)
+        function reviewAnswers() {
+            // Just show the questions with correct answers already highlighted
+            displayQuestions();
+            
+            // Reapply the correct/incorrect styling and show feedback
+            currentQuestions.forEach(q => {
+                const questionDiv = document.getElementById(`question-${q.id}`);
+                const options = questionDiv.querySelectorAll('.option');
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const userAnswer = userAnswers[q.id];
+                const correctAnswer = q.correct;
+                
+                // Mark correct answer
+                options.forEach(opt => {
+                    if (parseInt(opt.dataset.optionIndex) === correctAnswer) {
+                        opt.classList.add('correct');
+                    }
+                });
+                
+                // Mark user's answer if incorrect
+                if (userAnswer !== undefined && userAnswer !== correctAnswer) {
+                    options.forEach(opt => {
+                        if (parseInt(opt.dataset.optionIndex) === userAnswer) {
+                            opt.classList.add('incorrect');
+                        }
+                    });
+                }
+                
+                // Show feedback
+                if (userAnswer !== undefined) {
+                    feedbackDiv.textContent = q.feedback;
+                    feedbackDiv.className = userAnswer === correctAnswer ? 'feedback correct' : 'feedback incorrect';
+                } else {
+                    feedbackDiv.textContent = `You didn't answer this question. ${q.feedback}`;
+                    feedbackDiv.className = 'feedback incorrect';
+                }
+                feedbackDiv.style.display = 'block';
+            });
+            
+            // Hide results
+            document.getElementById('quiz-results').style.display = 'none';
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load initial random questions
+            loadRandomQuestions();
+            
+            // Set up event listeners for buttons
+            document.getElementById('submit-quiz').addEventListener('click', submitQuiz);
+            document.getElementById('new-quiz').addEventListener('click', loadRandomQuestions);
+            document.getElementById('show-all').addEventListener('click', loadAllQuestions);
+            document.getElementById('review-answers').addEventListener('click', reviewAnswers);
+        });
+    </script>
+</body>
+</html>
