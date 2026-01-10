@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP Needs Analysis: Complete Exam Preparation</title>
+    <style>
+        :root {
+            --primary-blue: #2C3E50;
+            --secondary-blue: #3498DB;
+            --accent-blue: #2980B9;
+            --light-blue: #ECF0F1;
+            --dark-blue: #1A2530;
+            --success: #27AE60;
+            --warning: #F39C12;
+            --danger: #E74C3C;
+            --gray: #95A5A6;
+            --white: #FFFFFF;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-blue);
+            color: var(--dark-blue);
+            line-height: 1.6;
+            padding: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 25px 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 10px;
+        }
+
+        .header-subtitle {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        /* Navigation */
+        .nav-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 8px;
+            margin: 25px 0;
+        }
+
+        .nav-btn {
+            background-color: var(--white);
+            border: 2px solid var(--secondary-blue);
+            border-radius: 8px;
+            padding: 12px 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--primary-blue);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--secondary-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background-color: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            padding: 25px 20px;
+            margin: 25px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Typography */
+        h2 {
+            color: var(--primary-blue);
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--secondary-blue);
+            font-size: clamp(1.5rem, 3vw, 1.8rem);
+        }
+
+        h3 {
+            color: var(--accent-blue);
+            margin: 20px 0 12px;
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+        }
+
+        h4 {
+            color: var(--dark-blue);
+            margin: 15px 0 8px;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Enhanced Content Boxes */
+        .definition-box {
+            background: #f8f9fa;
+            border-left: 4px solid var(--secondary-blue);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .example-box {
+            background: #e8f4fc;
+            border: 2px solid var(--secondary-blue);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .key-point {
+            background: #d4edda;
+            border-left: 4px solid var(--success);
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid var(--warning);
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            font-size: 0.95rem;
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Quiz Section */
+        .quiz-container {
+            background: white;
+            border-radius: 10px;
+            padding: 25px 20px;
+            margin: 25px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .progress-indicator {
+            font-weight: 600;
+            color: var(--primary-blue);
+            background: var(--light-blue);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .question-container {
+            margin: 25px 0;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--dark-blue);
+            line-height: 1.5;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .option {
+            background: var(--light-blue);
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+
+        .option:hover {
+            border-color: var(--secondary-blue);
+            background: #e8f4fc;
+        }
+
+        .option.selected {
+            border-color: var(--secondary-blue);
+            background: #e8f4fc;
+            font-weight: 600;
+        }
+
+        .option.correct {
+            border-color: var(--success);
+            background: #d4edda;
+        }
+
+        .option.incorrect {
+            border-color: var(--danger);
+            background: #f8d7da;
+        }
+
+        .option-letter {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            background: var(--secondary-blue);
+            color: white;
+            border-radius: 50%;
+            margin-right: 12px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .feedback-box {
+            display: none;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border-left: 4px solid var(--secondary-blue);
+        }
+
+        .feedback-box.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .feedback-title {
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feedback-content {
+            color: var(--dark-blue);
+            line-height: 1.6;
+        }
+
+        /* Quiz Controls */
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .quiz-btn {
+            background-color: var(--secondary-blue);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            font-size: 0.95rem;
+            min-width: 140px;
+        }
+
+        .quiz-btn:hover:not(:disabled) {
+            background-color: var(--accent-blue);
+        }
+
+        .quiz-btn:disabled {
+            background-color: var(--gray);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .quiz-btn.secondary {
+            background-color: var(--gray);
+        }
+
+        .quiz-btn.success {
+            background-color: var(--success);
+        }
+
+        .quiz-btn.danger {
+            background-color: var(--danger);
+        }
+
+        /* Results Section */
+        .results-container {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 25px 0;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .results-container.show {
+            display: block;
+        }
+
+        .score-display {
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin: 20px 0;
+        }
+
+        .score-text {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: var(--dark-blue);
+        }
+
+        .performance-summary {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        /* Summary Section */
+        .summary-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--secondary-blue);
+        }
+
+        .summary-card h4 {
+            margin-top: 0;
+            color: var(--accent-blue);
+        }
+
+        /* ESP Process Diagram */
+        .process-diagram {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .process-step {
+            background: white;
+            border: 2px solid var(--secondary-blue);
+            border-radius: 8px;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-blue);
+            font-size: 0.9rem;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 15px 0 15px 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* References */
+        .reference-item {
+            background: white;
+            border-left: 3px solid var(--secondary-blue);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 5px 5px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .nav-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .content-section {
+                padding: 20px 15px;
+            }
+            
+            .process-diagram {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 10px 8px;
+            }
+            
+            .quiz-controls {
+                flex-direction: column;
+            }
+            
+            .quiz-btn {
+                width: 100%;
+            }
+            
+            .summary-points {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .option {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+            
+            .option-letter {
+                width: 24px;
+                height: 24px;
+                line-height: 24px;
+                font-size: 0.8rem;
+                margin-right: 10px;
+            }
+            
+            .progress-indicator {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav-container,
+            .quiz-controls,
+            button {
+                display: none !important;
+            }
+            
+            .content-section {
+                display: block !important;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            
+            .content-section.active {
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>ESP Needs Analysis: Complete Study Guide</h1>
+        <div class="header-subtitle">Master One - Didactics of Teaching ESP | University Ziane Achour, Djelfa</div>
+        <p>Comprehensive exam preparation with 50 practice questions</p>
+    </header>
+
+    <nav class="nav-container">
+        <button class="nav-btn active" data-section="summary">Summary</button>
+        <button class="nav-btn" data-section="definitions">Definitions</button>
+        <button class="nav-btn" data-section="types">Types of Needs</button>
+        <button class="nav-btn" data-section="instruments">Instruments</button>
+        <button class="nav-btn" data-section="process">ESP Process</button>
+        <button class="nav-btn" data-section="importance">Importance</button>
+        <button class="nav-btn" data-section="quiz">Exam Quiz (50 Q)</button>
+        <button class="nav-btn" data-section="references">References</button>
+    </nav>
+
+    <!-- Summary Section -->
+    <section id="summary" class="content-section active">
+        <h2>Comprehensive Summary of Needs Analysis in ESP</h2>
+        
+        <div class="definition-box">
+            <h3>What is Needs Analysis in ESP?</h3>
+            <p><strong>Needs Analysis (NA)</strong> is the systematic investigation of the language needs of specific learners within particular contexts to design effective ESP courses. It bridges the gap between learners' current abilities and their target language requirements.</p>
+        </div>
+
+        <div class="example-box">
+            <h4>Real-World Example:</h4>
+            <p><strong>Scenario:</strong> Medical students in Algeria need to read international medical journals and communicate with international patients.</p>
+            <p><strong>NA Application:</strong> The ESP practitioner would:</p>
+            <ol>
+                <li>Interview medical professors about required reading materials</li>
+                <li>Survey students about their current English proficiency</li>
+                <li>Analyze medical journals for frequent vocabulary and structures</li>
+                <li>Observe doctor-patient interactions in English</li>
+                <li>Design course focusing on medical terminology, journal reading strategies, and patient communication skills</li>
+            </ol>
+        </div>
+
+        <h3>Core Principles of ESP Needs Analysis</h3>
+        <div class="summary-points">
+            <div class="summary-card">
+                <h4>Learner-Centered Approach</h4>
+                <p>Focuses on what learners need to DO with English rather than general language knowledge. Example: An engineer needs to write technical reports, not discuss literature.</p>
+            </div>
+            <div class="summary-card">
+                <h4>Context-Specific</h4>
+                <p>Each profession/field has unique language requirements. Legal English differs from Business English in vocabulary, formality, and discourse patterns.</p>
+            </div>
+            <div class="summary-card">
+                <h4>Systematic Process</h4>
+                <p>Follows structured steps: planning, data collection, analysis, application. Requires methodological rigor for valid results.</p>
+            </div>
+            <div class="summary-card">
+                <h4>Ongoing Activity</h4>
+                <p>Not a one-time event. Should be conducted before, during, and after courses to adapt to changing needs.</p>
+            </div>
+        </div>
+
+        <div class="key-point">
+            <h4>Key Distinction: ESP vs General English</h4>
+            <p><strong>General English:</strong> Teaches language for everyday communication across various contexts.</p>
+            <p><strong>ESP:</strong> Targets specific language needed for particular professional/academic situations. Example: While general English might teach "shopping vocabulary," ESP for business teaches "negotiation language" or "meeting protocols."</p>
+        </div>
+
+        <h3>The ESP Course Development Cycle</h3>
+        <div class="process-diagram">
+            <div class="process-step">Needs Analysis</div>
+            <div class="process-step">Course Design</div>
+            <div class="process-step">Materials Selection</div>
+            <div class="process-step">Teaching Implementation</div>
+            <div class="process-step">Assessment & Feedback</div>
+        </div>
+
+        <div class="warning-box">
+            <h4>Common Mistakes in Needs Analysis</h4>
+            <ol>
+                <li><strong>Assuming needs:</strong> Designing courses based on teacher assumptions rather than actual data</li>
+                <li><strong>One-size-fits-all:</strong> Using the same approach for different professional groups</li>
+                <li><strong>Static analysis:</strong> Not updating needs as fields evolve (e.g., new technology terms)</li>
+                <li><strong>Ignoring constraints:</strong> Not considering time, resources, or institutional limitations</li>
+            </ol>
+        </div>
+
+        <div class="example-box">
+            <h4>Case Study: ESP for Computer Science Students</h4>
+            <p><strong>Situation:</strong> Algerian computer science students need to read programming documentation, participate in international forums, and write code comments in English.</p>
+            <p><strong>Effective NA Approach:</strong></p>
+            <ol>
+                <li><strong>Target Situation Analysis:</strong> Analyze Stack Overflow discussions, GitHub documentation, API manuals</li>
+                <li><strong>Present Situation Analysis:</strong> Test students' current technical reading comprehension</li>
+                <li><strong>Learning Needs Analysis:</strong> Survey preferred learning methods (online vs. classroom)</li>
+                <li><strong>Result:</strong> Course focuses on technical documentation reading, forum participation etiquette, and concise technical writing</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Definitions Section -->
+    <section id="definitions" class="content-section">
+        <h2>Key Definitions and Concepts</h2>
+        
+        <div class="definition-box">
+            <h3>Nunan (1988)</h3>
+            <p>"A family of procedures for gathering information about learners and about communication tasks."</p>
+            <p><strong>Practical Application:</strong> This emphasizes the variety of methods available (interviews, questionnaires, observations) and their common purpose: understanding learner requirements.</p>
+        </div>
+
+        <div class="definition-box">
+            <h3>Brown (1995, 2009)</h3>
+            <p>"The systematic collection and analysis of all information necessary for defining a defensible curriculum."</p>
+            <p><strong>Key Elements:</strong> Systematic approach, comprehensive data collection, curriculum justification.</p>
+        </div>
+
+        <div class="definition-box">
+            <h3>Richterich and Trim (1980)</h3>
+            <p>Defined NA as understanding parameters including learners, teachers, administrators, career expectations, social dynamics, and resource analysis.</p>
+            <p><strong>Broad Perspective:</strong> Considers ALL stakeholders and contextual factors affecting learning.</p>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Term</th>
+                    <th>Definition</th>
+                    <th>Example in ESP Context</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Needs Analysis</strong></td>
+                    <td>Systematic investigation of language requirements</td>
+                    <td>Surveying nurses about English needed for patient handovers</td>
+                </tr>
+                <tr>
+                    <td><strong>Needs Assessment</strong></td>
+                    <td>Evaluation of learning requirements (often used interchangeably)</td>
+                    <td>Testing engineering students' ability to understand technical manuals</td>
+                </tr>
+                <tr>
+                    <td><strong>Target Situation</strong></td>
+                    <td>Future context where English will be used</td>
+                    <td>International conference presentation for researchers</td>
+                </tr>
+                <tr>
+                    <td><strong>Present Situation</strong></td>
+                    <td>Learners' current language abilities</td>
+                    <td>Current proficiency in reading academic papers</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="key-point">
+            <h4>Historical Development</h4>
+            <p><strong>1920s:</strong> Term "needs analysis" first appears in educational literature</p>
+            <p><strong>1960s:</strong> Becomes central to ESP with growth of specialized English teaching</p>
+            <p><strong>1980s-90s:</strong> Development of systematic frameworks (Hutchinson & Waters, Dudley-Evans & St. John)</p>
+            <p><strong>2000s-present:</strong> Integration of technology, focus on ongoing assessment</p>
+        </div>
+    </section>
+
+    <!-- Types of Needs Section -->
+    <section id="types" class="content-section">
+        <h2>Types of Needs in ESP: Comprehensive Classification</h2>
+        
+        <div class="definition-box">
+            <h3>The Major Dichotomies</h3>
+            <p>Researchers have identified various need classifications that help ESP practitioners design more targeted courses.</p>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Definition</th>
+                    <th>Researcher</th>
+                    <th>Practical Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Objective Needs</strong></td>
+                    <td>Factual, observable requirements</td>
+                    <td>Brindley (1989)</td>
+                    <td>A pharmacist must read dosage instructions in English</td>
+                </tr>
+                <tr>
+                    <td><strong>Subjective Needs</strong></td>
+                    <td>Learners' perceptions, attitudes, motivations</td>
+                    <td>Brindley (1989)</td>
+                    <td>A student feels anxious about speaking in meetings</td>
+                </tr>
+                <tr>
+                    <td><strong>Target Needs</strong></td>
+                    <td>Language required in target situation</td>
+                    <td>Hutchinson & Waters (1987)</td>
+                    <td>Writing research abstracts for journal submission</td>
+                </tr>
+                <tr>
+                    <td><strong>Learning Needs</strong></td>
+                    <td>Requirements for the learning process</td>
+                    <td>Hutchinson & Waters (1987)</td>
+                    <td>Need for visual aids, practice opportunities</td>
+                </tr>
+                <tr>
+                    <td><strong>Felt Needs</strong></td>
+                    <td>What learners feel they need</td>
+                    <td>Berwick (1989)</td>
+                    <td>"I need to improve my pronunciation"</td>
+                </tr>
+                <tr>
+                    <td><strong>Perceived Needs</strong></td>
+                    <td>What experts think learners need</td>
+                    <td>Berwick (1989)</td>
+                    <td>Teacher identifies need for academic writing skills</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="example-box">
+            <h4>Example: Business English for Marketing Professionals</h4>
+            <p><strong>Objective Needs:</strong> Write marketing reports, analyze competitor data in English</p>
+            <p><strong>Subjective Needs:</strong> Confidence in presenting to international clients</p>
+            <p><strong>Target Needs:</strong> Create persuasive presentations, negotiate contracts</p>
+            <p><strong>Learning Needs:</strong> Case study analysis, role-play exercises</p>
+            <p><strong>Felt Needs:</strong> "I need to understand business idioms"</p>
+            <p><strong>Perceived Needs:</strong> Trainer identifies need for cross-cultural communication skills</p>
+        </div>
+
+        <h3>Analysis Approaches in ESP</h3>
+        <div class="summary-points">
+            <div class="summary-card">
+                <h4>Target Situation Analysis (TSA)</h4>
+                <p>Focuses on language requirements in future professional context. Methods: Job analysis, observation of target situations.</p>
+            </div>
+            <div class="summary-card">
+                <h4>Present Situation Analysis (PSA)</h4>
+                <p>Assesses current language proficiency and gaps. Methods: Placement tests, proficiency assessments.</p>
+            </div>
+            <div class="summary-card">
+                <h4>Learning Needs Analysis</h4>
+                <p>Identifies optimal learning conditions and preferences. Methods: Learning style questionnaires, interviews.</p>
+            </div>
+            <div class="summary-card">
+                <h4>Means Analysis</h4>
+                <p>Examines constraints and resources available. Methods: Institutional analysis, resource audit.</p>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <h4>Common Confusion: Objective vs Subjective Needs</h4>
+            <p><strong>Objective:</strong> Verifiable data (test scores, job requirements, observed difficulties)</p>
+            <p><strong>Subjective:</strong> Personal perceptions (anxiety levels, motivation, preferences)</p>
+            <p><strong>Best Practice:</strong> Collect both types for comprehensive understanding. A student might objectively need presentation skills but subjectively fear public speaking.</p>
+        </div>
+    </section>
+
+    <!-- Instruments Section -->
+    <section id="instruments" class="content-section">
+        <h2>Data Collection Instruments in Needs Analysis</h2>
+        
+        <div class="definition-box">
+            <h3>Selecting Appropriate Instruments</h3>
+            <p>The choice of instrument depends on research questions, available resources, target population, and desired data type (qualitative vs quantitative).</p>
+        </div>
+
+        <table class="comparison-table">
+            <caption>Comparison of Major Data Collection Methods</caption>
+            <thead>
+                <tr>
+                    <th>Instrument</th>
+                    <th>Best For</th>
+                    <th>Advantages</th>
+                    <th>Limitations</th>
+                    <th>ESP Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Questionnaires</strong></td>
+                    <td>Large groups, quantitative data</td>
+                    <td>Time-efficient, anonymous, standardized</td>
+                    <td>Superficial data, low response rates</td>
+                    <td>Survey 200 medical students about reading needs</td>
+                </tr>
+                <tr>
+                    <td><strong>Interviews</strong></td>
+                    <td>In-depth qualitative data</td>
+                    <td>Rich data, flexibility, clarification</td>
+                    <td>Time-consuming, interviewer bias</td>
+                    <td>Interview 10 engineers about workplace communication</td>
+                </tr>
+                <tr>
+                    <td><strong>Observation</strong></td>
+                    <td>Authentic language use</td>
+                    <td>Real-world data, context-rich</td>
+                    <td>Observer effect, time-intensive</td>
+                    <td>Observe business meetings in English</td>
+                </tr>
+                <tr>
+                    <td><strong>Tests</strong></td>
+                    <td>Proficiency assessment</td>
+                    <td>Objective, comparable data</td>
+                    <td>Test anxiety, limited scope</td>
+                    <td>Test aviation students' radiotelephony comprehension</td>
+                </tr>
+                <tr>
+                    <td><strong>Document Analysis</strong></td>
+                    <td>Target language analysis</td>
+                    <td>Authentic materials, comprehensive</td>
+                    <td>Time-consuming, requires expertise</td>
+                    <td>Analyze legal contracts for frequent structures</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="example-box">
+            <h4>Practical Example: Designing an ESP Questionnaire</h4>
+            <p><strong>Context:</strong> Needs analysis for tourism English course</p>
+            <p><strong>Questionnaire Sections:</strong></p>
+            <ol>
+                <li><strong>Demographic Information:</strong> Current position, years in tourism, previous English training</li>
+                <li><strong>Current English Use:</strong> Frequency of English use, situations (phone, email, face-to-face)</li>
+                <li><strong>Skill Priorities:</strong> Ranking of listening, speaking, reading, writing importance</li>
+                <li><strong>Specific Tasks:</strong> Rating difficulty of common tasks (handling complaints, giving directions)</li>
+                <li><strong>Learning Preferences:</strong> Preferred teaching methods, schedule constraints</li>
+                <li><strong>Open-ended:</strong> Additional comments, specific challenges</li>
+            </ol>
+        </div>
+
+        <h3>Ensuring Instrument Quality</h3>
+        <div class="summary-points">
+            <div class="summary-card">
+                <h4>Reliability</h4>
+                <p>Consistency of measurement. Test-retest reliability: similar results on different occasions.</p>
+                <p><strong>Example:</strong> A vocabulary test given twice should produce similar scores.</p>
+            </div>
+            <div class="summary-card">
+                <h4>Validity</h4>
+                <p>Measures what it claims to measure. Content validity: covers all relevant aspects.</p>
+                <p><strong>Example:</strong> A test for medical reading should include actual medical texts.</p>
+            </div>
+            <div class="summary-card">
+                <h4>Usability</h4>
+                <p>Practical to administer. Clear instructions, appropriate length, easy scoring.</p>
+                <p><strong>Example:</strong> 20-minute questionnaire vs 2-hour interview.</p>
+            </div>
+        </div>
+
+        <div class="key-point">
+            <h4>Triangulation: Using Multiple Methods</h4>
+            <p>For comprehensive needs analysis, combine different instruments:</p>
+            <p><strong>Example Sequence:</strong></p>
+            <ol>
+                <li><strong>Document analysis</strong> of target texts</li>
+                <li><strong>Questionnaire</strong> to all students</li>
+                <li><strong>Interviews</strong> with sample of students and professionals</li>
+                <li><strong>Observation</strong> of target language situations</li>
+            </ol>
+            <p>This provides both breadth (questionnaires) and depth (interviews) of understanding.</p>
+        </div>
+    </section>
+
+    <!-- ESP Process Section -->
+    <section id="process" class="content-section">
+        <h2>The ESP Process: From Analysis to Implementation</h2>
+        
+        <div class="definition-box">
+            <h3>Dudley-Evans & St. John's Cyclical Model (1998)</h3>
+            <p>Needs analysis is not a one-time starting point but an ongoing, cyclical process integrated throughout ESP course development.</p>
+        </div>
+
+        <div class="process-diagram">
+            <div class="process-step">Initial NA</div>
+            <div class="process-step">Course Design</div>
+            <div class="process-step">Materials Dev</div>
+            <div class="process-step">Teaching</div>
+            <div class="process-step">Evaluation</div>
+        </div>
+        <p style="text-align: center; margin-top: 10px; font-style: italic;">← Feedback loop continues throughout →</p>
+
+        <h3>Detailed Process Steps</h3>
+        
+        <div class="summary-points">
+            <div class="summary-card">
+                <h4>1. Initial Planning</h4>
+                <p><strong>Identify stakeholders:</strong> Learners, teachers, employers, administrators</p>
+                <p><strong>Define scope:</strong> What aspects to investigate (language skills, contexts, tasks)</p>
+                <p><strong>Select methods:</strong> Choose appropriate instruments</p>
+            </div>
+            <div class="summary-card">
+                <h4>2. Data Collection</h4>
+                <p><strong>Multiple sources:</strong> Combine questionnaires, interviews, observations</p>
+                <p><strong>Triangulation:</strong> Cross-verify data from different sources</p>
+                <p><strong>Ethical considerations:</strong> Informed consent, confidentiality</p>
+            </div>
+            <div class="summary-card">
+                <h4>3. Data Analysis</h4>
+                <p><strong>Identify patterns:</strong> Common needs, priorities, gaps</p>
+                <p><strong>Categorize needs:</strong> Linguistic, strategic, cultural</p>
+                <p><strong>Prioritize:</strong> Most urgent vs important needs</p>
+            </div>
+            <div class="summary-card">
+                <h4>4. Application to Curriculum</h4>
+                <p><strong>Course objectives:</strong> Specific, measurable goals</p>
+                <p><strong>Syllabus design:</strong> Content selection and sequencing</p>
+                <p><strong>Materials development:</strong> Authentic, relevant resources</p>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <h4>Complete Example: ESP for Journalism Students</h4>
+            <p><strong>Step 1 - Planning:</strong> Identify needs to write news articles, conduct interviews, understand media ethics in English</p>
+            <p><strong>Step 2 - Data Collection:</strong> 
+                • Analyze international news articles<br>
+                • Survey journalism professors<br>
+                • Interview working journalists<br>
+                • Test students' current writing skills</p>
+            <p><strong>Step 3 - Analysis:</strong> Identify key needs: headline writing, interview questioning techniques, ethical language</p>
+            <p><strong>Step 4 - Application:</strong> Design course modules on news writing, interviewing skills, media vocabulary</p>
+            <p><strong>Step 5 - Ongoing:</strong> Mid-course feedback survey to adjust focus</p>
+        </div>
+
+        <div class="key-point">
+            <h4>The Importance of Ongoing Needs Analysis</h4>
+            <p><strong>Why ongoing?</strong> Learner needs evolve, contexts change, initial analysis may be incomplete.</p>
+            <p><strong>When to conduct:</strong></p>
+            <ul>
+                <li><strong>Diagnostic:</strong> Before course begins</li>
+                <li><strong>Formative:</strong> During course for adjustments</li>
+                <li><strong>Summative:</strong> After course for future improvements</li>
+                <li><strong>Longitudinal:</strong> Tracking changes over time</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Importance Section -->
+    <section id="importance" class="content-section">
+        <h2>The Critical Importance of Needs Analysis in ESP</h2>
+        
+        <div class="definition-box">
+            <h3>Fundamental to ESP Philosophy</h3>
+            <p>"Tell me what you need English for and I will tell you the English that you need."<br>
+            <em>- Hutchinson and Waters (1987)</em></p>
+            <p>This principle distinguishes ESP from general English and guides all ESP course development.</p>
+        </div>
+
+        <h3>Why Needs Analysis is Essential</h3>
+        
+        <div class="summary-points">
+            <div class="summary-card">
+                <h4>Course Relevance</h4>
+                <p>Ensures course content matches actual professional requirements. Without NA, courses may teach irrelevant content.</p>
+                <p><strong>Example:</strong> Teaching Shakespeare to engineers wastes time needed for technical writing.</p>
+            </div>
+            <div class="summary-card">
+                <h4>Learner Motivation</h4>
+                <p>Students are more motivated when they see direct relevance to their goals. NA identifies these connections.</p>
+                <p><strong>Example:</strong> Medical students engage more when learning patient communication rather than general conversation.</p>
+            </div>
+            <div class="summary-card">
+                <h4>Resource Efficiency</h4>
+                <p>Focuses limited time and resources on priority areas identified through NA.</p>
+                <p><strong>Example:</strong> If analysis shows reading is the primary need, less time on speaking practice.</p>
+            </div>
+            <div class="summary-card">
+                <h4>Assessment Validity</h4>
+                <p>NA-informed assessments test relevant skills, providing meaningful feedback.</p>
+                <p><strong>Example:</strong> Testing business students on email writing rather than poetry analysis.</p>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <h4>Consequences of Skipping Needs Analysis</h4>
+            <p><strong>Schutz and Derwing (1981) warning:</strong> "Many well-intentioned language programs... have foundered because either no consideration was given to the actual use the learner intended to make of the language or because the list of uses drawn up by the course designer was based on imagination rather than an objective assessment."</p>
+            <p><strong>Real consequences:</strong></p>
+            <ol>
+                <li><strong>Low motivation:</strong> Students see no relevance to their goals</li>
+                <li><strong>Wasted resources:</strong> Time spent on unnecessary content</li>
+                <li><strong>Poor outcomes:</strong> Students unable to perform required tasks</li>
+                <li><strong>Course failure:</strong> Low enrollment, negative feedback</li>
+            </ol>
+        </div>
+
+        <div class="example-box">
+            <h4>Success Story: ESP for Oil Industry Professionals</h4>
+            <p><strong>Situation:</strong> Algerian oil engineers working with international companies</p>
+            <p><strong>Comprehensive NA:</strong></p>
+            <ol>
+                <li>Interviewed senior engineers about communication needs</li>
+                <li>Analyzed reports, emails, meeting minutes</li>
+                <li>Observed actual workplace interactions</li>
+                <li>Surveyed 150 engineers about difficulties</li>
+            </ol>
+            <p><strong>Findings:</strong> Primary needs: technical report writing, safety procedure comprehension, meeting participation</p>
+            <p><strong>Result:</strong> Targeted 12-week course focusing on these areas. Post-course evaluation showed 85% improvement in task performance.</p>
+        </div>
+
+        <h3>Needs Analysis as Professional Practice</h3>
+        <div class="key-point">
+            <p><strong>For ESP Practitioners, NA is not optional but fundamental:</strong></p>
+            <ul>
+                <li><strong>Professional credibility:</strong> Evidence-based course design</li>
+                <li><strong>Accountability:</strong> Justifying course content to stakeholders</li>
+                <li><strong>Continuous improvement:</strong> Regular updates based on new data</li>
+                <li><strong>Research basis:</strong> Contributing to ESP knowledge base</li>
+            </ul>
+        </div>
+
+        <div class="definition-box">
+            <h4>Brindley's (1980) Dual Role of Needs Analysis</h4>
+            <p>1. <strong>As a guide in setting broad goals</strong> - Establishing overall course objectives</p>
+            <p>2. <strong>As a guide in the learning process</strong> - Informing teaching methods and materials selection</p>
+            <p>This dual function makes NA essential at both macro (course design) and micro (classroom practice) levels.</p>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="content-section">
+        <div class="quiz-header">
+            <h2>ESP Needs Analysis Exam Preparation</h2>
+            <div class="progress-indicator" id="progress-indicator">Question 1 of 50</div>
+        </div>
+
+        <div class="quiz-container">
+            <div id="question-container">
+                <!-- Questions will be loaded here -->
+            </div>
+
+            <div class="feedback-box" id="feedback-box">
+                <div class="feedback-title" id="feedback-title"></div>
+                <div class="feedback-content" id="feedback-content"></div>
+            </div>
+
+            <div class="quiz-controls">
+                <button class="quiz-btn secondary" id="prev-btn" disabled>Previous Question</button>
+                <button class="quiz-btn" id="next-btn">Next Question</button>
+                <button class="quiz-btn success" id="submit-btn" style="display: none;">Submit Answer</button>
+                <button class="quiz-btn danger" id="restart-btn" style="display: none;">Restart Quiz</button>
+            </div>
+        </div>
+
+        <div class="results-container" id="results-container">
+            <h2>Quiz Results</h2>
+            <div class="score-display" id="score-display">0/50</div>
+            <div class="score-text" id="score-text"></div>
+            
+            <div class="performance-summary">
+                <h3>Performance Analysis</h3>
+                <div id="category-breakdown"></div>
+            </div>
+            
+            <button class="quiz-btn" id="review-btn" style="margin-top: 20px;">Review Questions</button>
+        </div>
+    </section>
+
+    <!-- References Section -->
+    <section id="references" class="content-section">
+        <h2>Key References and Further Reading</h2>
+        
+        <div class="definition-box">
+            <h3>Essential ESP Literature</h3>
+            <p>These works form the foundation of ESP needs analysis theory and practice.</p>
+        </div>
+
+        <div class="reference-item">
+            <strong>Hutchinson, T., & Waters, A. (1987).</strong> <em>English for Specific Purposes: A Learning-Centered Approach.</em> Cambridge University Press.
+            <p><strong>Key Contribution:</strong> Introduced the distinction between target needs and learning needs.</p>
+        </div>
+
+        <div class="reference-item">
+            <strong>Dudley-Evans, T. & St. John, M. J. (1998).</strong> <em>Developments in English for Specific Purposes: A Multidisciplinary Approach.</em> Cambridge University Press.
+            <p><strong>Key Contribution:</strong> Developed the cyclical model of ESP course development.</p>
+        </div>
+
+        <div class="reference-item">
+            <strong>Brown, J. D. (1995).</strong> <em>The Elements of Language Curriculum: A Systematic Approach to Program Development.</em> Heinle & Heinle.
+            <p><strong>Key Contribution:</strong> Systematic framework for needs analysis and curriculum design.</p>
+        </div>
+
+        <div class="reference-item">
+            <strong>Nunan, D. (1988).</strong> <em>The Learner-Centred Curriculum.</em> Cambridge University Press.
+            <p><strong>Key Contribution:</strong> Emphasized learner needs in curriculum design.</p>
+        </div>
+
+        <div class="reference-item">
+            <strong>Richterich, R. (1980).</strong> "Identifying the Needs of Adults Learning a Foreign Language." <em>International Review of Applied Linguistics, 18(1).</em>
+            <p><strong>Key Contribution:</strong> Early systematic approach to needs analysis.</p>
+        </div>
+
+        <div class="reference-item">
+            <strong>Brindley, G. (1989).</strong> "Needs analysis and Objective Setting in the Adult Migrant Education Program." In C. J. Brumfit and R. A. C. Mitchell (Eds.), <em>Research in the Language Classroom.</em>
+            <p><strong>Key Contribution:</strong> Distinguished objective and subjective needs.</p>
+        </div>
+
+        <div class="reference-item">
+            <strong>Long, M. H. (2005).</strong> "Methodological Issues in Learner Needs Identification." In R. Kiely et al. (Eds.), <em>Needs Analysis for Language Course Design.</em>
+            <p><strong>Key Contribution:</strong> Addressed methodological challenges in needs analysis.</p>
+        </div>
+
+        <div class="reference-item">
+            <strong>West, R. (1994).</strong> "Needs Analysis in Language Teaching." <em>Language Teaching, 27(1).</em>
+            <p><strong>Key Contribution:</strong> Historical overview and contemporary practices.</p>
+        </div>
+
+        <div class="key-point" style="margin-top: 30px;">
+            <h3>Recommended Reading Strategy</h3>
+            <p><strong>For exam preparation:</strong> Focus on Hutchinson & Waters (1987) and Dudley-Evans & St. John (1998)</p>
+            <p><strong>For research:</strong> Explore Long (2005) and recent journal articles</p>
+            <p><strong>For practice:</strong> Brown (1995) provides practical frameworks</p>
+        </div>
+    </section>
+
+    <script>
+        // Navigation System
+        document.querySelectorAll('.nav-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const section = button.dataset.section;
+                
+                // Update active navigation button
+                document.querySelectorAll('.nav-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                button.classList.add('active');
+                
+                // Hide all sections
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show selected section
+                document.getElementById(section).classList.add('active');
+                
+                // If quiz section, initialize quiz
+                if (section === 'quiz') {
+                    initializeQuiz();
+                }
+            });
+        });
+
+        // Quiz Data - 50 Comprehensive Questions
+        const quizQuestions = [
+            // Category 1: Definitions and Concepts (10 questions)
+            {
+                category: "Definitions",
+                question: "According to Nunan (1988), needs analysis refers to:",
+                options: [
+                    "A single method for testing language proficiency",
+                    "A family of procedures for gathering information about learners and communication tasks",
+                    "A technique for evaluating teacher performance",
+                    "A system for grading student assignments"
+                ],
+                correct: 1,
+                explanation: "Nunan defined needs analysis as 'a family of procedures for gathering information about learners and about communication tasks.' This emphasizes the variety of methods available rather than a single approach."
+            },
+            {
+                category: "Definitions",
+                question: "Brown's (2009) definition of needs analysis emphasizes:",
+                options: [
+                    "Teacher preferences in course design",
+                    "Systematic collection of information for curriculum definition",
+                    "Student entertainment in learning",
+                    "Administrative convenience"
+                ],
+                correct: 1,
+                explanation: "Brown defined needs analysis as 'the systematic collection and analysis of all information necessary for defining a defensible curriculum.' This highlights the systematic nature and curriculum focus."
+            },
+            {
+                category: "Definitions",
+                question: "The term 'needs analysis' first became central to ESP in which decade?",
+                options: [
+                    "1940s",
+                    "1950s", 
+                    "1960s",
+                    "1970s"
+                ],
+                correct: 2,
+                explanation: "According to West (1994), needs analysis became central to ESP in the 1960s as ESP developed as a distinct field focusing on specific learner requirements."
+            },
+            {
+                category: "Definitions",
+                question: "What distinguishes ESP from General English according to Hutchinson and Waters (1987)?",
+                options: [
+                    "ESP uses more advanced vocabulary",
+                    "ESP focuses on specific learner needs and contexts",
+                    "ESP is taught by specialist teachers only",
+                    "ESP uses different grammar rules"
+                ],
+                correct: 1,
+                explanation: "Hutchinson and Waters emphasized that awareness of needs distinguishes ESP from general English. ESP focuses on specific purposes and contexts rather than general language proficiency."
+            },
+            {
+                category: "Definitions",
+                question: "Richterich and Trim's (1980) definition of needs analysis includes consideration of:",
+                options: [
+                    "Only linguistic factors",
+                    "Only learner characteristics",
+                    "Multiple parameters including social dynamics and resource analysis",
+                    "Only classroom teaching methods"
+                ],
+                correct: 2,
+                explanation: "Richterich and Trim defined needs analysis as understanding parameters including learners, teachers, administrators, career expectations, social dynamics, and resource analysis - a comprehensive view."
+            },
+            {
+                category: "Definitions",
+                question: "According to Holec (1980), needs assessment establishes:",
+                options: [
+                    "A close link between learners and curricula",
+                    "Teacher authority in the classroom",
+                    "Standardized testing procedures",
+                    "Government education policies"
+                ],
+                correct: 0,
+                explanation: "Holec described needs assessment as 'a classical procedure by which a close link can be established between the learners and the curricula,' emphasizing the connection between learner requirements and course design."
+            },
+            {
+                category: "Definitions",
+                question: "What does the acronym ESP stand for?",
+                options: [
+                    "English for Special People",
+                    "English for Specific Purposes",
+                    "English for Scholastic Purposes",
+                    "English for Simple Practice"
+                ],
+                correct: 1,
+                explanation: "ESP stands for English for Specific Purposes, focusing on teaching English for particular professional or academic contexts rather than general communication."
+            },
+            {
+                category: "Definitions",
+                question: "The 'S' in ESP refers to:",
+                options: [
+                    "Simple language",
+                    "Specific purposes",
+                    "Standard English",
+                    "Student-centered"
+                ],
+                correct: 1,
+                explanation: "The 'S' in ESP stands for 'Specific,' indicating the focused nature of the language teaching on particular purposes or contexts."
+            },
+            {
+                category: "Definitions",
+                question: "Which researcher emphasized that needs analysis theory can apply to general English courses?",
+                options: [
+                    "Hutchinson & Waters",
+                    "Seedhouse",
+                    "Dudley-Evans",
+                    "Brown"
+                ],
+                correct: 1,
+                explanation: "Seedhouse (1995) argued that needs analysis theory and application can be applied in general English courses, not just ESP."
+            },
+            {
+                category: "Definitions",
+                question: "According to Nagarajan (1988), a learner's needs include:",
+                options: [
+                    "Only current language proficiency",
+                    "Reasons for learning and future language use",
+                    "Teacher qualifications",
+                    "Classroom facilities"
+                ],
+                correct: 1,
+                explanation: "Nagarajan defined needs in terms of the reasons for which the learner wishes to learn English and the kind of English they will use in future."
+            },
+
+            // Category 2: Types of Needs (10 questions)
+            {
+                category: "Types of Needs",
+                question: "Objective needs according to Brindley (1989) are:",
+                options: [
+                    "Derivable from factual information about learners",
+                    "Based on learners' feelings and emotions",
+                    "What teachers think students should learn",
+                    "Cultural preferences in learning"
+                ],
+                correct: 0,
+                explanation: "Brindley defined objective needs as derivable from different kinds of factual information about learners, their language use, and current proficiency."
+            },
+            {
+                category: "Types of Needs",
+                question: "Subjective needs include:",
+                options: [
+                    "Test scores and proficiency levels",
+                    "Cognitive and affective factors like confidence and attitudes",
+                    "Job requirements and tasks",
+                    "Institutional resources available"
+                ],
+                correct: 1,
+                explanation: "Subjective needs are the cognitive and affective needs of learners, including personality, confidence, attitudes, wants and expectations."
+            },
+            {
+                category: "Types of Needs",
+                question: "Hutchinson and Waters (1987) distinguished between:",
+                options: [
+                    "Easy and difficult needs",
+                    "Target needs and learning needs",
+                    "Written and spoken needs",
+                    "Individual and group needs"
+                ],
+                correct: 1,
+                explanation: "Hutchinson and Waters made the key distinction between target needs (what learners need to do in target situation) and learning needs (what they need to do to learn)."
+            },
+            {
+                category: "Types of Needs",
+                question: "Target needs refer to:",
+                options: [
+                    "What learners need to do in order to learn",
+                    "What learners need to do in the target situation",
+                    "Teachers' training needs",
+                    "Administrative requirements"
+                ],
+                correct: 1,
+                explanation: "Target needs are what the learner needs to do in the target situation - the actual language use requirements in their professional or academic context."
+            },
+            {
+                category: "Types of Needs",
+                question: "Learning needs analysis focuses on:",
+                options: [
+                    "Target language use situations",
+                    "How learners learn best and what resources they need",
+                    "Employer expectations only",
+                    "Government curriculum requirements"
+                ],
+                correct: 1,
+                explanation: "Learning needs analysis focuses on how learners learn, their preferences, strategies, and the resources needed for effective learning."
+            },
+            {
+                category: "Types of Needs",
+                question: "Felt needs are:",
+                options: [
+                    "What experts think learners need",
+                    "Related to learners' feelings and thoughts about their needs",
+                    "Measured through objective testing",
+                    "Determined by job analysis"
+                ],
+                correct: 1,
+                explanation: "Felt needs are related to the feelings and thoughts of learners - their personal perceptions of what they need to learn."
+            },
+            {
+                category: "Types of Needs",
+                question: "Perceived needs are:",
+                options: [
+                    "Learners' personal desires",
+                    "Experts' opinions about educational gaps",
+                    "Measured through observation only",
+                    "Always identical to felt needs"
+                ],
+                correct: 1,
+                explanation: "Perceived needs are experts' thoughts about educational gaps in learners' experience - an outsider's perspective on what learners need."
+            },
+            {
+                category: "Types of Needs",
+                question: "Which type of need would include 'needing to write research papers' for a PhD student?",
+                options: [
+                    "Target need",
+                    "Learning need",
+                    "Subjective need",
+                    "Felt need"
+                ],
+                correct: 0,
+                explanation: "This is a target need - it describes what the learner needs to do in their specific academic context (write research papers)."
+            },
+            {
+                category: "Types of Needs",
+                question: "A student saying 'I need more visual aids to learn vocabulary' is expressing:",
+                options: [
+                    "Target need",
+                    "Learning need",
+                    "Objective need",
+                    "Perceived need"
+                ],
+                correct: 1,
+                explanation: "This is a learning need - it relates to how the student learns best (with visual aids) rather than what they need to do in the target situation."
+            },
+            {
+                category: "Types of Needs",
+                question: "Brown's (1995) distinction between situation and language needs emphasizes:",
+                options: [
+                    "Only linguistic elements",
+                    "Only contextual factors",
+                    "Both contextual factors and linguistic behaviors",
+                    "Teacher preferences"
+                ],
+                correct: 2,
+                explanation: "Brown distinguished situation needs (contextual factors like administrative, cultural aspects) and language needs (target linguistic behaviors), emphasizing both dimensions."
+            },
+
+            // Category 3: Instruments and Methods (10 questions)
+            {
+                category: "Instruments",
+                question: "The main advantage of questionnaires in needs analysis is:",
+                options: [
+                    "They provide in-depth qualitative data",
+                    "They are efficient for collecting data from large groups",
+                    "They allow for immediate clarification of responses",
+                    "They eliminate all response bias"
+                ],
+                correct: 1,
+                explanation: "Questionnaires are efficient for collecting data from large groups in a relatively short time, though they may lack depth compared to interviews."
+            },
+            {
+                category: "Instruments",
+                question: "Interviews are particularly useful for:",
+                options: [
+                    "Collecting data from thousands of respondents",
+                    "Gathering in-depth, qualitative information",
+                    "Standardized data collection",
+                    "Quick statistical analysis"
+                ],
+                correct: 1,
+                explanation: "Interviews allow for in-depth exploration of opinions and experiences through probing questions and clarification, providing rich qualitative data."
+            },
+            {
+                category: "Instruments",
+                question: "A limitation of questionnaires mentioned by Kumar (1996) is:",
+                options: [
+                    "They are too time-consuming",
+                    "They allow for social desirability bias in responses",
+                    "They provide too much depth of information",
+                    "They require highly trained interviewers"
+                ],
+                correct: 1,
+                explanation: "Kumar noted that questionnaires may lead to social desirability bias, where respondents give answers they think are socially acceptable rather than their true opinions."
+            },
+            {
+                category: "Instruments",
+                question: "Observation as a needs analysis method is best for:",
+                options: [
+                    "Collecting data on authentic language use in real contexts",
+                    "Large-scale statistical analysis",
+                    "Testing grammatical knowledge",
+                    "Measuring teacher performance"
+                ],
+                correct: 0,
+                explanation: "Observation allows researchers to see authentic language use in real contexts, providing valuable data about actual communication needs and practices."
+            },
+            {
+                category: "Instruments",
+                question: "Tests in needs analysis primarily provide information about:",
+                options: [
+                    "Learners' attitudes and motivations",
+                    "Current language proficiency and specific problems",
+                    "Future job requirements",
+                    "Institutional resources"
+                ],
+                correct: 1,
+                explanation: "Tests can provide objective information about learners' current language proficiency levels and identify specific areas of difficulty."
+            },
+            {
+                category: "Instruments",
+                question: "Document analysis in ESP needs analysis typically involves:",
+                options: [
+                    "Analyzing learners' personal diaries",
+                    "Examining target language texts and materials",
+                    "Reviewing teacher qualifications",
+                    "Studying school building plans"
+                ],
+                correct: 1,
+                explanation: "Document analysis involves examining authentic texts from the target situation to identify language features, vocabulary, and discourse patterns."
+            },
+            {
+                category: "Instruments",
+                question: "Which instrument is most affected by interviewer bias?",
+                options: [
+                    "Questionnaires",
+                    "Tests",
+                    "Interviews",
+                    "Document analysis"
+                ],
+                correct: 2,
+                explanation: "Interviews are particularly susceptible to interviewer bias, where the interviewer's behavior, questions, or reactions may influence responses."
+            },
+            {
+                category: "Instruments",
+                question: "For needs analysis with time constraints and a large population, which instrument is most appropriate?",
+                options: [
+                    "In-depth interviews",
+                    "Extended observations",
+                    "Structured questionnaires",
+                    "Document analysis"
+                ],
+                correct: 2,
+                explanation: "Structured questionnaires are most appropriate for large populations with time constraints, as they can be distributed widely and analyzed efficiently."
+            },
+            {
+                category: "Instruments",
+                question: "Triangulation in needs analysis refers to:",
+                options: [
+                    "Using only one data collection method",
+                    "Using three different researchers",
+                    "Using multiple methods to cross-verify data",
+                    "Analyzing data from three perspectives"
+                ],
+                correct: 2,
+                explanation: "Triangulation involves using multiple methods (e.g., questionnaires, interviews, observation) to cross-verify findings and increase validity."
+            },
+            {
+                category: "Instruments",
+                question: "Which factor is NOT typically considered when selecting needs analysis instruments?",
+                options: [
+                    "Available time and resources",
+                    "Size of target population",
+                    "Type of data needed",
+                    "Favorite color of researcher"
+                ],
+                correct: 3,
+                explanation: "Instrument selection should be based on practical and methodological considerations, not personal preferences like favorite colors."
+            },
+
+            // Category 4: Process and Implementation (10 questions)
+            {
+                category: "Process",
+                question: "According to Brown (1995), the first step in needs analysis is:",
+                options: [
+                    "Gathering information",
+                    "Making basic decisions about the needs analysis",
+                    "Using the information collected",
+                    "Reporting results to administrators"
+                ],
+                correct: 1,
+                explanation: "Brown identified three steps: 1) Making basic decisions, 2) Gathering information, 3) Using the information. Planning decisions come first."
+            },
+            {
+                category: "Process",
+                question: "The four categories of people involved in needs analysis according to Brown (1995) are:",
+                options: [
+                    "Students, parents, teachers, principals",
+                    "Target group, audience, analysts, resource group",
+                    "Beginners, intermediates, advanced, experts",
+                    "Linguists, psychologists, sociologists, teachers"
+                ],
+                correct: 1,
+                explanation: "Brown identified: target group (learners), audience (those who use results), analysts (researchers), resource group (information sources)."
+            },
+            {
+                category: "Process",
+                question: "Dudley-Evans and St. John's (1998) model of ESP process is best described as:",
+                options: [
+                    "Linear and one-directional",
+                    "Cyclical with ongoing needs analysis",
+                    "Teacher-centered only",
+                    "Focused only on initial assessment"
+                ],
+                correct: 1,
+                explanation: "They viewed the ESP process as cyclical, with needs analysis occurring at different stages rather than just at the beginning."
+            },
+            {
+                category: "Process",
+                question: "Ongoing needs analysis is important because:",
+                options: [
+                    "It eliminates the need for initial analysis",
+                    "Perceptions and needs may change during the course",
+                    "It reduces teacher workload",
+                    "It's required by education laws"
+                ],
+                correct: 1,
+                explanation: "Ongoing needs analysis recognizes that perceptions of learners, teachers, and stakeholders may change as the course progresses and more is learned."
+            },
+            {
+                category: "Process",
+                question: "Reliability in needs analysis refers to:",
+                options: [
+                    "How expensive the procedure is",
+                    "Consistency of measurement across time and researchers",
+                    "How popular the method is with students",
+                    "Speed of data collection"
+                ],
+                correct: 1,
+                explanation: "Reliability is the consistency with which a procedure obtains information - similar results when repeated or used by different analysts."
+            },
+            {
+                category: "Process",
+                question: "Validity concerns whether an instrument:",
+                options: [
+                    "Is quick to administer",
+                    "Measures what it claims to measure",
+                    "Is liked by participants",
+                    "Uses advanced technology"
+                ],
+                correct: 1,
+                explanation: "Validity is the degree to which an instrument measures what it claims to measure - its accuracy and appropriateness for the purpose."
+            },
+            {
+                category: "Process",
+                question: "Usability in needs analysis instruments refers to:",
+                options: [
+                    "How theoretically sound the method is",
+                    "Practicality in terms of time, cost, and ease of use",
+                    "How many publications it has generated",
+                    "Its complexity and sophistication"
+                ],
+                correct: 1,
+                explanation: "Usability concerns the practicality of a procedure - how easy, quick, and cost-effective it is to administer, score, and interpret."
+            },
+            {
+                category: "Process",
+                question: "Internal reliability can be checked by:",
+                options: [
+                    "Comparing results with another completely different test",
+                    "Having the same procedure produce similar results on different occasions",
+                    "Asking experts for their opinion",
+                    "Using expensive equipment"
+                ],
+                correct: 1,
+                explanation: "Internal reliability checks whether the same procedure produces consistent results when repeated under similar conditions."
+            },
+            {
+                category: "Process",
+                question: "External validity concerns:",
+                options: [
+                    "How well the sample represents the larger population",
+                    "How quickly data can be collected",
+                    "The cost of the research",
+                    "The qualifications of the researcher"
+                ],
+                correct: 0,
+                explanation: "External validity concerns the degree to which findings from a sample can be generalized to the larger population the study aims to represent."
+            },
+            {
+                category: "Process",
+                question: "According to the ESP process model, needs analysis should feed into:",
+                options: [
+                    "Only initial course design",
+                    "Course design, materials selection, teaching approaches, and evaluation",
+                    "Teacher recruitment only",
+                    "Student assessment but not teaching methods"
+                ],
+                correct: 1,
+                explanation: "Needs analysis informs multiple aspects of ESP course development: design, materials, teaching methods, and evaluation - not just initial planning."
+            },
+
+            // Category 5: Importance and Application (10 questions)
+            {
+                category: "Importance",
+                question: "The famous ESP principle 'Tell me what you need English for and I will tell you the English that you need' is from:",
+                options: [
+                    "Brown (1995)",
+                    "Hutchinson and Waters (1987)",
+                    "Nunan (1988)",
+                    "Dudley-Evans and St. John (1998)"
+                ],
+                correct: 1,
+                explanation: "This principle comes from Hutchinson and Waters (1987) and encapsulates the learner-centered, purpose-specific approach of ESP."
+            },
+            {
+                category: "Importance",
+                question: "Needs analysis is particularly crucial in ESP because:",
+                options: [
+                    "ESP courses are always longer than general English courses",
+                    "ESP focuses on specific, identifiable language requirements",
+                    "ESP teachers need more training",
+                    "ESP uses more expensive materials"
+                ],
+                correct: 1,
+                explanation: "ESP's focus on specific purposes makes needs analysis essential to identify exactly what language is needed for particular contexts."
+            },
+            {
+                category: "Importance",
+                question: "According to Clark (1978), the first step in language teaching should be:",
+                options: [
+                    "Choosing a textbook",
+                    "Designing a syllabus based on learner needs",
+                    "Testing students' grammar knowledge",
+                    "Training teachers in methodology"
+                ],
+                correct: 1,
+                explanation: "Clark stated that 'The first step in any language teaching project must surely be to design a syllabus that will reflect the language needs and wishes of the learner concerned.'"
+            },
+            {
+                category: "Importance",
+                question: "Schutz and Derwing (1981) warned that language programs fail when:",
+                options: [
+                    "They use too much technology",
+                    "They don't consider actual learner needs or base needs on imagination",
+                    "They focus too much on speaking skills",
+                    "They use native speaker teachers only"
+                ],
+                correct: 1,
+                explanation: "They warned that programs fail when no consideration is given to actual use or when needs are based on imagination rather than objective assessment."
+            },
+            {
+                category: "Importance",
+                question: "Brindley (1980) argued that needs analysis is essential as a guide for:",
+                options: [
+                    "Setting broad goals and guiding the learning process",
+                    "Selecting classroom furniture",
+                    "Determining teacher salaries",
+                    "Choosing school locations"
+                ],
+                correct: 0,
+                explanation: "Brindley identified two essential roles: as a guide in setting broad goals and as a guide in the learning process itself."
+            },
+            {
+                category: "Importance",
+                question: "Farhat (2001) noted that needs analysis is necessary because:",
+                options: [
+                    "It's impossible to learn all of a language, so we must select what to teach",
+                    "All languages are equally difficult to learn",
+                    "Students always know exactly what they need",
+                    "Teachers need to justify their jobs"
+                ],
+                correct: 0,
+                explanation: "Farhat noted that since it's impossible to learn an entire language, we need to select what to teach based on why and where learners will use it."
+            },
+            {
+                category: "Importance",
+                question: "Savage and Storer (1992) emphasized that learners should be involved in needs assessment:",
+                options: [
+                    "Only at the beginning of the course",
+                    "At initial, during, and final stages",
+                    "Only if they are high-achieving students",
+                    "Only through anonymous feedback"
+                ],
+                correct: 1,
+                explanation: "They argued for involving learners actively at all stages: initial planning, during implementation, and final evaluation."
+            },
+            {
+                category: "Importance",
+                question: "The main consequence of skipping needs analysis is:",
+                options: [
+                    "Courses become cheaper to run",
+                    "Courses may be irrelevant to learners' actual requirements",
+                    "Teachers have more creative freedom",
+                    "Students get higher grades"
+                ],
+                correct: 1,
+                explanation: "Without needs analysis, courses may not address learners' actual language requirements, leading to irrelevance and poor outcomes."
+            },
+            {
+                category: "Importance",
+                question: "Needs analysis helps with learner motivation by:",
+                options: [
+                    "Making courses easier",
+                    "Ensuring relevance to learners' goals and contexts",
+                    "Eliminating all difficult content",
+                    "Using entertaining materials only"
+                ],
+                correct: 1,
+                explanation: "When learners see direct relevance to their goals and contexts, they are more motivated to engage with the course material."
+            },
+            {
+                category: "Importance",
+                question: "In third world contexts, Riddell (1991) emphasized that needs analysis should inform:",
+                options: [
+                    "Only teacher training",
+                    "Only textbook selection",
+                    "Syllabus design, materials selection, and examination design",
+                    "Only classroom activities"
+                ],
+                correct: 2,
+                explanation: "Riddell emphasized that needs analysis should guide syllabus development, materials selection (including adaptation of published materials), and examination design."
+            }
+        ];
+
+        // Quiz State Management
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(quizQuestions.length).fill(null);
+        let quizScore = 0;
+        let quizStarted = false;
+
+        // Initialize Quiz
+        function initializeQuiz() {
+            currentQuestionIndex = 0;
+            userAnswers = new Array(quizQuestions.length).fill(null);
+            quizScore = 0;
+            quizStarted = true;
+            
+            document.getElementById('results-container').classList.remove('show');
+            document.getElementById('question-container').style.display = 'block';
+            document.getElementById('feedback-box').classList.remove('show');
+            
+            loadQuestion(currentQuestionIndex);
+            updateProgressIndicator();
+        }
+
+        // Load Question
+        function loadQuestion(index) {
+            const question = quizQuestions[index];
+            const container = document.getElementById('question-container');
+            
+            let optionsHtml = '<div class="options-grid">';
+            const letters = ['A', 'B', 'C', 'D'];
+            
+            question.options.forEach((option, i) => {
+                const isSelected = userAnswers[index] === i;
+                const isCorrectAnswer = i === question.correct;
+                let optionClass = 'option';
+                
+                if (isSelected) {
+                    optionClass += ' selected';
+                    if (quizStarted) {
+                        optionClass += isCorrectAnswer ? ' correct' : ' incorrect';
+                    }
+                }
+                
+                optionsHtml += `
+                    <div class="${optionClass}" data-index="${i}">
+                        <div class="option-letter">${letters[i]}</div>
+                        <div class="option-text">${option}</div>
+                    </div>
+                `;
+            });
+            optionsHtml += '</div>';
+            
+            container.innerHTML = `
+                <div class="question-container">
+                    <div class="question-text">${index + 1}. ${question.question}</div>
+                    ${optionsHtml}
+                </div>
+            `;
+            
+            // Add click handlers to options
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    if (!quizStarted) return;
+                    
+                    const selectedIndex = parseInt(this.dataset.index);
+                    selectOption(index, selectedIndex);
+                });
+            });
+            
+            // Update buttons
+            document.getElementById('prev-btn').disabled = index === 0;
+            document.getElementById('next-btn').style.display = index < quizQuestions.length - 1 ? 'block' : 'none';
+            document.getElementById('submit-btn').style.display = index === quizQuestions.length - 1 ? 'block' : 'none';
+            
+            // Update feedback if answer was selected
+            if (userAnswers[index] !== null && quizStarted) {
+                showFeedback(index);
+            }
+        }
+
+        // Select Option
+        function selectOption(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            
+            // Update UI
+            const options = document.querySelectorAll('.option');
+            options.forEach((opt, i) => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                if (i === optionIndex) {
+                    opt.classList.add('selected');
+                    // Show correct/incorrect if this isn't the first time viewing
+                    if (quizStarted) {
+                        const isCorrect = optionIndex === quizQuestions[questionIndex].correct;
+                        opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+                    }
+                }
+            });
+            
+            // Show feedback
+            showFeedback(questionIndex);
+        }
+
+        // Show Feedback
+        function showFeedback(questionIndex) {
+            const question = quizQuestions[questionIndex];
+            const feedbackBox = document.getElementById('feedback-box');
+            const feedbackTitle = document.getElementById('feedback-title');
+            const feedbackContent = document.getElementById('feedback-content');
+            
+            if (userAnswers[questionIndex] !== null) {
+                const isCorrect = userAnswers[questionIndex] === question.correct;
+                const letters = ['A', 'B', 'C', 'D'];
+                
+                feedbackTitle.innerHTML = isCorrect 
+                    ? '<span style="color: var(--success);">✓ Correct!</span>' 
+                    : `<span style="color: var(--danger);">✗ Incorrect. The correct answer is ${letters[question.correct]}</span>`;
+                
+                feedbackContent.innerHTML = `
+                    <p><strong>Explanation:</strong> ${question.explanation}</p>
+                    <p><strong>Category:</strong> ${question.category}</p>
+                `;
+                
+                feedbackBox.classList.add('show');
+            }
+        }
+
+        // Navigation
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion(currentQuestionIndex);
+                updateProgressIndicator();
+            }
+        });
+
+        document.getElementById('next-btn').addEventListener('click', () => {
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion(currentQuestionIndex);
+                updateProgressIndicator();
+            }
+        });
+
+        document.getElementById('submit-btn').addEventListener('click', () => {
+            calculateResults();
+            showResults();
+        });
+
+        document.getElementById('restart-btn').addEventListener('click', initializeQuiz);
+        document.getElementById('review-btn').addEventListener('click', () => {
+            currentQuestionIndex = 0;
+            loadQuestion(currentQuestionIndex);
+            document.getElementById('results-container').classList.remove('show');
+            document.getElementById('question-container').style.display = 'block';
+            updateProgressIndicator();
+        });
+
+        // Update Progress Indicator
+        function updateProgressIndicator() {
+            const indicator = document.getElementById('progress-indicator');
+            indicator.textContent = `Question ${currentQuestionIndex + 1} of ${quizQuestions.length}`;
+        }
+
+        // Calculate Results
+        function calculateResults() {
+            quizScore = 0;
+            const categoryScores = {};
+            const categoryTotals = {};
+            
+            quizQuestions.forEach((question, index) => {
+                if (userAnswers[index] === question.correct) {
+                    quizScore++;
+                    categoryScores[question.category] = (categoryScores[question.category] || 0) + 1;
+                }
+                categoryTotals[question.category] = (categoryTotals[question.category] || 0) + 1;
+            });
+            
+            // Generate category breakdown
+            let breakdownHtml = '<div style="margin-top: 15px;">';
+            for (const category in categoryTotals) {
+                const score = categoryScores[category] || 0;
+                const total = categoryTotals[category];
+                const percentage = Math.round((score / total) * 100);
+                breakdownHtml += `
+                    <div style="margin: 10px 0;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>${category}:</span>
+                            <span>${score}/${total} (${percentage}%)</span>
+                        </div>
+                        <div style="height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden;">
+                            <div style="height: 100%; width: ${percentage}%; background: ${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'};"></div>
+                        </div>
+                    </div>
+                `;
+            }
+            breakdownHtml += '</div>';
+            
+            document.getElementById('category-breakdown').innerHTML = breakdownHtml;
+        }
+
+        // Show Results
+        function showResults() {
+            const scoreDisplay = document.getElementById('score-display');
+            const scoreText = document.getElementById('score-text');
+            
+            scoreDisplay.textContent = `${quizScore}/${quizQuestions.length}`;
+            
+            let performanceText = '';
+            if (quizScore >= 45) {
+                performanceText = 'Excellent! You have mastered ESP needs analysis concepts.';
+                scoreDisplay.style.color = 'var(--success)';
+            } else if (quizScore >= 35) {
+                performanceText = 'Good! You have a solid understanding of ESP needs analysis.';
+                scoreDisplay.style.color = 'var(--warning)';
+            } else if (quizScore >= 25) {
+                performanceText = 'Fair. Review the materials and try again for better results.';
+                scoreDisplay.style.color = 'var(--danger)';
+            } else {
+                performanceText = 'Needs improvement. Study the materials thoroughly and retake the quiz.';
+                scoreDisplay.style.color = 'var(--danger)';
+            }
+            
+            scoreText.innerHTML = `
+                <p>${performanceText}</p>
+                <p style="margin-top: 10px;">Use the review button to go through questions again, or navigate to specific sections for more study.</p>
+            `;
+            
+            document.getElementById('question-container').style.display = 'none';
+            document.getElementById('results-container').classList.add('show');
+        }
+
+        // Initialize the first question if on quiz section
+        if (window.location.hash === '#quiz' || document.querySelector('.nav-btn.active').dataset.section === 'quiz') {
+            setTimeout(initializeQuiz, 100);
+        }
+    </script>
+</body>
+</html>
