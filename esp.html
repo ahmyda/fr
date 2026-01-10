@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESP Needs Analysis: Complete Exam Preparation</title>
+    <title>ESP Needs Analysis: 5 Random Questions Quiz</title>
     <style>
         :root {
             --primary-blue: #2C3E50;
@@ -527,28 +527,39 @@
             }
         }
 
-        /* Print Styles */
-        @media print {
-            .nav-container,
-            .quiz-controls,
-            button {
-                display: none !important;
-            }
-            
-            .content-section {
-                display: block !important;
-                box-shadow: none;
-                border: 1px solid #ddd;
-            }
-            
-            .content-section.active {
-                page-break-after: always;
-            }
+        /* New Quiz Intro */
+        .quiz-intro {
+            background: #e8f4fc;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .quiz-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--secondary-blue);
         }
     </style>
 </head>
 <body>
-    <header class="header">
+        <header class="header">
         <h1>ESP Needs Analysis: Complete Study Guide</h1>
         <div class="header-subtitle">Master One - Didactics of Teaching ESP | University Ziane Achour, Djelfa</div>
         <p>Comprehensive exam preparation with 50 practice questions</p>
@@ -1063,15 +1074,38 @@
             <p>This dual function makes NA essential at both macro (course design) and micro (classroom practice) levels.</p>
         </div>
     </section>
-
-    <!-- Quiz Section -->
+       <!-- Quiz Section -->
     <section id="quiz" class="content-section">
-        <div class="quiz-header">
-            <h2>ESP Needs Analysis Exam Preparation</h2>
-            <div class="progress-indicator" id="progress-indicator">Question 1 of 50</div>
+        <div class="quiz-intro">
+            <h2>ESP Needs Analysis: Random Quiz Challenge</h2>
+            <p>Test your knowledge with <strong>5 random questions</strong> selected from our question bank.</p>
+            <p>Each time you take the quiz, you'll get different questions!</p>
+            
+            <div class="quiz-features">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h4>Random Selection</h4>
+                    <p>5 questions randomly chosen each time</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4>Instant Feedback</h4>
+                    <p>Detailed explanations for every answer</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h4>Try Again</h4>
+                    <p>Generate new questions anytime</p>
+                </div>
+            </div>
         </div>
 
         <div class="quiz-container">
+            <div class="quiz-header">
+                <h2>Random Quiz Challenge</h2>
+                <div class="progress-indicator" id="progress-indicator">Question 1 of 5</div>
+            </div>
+
             <div id="question-container">
                 <!-- Questions will be loaded here -->
             </div>
@@ -1084,22 +1118,25 @@
             <div class="quiz-controls">
                 <button class="quiz-btn secondary" id="prev-btn" disabled>Previous Question</button>
                 <button class="quiz-btn" id="next-btn">Next Question</button>
-                <button class="quiz-btn success" id="submit-btn" style="display: none;">Submit Answer</button>
-                <button class="quiz-btn danger" id="restart-btn" style="display: none;">Restart Quiz</button>
+                <button class="quiz-btn success" id="submit-btn" style="display: none;">Submit Quiz</button>
+                <button class="quiz-btn" id="start-btn">Start New Quiz</button>
             </div>
         </div>
 
         <div class="results-container" id="results-container">
             <h2>Quiz Results</h2>
-            <div class="score-display" id="score-display">0/50</div>
+            <div class="score-display" id="score-display">0/5</div>
             <div class="score-text" id="score-text"></div>
             
             <div class="performance-summary">
-                <h3>Performance Analysis</h3>
-                <div id="category-breakdown"></div>
+                <h3>Your Performance</h3>
+                <div id="question-review"></div>
             </div>
             
-            <button class="quiz-btn" id="review-btn" style="margin-top: 20px;">Review Questions</button>
+            <div class="quiz-controls" style="justify-content: center; margin-top: 30px;">
+                <button class="quiz-btn" id="new-quiz-btn">Start New Random Quiz</button>
+                <button class="quiz-btn secondary" id="review-btn">Review Answers</button>
+            </div>
         </div>
     </section>
 
@@ -1131,33 +1168,6 @@
             <strong>Nunan, D. (1988).</strong> <em>The Learner-Centred Curriculum.</em> Cambridge University Press.
             <p><strong>Key Contribution:</strong> Emphasized learner needs in curriculum design.</p>
         </div>
-
-        <div class="reference-item">
-            <strong>Richterich, R. (1980).</strong> "Identifying the Needs of Adults Learning a Foreign Language." <em>International Review of Applied Linguistics, 18(1).</em>
-            <p><strong>Key Contribution:</strong> Early systematic approach to needs analysis.</p>
-        </div>
-
-        <div class="reference-item">
-            <strong>Brindley, G. (1989).</strong> "Needs analysis and Objective Setting in the Adult Migrant Education Program." In C. J. Brumfit and R. A. C. Mitchell (Eds.), <em>Research in the Language Classroom.</em>
-            <p><strong>Key Contribution:</strong> Distinguished objective and subjective needs.</p>
-        </div>
-
-        <div class="reference-item">
-            <strong>Long, M. H. (2005).</strong> "Methodological Issues in Learner Needs Identification." In R. Kiely et al. (Eds.), <em>Needs Analysis for Language Course Design.</em>
-            <p><strong>Key Contribution:</strong> Addressed methodological challenges in needs analysis.</p>
-        </div>
-
-        <div class="reference-item">
-            <strong>West, R. (1994).</strong> "Needs Analysis in Language Teaching." <em>Language Teaching, 27(1).</em>
-            <p><strong>Key Contribution:</strong> Historical overview and contemporary practices.</p>
-        </div>
-
-        <div class="key-point" style="margin-top: 30px;">
-            <h3>Recommended Reading Strategy</h3>
-            <p><strong>For exam preparation:</strong> Focus on Hutchinson & Waters (1987) and Dudley-Evans & St. John (1998)</p>
-            <p><strong>For research:</strong> Explore Long (2005) and recent journal articles</p>
-            <p><strong>For practice:</strong> Brown (1995) provides practical frameworks</p>
-        </div>
     </section>
 
     <script>
@@ -1182,13 +1192,13 @@
                 
                 // If quiz section, initialize quiz
                 if (section === 'quiz') {
-                    initializeQuiz();
+                    showQuizIntro();
                 }
             });
         });
 
-        // Quiz Data - 50 Comprehensive Questions
-        const quizQuestions = [
+        // Complete Question Bank (50 questions - same as before)
+        const questionBank = [
             // Category 1: Definitions and Concepts (10 questions)
             {
                 category: "Definitions",
@@ -1802,16 +1812,38 @@
 
         // Quiz State Management
         let currentQuestionIndex = 0;
-        let userAnswers = new Array(quizQuestions.length).fill(null);
+        let selectedQuestions = [];
+        let userAnswers = [];
         let quizScore = 0;
-        let quizStarted = false;
+        let quizActive = false;
 
-        // Initialize Quiz
-        function initializeQuiz() {
+        // Show Quiz Introduction
+        function showQuizIntro() {
+            document.getElementById('question-container').innerHTML = `
+                <div class="quiz-intro">
+                    <h3>Ready to Test Your Knowledge?</h3>
+                    <p>You'll get <strong>5 random questions</strong> from our question bank each time you start a new quiz.</p>
+                    <p>Take the quiz as many times as you want - you'll get different questions each time!</p>
+                    <div style="margin: 20px 0;">
+                        <button class="quiz-btn success" onclick="startNewQuiz()" style="font-size: 1.1rem; padding: 15px 30px;">
+                            Start Random Quiz
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('feedback-box').classList.remove('show');
+            document.getElementById('results-container').classList.remove('show');
+            quizActive = false;
+        }
+
+        // Start New Random Quiz
+        function startNewQuiz() {
+            // Select 5 random questions
+            selectedQuestions = getRandomQuestions(5);
             currentQuestionIndex = 0;
-            userAnswers = new Array(quizQuestions.length).fill(null);
+            userAnswers = new Array(selectedQuestions.length).fill(null);
             quizScore = 0;
-            quizStarted = true;
+            quizActive = true;
             
             document.getElementById('results-container').classList.remove('show');
             document.getElementById('question-container').style.display = 'block';
@@ -1819,11 +1851,20 @@
             
             loadQuestion(currentQuestionIndex);
             updateProgressIndicator();
+            
+            // Update button text
+            document.getElementById('start-btn').textContent = 'Restart Quiz';
+        }
+
+        // Get Random Questions
+        function getRandomQuestions(count) {
+            const shuffled = [...questionBank].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
         }
 
         // Load Question
         function loadQuestion(index) {
-            const question = quizQuestions[index];
+            const question = selectedQuestions[index];
             const container = document.getElementById('question-container');
             
             let optionsHtml = '<div class="options-grid">';
@@ -1836,7 +1877,7 @@
                 
                 if (isSelected) {
                     optionClass += ' selected';
-                    if (quizStarted) {
+                    if (quizActive) {
                         optionClass += isCorrectAnswer ? ' correct' : ' incorrect';
                     }
                 }
@@ -1860,7 +1901,7 @@
             // Add click handlers to options
             document.querySelectorAll('.option').forEach(option => {
                 option.addEventListener('click', function() {
-                    if (!quizStarted) return;
+                    if (!quizActive) return;
                     
                     const selectedIndex = parseInt(this.dataset.index);
                     selectOption(index, selectedIndex);
@@ -1869,11 +1910,11 @@
             
             // Update buttons
             document.getElementById('prev-btn').disabled = index === 0;
-            document.getElementById('next-btn').style.display = index < quizQuestions.length - 1 ? 'block' : 'none';
-            document.getElementById('submit-btn').style.display = index === quizQuestions.length - 1 ? 'block' : 'none';
+            document.getElementById('next-btn').style.display = index < selectedQuestions.length - 1 ? 'block' : 'none';
+            document.getElementById('submit-btn').style.display = index === selectedQuestions.length - 1 ? 'block' : 'none';
             
             // Update feedback if answer was selected
-            if (userAnswers[index] !== null && quizStarted) {
+            if (userAnswers[index] !== null && quizActive) {
                 showFeedback(index);
             }
         }
@@ -1889,8 +1930,8 @@
                 if (i === optionIndex) {
                     opt.classList.add('selected');
                     // Show correct/incorrect if this isn't the first time viewing
-                    if (quizStarted) {
-                        const isCorrect = optionIndex === quizQuestions[questionIndex].correct;
+                    if (quizActive) {
+                        const isCorrect = optionIndex === selectedQuestions[questionIndex].correct;
                         opt.classList.add(isCorrect ? 'correct' : 'incorrect');
                     }
                 }
@@ -1902,7 +1943,7 @@
 
         // Show Feedback
         function showFeedback(questionIndex) {
-            const question = quizQuestions[questionIndex];
+            const question = selectedQuestions[questionIndex];
             const feedbackBox = document.getElementById('feedback-box');
             const feedbackTitle = document.getElementById('feedback-title');
             const feedbackContent = document.getElementById('feedback-content');
@@ -1934,7 +1975,7 @@
         });
 
         document.getElementById('next-btn').addEventListener('click', () => {
-            if (currentQuestionIndex < quizQuestions.length - 1) {
+            if (currentQuestionIndex < selectedQuestions.length - 1) {
                 currentQuestionIndex++;
                 loadQuestion(currentQuestionIndex);
                 updateProgressIndicator();
@@ -1946,7 +1987,9 @@
             showResults();
         });
 
-        document.getElementById('restart-btn').addEventListener('click', initializeQuiz);
+        document.getElementById('start-btn').addEventListener('click', startNewQuiz);
+        document.getElementById('new-quiz-btn').addEventListener('click', startNewQuiz);
+        
         document.getElementById('review-btn').addEventListener('click', () => {
             currentQuestionIndex = 0;
             loadQuestion(currentQuestionIndex);
@@ -1958,7 +2001,7 @@
         // Update Progress Indicator
         function updateProgressIndicator() {
             const indicator = document.getElementById('progress-indicator');
-            indicator.textContent = `Question ${currentQuestionIndex + 1} of ${quizQuestions.length}`;
+            indicator.textContent = `Question ${currentQuestionIndex + 1} of ${selectedQuestions.length}`;
         }
 
         // Calculate Results
@@ -1967,7 +2010,7 @@
             const categoryScores = {};
             const categoryTotals = {};
             
-            quizQuestions.forEach((question, index) => {
+            selectedQuestions.forEach((question, index) => {
                 if (userAnswers[index] === question.correct) {
                     quizScore++;
                     categoryScores[question.category] = (categoryScores[question.category] || 0) + 1;
@@ -1975,27 +2018,30 @@
                 categoryTotals[question.category] = (categoryTotals[question.category] || 0) + 1;
             });
             
-            // Generate category breakdown
-            let breakdownHtml = '<div style="margin-top: 15px;">';
-            for (const category in categoryTotals) {
-                const score = categoryScores[category] || 0;
-                const total = categoryTotals[category];
-                const percentage = Math.round((score / total) * 100);
-                breakdownHtml += `
-                    <div style="margin: 10px 0;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                            <span>${category}:</span>
-                            <span>${score}/${total} (${percentage}%)</span>
+            // Generate question review
+            let reviewHtml = '<div style="margin-top: 15px;">';
+            selectedQuestions.forEach((question, index) => {
+                const isCorrect = userAnswers[index] === question.correct;
+                const letters = ['A', 'B', 'C', 'D'];
+                const userAnswer = userAnswers[index] !== null ? letters[userAnswers[index]] : 'Not answered';
+                const correctAnswer = letters[question.correct];
+                
+                reviewHtml += `
+                    <div style="margin: 15px 0; padding: 15px; background: ${isCorrect ? '#d4edda' : '#f8d7da'}; border-radius: 5px;">
+                        <div style="font-weight: 600;">Q${index + 1}: ${question.question}</div>
+                        <div style="margin-top: 5px;">
+                            <span>Your answer: <strong>${userAnswer}</strong></span> | 
+                            <span>Correct answer: <strong>${correctAnswer}</strong></span>
                         </div>
-                        <div style="height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden;">
-                            <div style="height: 100%; width: ${percentage}%; background: ${percentage >= 70 ? 'var(--success)' : percentage >= 50 ? 'var(--warning)' : 'var(--danger)'};"></div>
+                        <div style="margin-top: 5px; font-size: 0.9em; color: #666;">
+                            ${question.explanation}
                         </div>
                     </div>
                 `;
-            }
-            breakdownHtml += '</div>';
+            });
+            reviewHtml += '</div>';
             
-            document.getElementById('category-breakdown').innerHTML = breakdownHtml;
+            document.getElementById('question-review').innerHTML = reviewHtml;
         }
 
         // Show Results
@@ -2003,36 +2049,41 @@
             const scoreDisplay = document.getElementById('score-display');
             const scoreText = document.getElementById('score-text');
             
-            scoreDisplay.textContent = `${quizScore}/${quizQuestions.length}`;
+            scoreDisplay.textContent = `${quizScore}/${selectedQuestions.length}`;
             
             let performanceText = '';
-            if (quizScore >= 45) {
-                performanceText = 'Excellent! You have mastered ESP needs analysis concepts.';
+            if (quizScore === 5) {
+                performanceText = 'Perfect score! Excellent understanding of ESP needs analysis.';
                 scoreDisplay.style.color = 'var(--success)';
-            } else if (quizScore >= 35) {
-                performanceText = 'Good! You have a solid understanding of ESP needs analysis.';
+            } else if (quizScore >= 4) {
+                performanceText = 'Very good! You have a strong grasp of ESP needs analysis concepts.';
+                scoreDisplay.style.color = 'var(--success)';
+            } else if (quizScore >= 3) {
+                performanceText = 'Good effort! Review the explanations to improve further.';
                 scoreDisplay.style.color = 'var(--warning)';
-            } else if (quizScore >= 25) {
-                performanceText = 'Fair. Review the materials and try again for better results.';
-                scoreDisplay.style.color = 'var(--danger)';
             } else {
-                performanceText = 'Needs improvement. Study the materials thoroughly and retake the quiz.';
+                performanceText = 'Keep studying! Review the materials and try the quiz again.';
                 scoreDisplay.style.color = 'var(--danger)';
             }
             
             scoreText.innerHTML = `
                 <p>${performanceText}</p>
-                <p style="margin-top: 10px;">Use the review button to go through questions again, or navigate to specific sections for more study.</p>
+                <p style="margin-top: 10px;">You got ${quizScore} out of ${selectedQuestions.length} questions correct.</p>
             `;
             
             document.getElementById('question-container').style.display = 'none';
             document.getElementById('results-container').classList.add('show');
+            
+            // Scroll to results
+            document.getElementById('results-container').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Initialize the first question if on quiz section
-        if (window.location.hash === '#quiz' || document.querySelector('.nav-btn.active').dataset.section === 'quiz') {
-            setTimeout(initializeQuiz, 100);
-        }
+        // Initialize quiz intro when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.querySelector('.nav-btn.active').dataset.section === 'quiz') {
+                showQuizIntro();
+            }
+        });
     </script>
 </body>
 </html>
