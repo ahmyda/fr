@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Needs Analysis Approaches Quiz</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .header p {
+      color: #ecf0f1;
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .approaches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+      background: #f8f9fa;
+    }
+
+    .approach-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease;
+    }
+
+    .approach-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .approach-card h3 {
+      color: #2c3e50;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid;
+      font-size: 1.3rem;
+    }
+
+    .card-tsa { border-color: #3498db; }
+    .card-psa { border-color: #2ecc71; }
+    .card-lna { border-color: #e74c3c; }
+    .card-ma { border-color: #f39c12; }
+
+    .approach-card ul {
+      list-style: none;
+      color: #34495e;
+    }
+
+    .approach-card li {
+      margin-bottom: 8px;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .approach-card li:before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: inherit;
+      font-weight: bold;
+    }
+
+    .quiz-section {
+      padding: 30px;
+    }
+
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 12px;
+    }
+
+    .quiz-stats {
+      display: flex;
+      gap: 30px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2c3e50;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #7f8c8d;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .progress-container {
+      flex: 1;
+      margin: 0 30px;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background: #ecf0f1;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3498db, #2ecc71);
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .quiz-controls {
+      display: flex;
+      gap: 15px;
+    }
+
+    .control-btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: #3498db;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #2980b9;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #2ecc71;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #27ae60;
+      transform: translateY(-2px);
+    }
+
+    .btn-tertiary {
+      background: #e74c3c;
+      color: white;
+    }
+
+    .btn-tertiary:hover {
+      background: #c0392b;
+      transform: translateY(-2px);
+    }
+
+    .question-container {
+      margin-bottom: 30px;
+    }
+
+    .question-card {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border-left: 5px solid #3498db;
+      margin-bottom: 20px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .question-number {
+      background: #2c3e50;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .question-category {
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: white;
+    }
+
+    .category-tsa { background: #3498db; }
+    .category-psa { background: #2ecc71; }
+    .category-lna { background: #e74c3c; }
+    .category-ma { background: #f39c12; }
+
+    .question-text {
+      font-size: 1.3rem;
+      color: #2c3e50;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .option {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .option:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .option.selected {
+      border-color: #3498db;
+      background: #e3f2fd;
+    }
+
+    .option.correct {
+      border-color: #2ecc71;
+      background: #d4edda;
+    }
+
+    .option.incorrect {
+      border-color: #e74c3c;
+      background: #f8d7da;
+    }
+
+    .option input {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .submit-section {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .submit-btn {
+      padding: 15px 40px;
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+    }
+
+    .submit-btn:disabled {
+      background: #95a5a6;
+      cursor: not-allowed;
+    }
+
+    .feedback-section {
+      margin-top: 30px;
+      padding: 25px;
+      border-radius: 12px;
+      display: none;
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .feedback-correct {
+      background: linear-gradient(135deg, #d4edda, #c3e6cb);
+      border-left: 5px solid #2ecc71;
+    }
+
+    .feedback-incorrect {
+      background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+      border-left: 5px solid #e74c3c;
+    }
+
+    .feedback-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .feedback-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .icon-correct {
+      background: #2ecc71;
+      color: white;
+    }
+
+    .icon-incorrect {
+      background: #e74c3c;
+      color: white;
+    }
+
+    .feedback-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .feedback-content {
+      color: #2c3e50;
+      line-height: 1.6;
+    }
+
+    .explanation {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      border-left: 3px solid #3498db;
+    }
+
+    .results-container {
+      display: none;
+      padding: 30px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .results-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .results-score {
+      font-size: 4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #3498db, #2ecc71);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin: 20px 0;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .category-results {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .category-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid;
+    }
+
+    .category-score {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .results-breakdown {
+      margin-top: 40px;
+    }
+
+    .breakdown-list {
+      list-style: none;
+    }
+
+    .breakdown-item {
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      background: #f8f9fa;
+    }
+
+    .item-correct {
+      border-left: 4px solid #2ecc71;
+    }
+
+    .item-incorrect {
+      border-left: 4px solid #e74c3c;
+    }
+
+    .restart-btn {
+      display: block;
+      margin: 40px auto 0;
+      padding: 15px 50px;
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .restart-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+    }
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 25px;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      z-index: 1000;
+      animation: slideInRight 0.5s ease;
+      display: none;
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .notification-success {
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+    }
+
+    .notification-error {
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+    }
+
+    @media (max-width: 768px) {
+      .quiz-header {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .quiz-stats {
+        width: 100%;
+        justify-content: space-around;
+      }
+
+      .progress-container {
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      .question-container {
+        padding: 15px;
+      }
+
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .question-text {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1><i class="fas fa-chart-line"></i> Needs Analysis Approaches Quiz</h1>
+      <p>Test your understanding of the four key approaches to needs analysis in language teaching. Each question is categorized by approach type.</p>
+    </div>
+
+    <div class="approaches-grid">
+      <div class="approach-card card-tsa">
+        <h3><i class="fas fa-bullseye"></i> Target Situation Analysis</h3>
+        <ul>
+          <li><strong>Focus:</strong> What learner needs to do in target situation</li>
+          <li><strong>Key Questions:</strong> What language skills are required? What communication tasks?</li>
+          <li><strong>Application:</strong> Identifying specific requirements for professional/academic contexts</li>
+        </ul>
+      </div>
+      <div class="approach-card card-psa">
+        <h3><i class="fas fa-chart-bar"></i> Present Situation Analysis</h3>
+        <ul>
+          <li><strong>Focus:</strong> Learner's current language proficiency</li>
+          <li><strong>Key Questions:</strong> What is current level? What are strengths/weaknesses?</li>
+          <li><strong>Application:</strong> Determining starting point and identifying gaps</li>
+        </ul>
+      </div>
+      <div class="approach-card card-lna">
+        <h3><i class="fas fa-graduation-cap"></i> Learning Needs Analysis</h3>
+        <ul>
+          <li><strong>Focus:</strong> How learner prefers to learn</li>
+          <li><strong>Key Questions:</strong> What learning styles? What resources available?</li>
+          <li><strong>Application:</strong> Designing appropriate learning activities and materials</li>
+        </ul>
+      </div>
+      <div class="approach-card card-ma">
+        <h3><i class="fas fa-cogs"></i> Means Analysis</h3>
+        <ul>
+          <li><strong>Focus:</strong> Learning environment and constraints</li>
+          <li><strong>Key Questions:</strong> What resources available? What constraints exist?</li>
+          <li><strong>Application:</strong> Developing realistic and implementable course plans</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header">
+        <div class="quiz-stats">
+          <div class="stat">
+            <div class="stat-value" id="currentQuestion">1</div>
+            <div class="stat-label">Question</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value" id="score">0</div>
+            <div class="stat-label">Score</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value" id="remaining">30</div>
+            <div class="stat-label">Remaining</div>
+          </div>
+        </div>
+        
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <div class="quiz-controls">
+          <button class="control-btn btn-primary" id="hintBtn">
+            <i class="fas fa-lightbulb"></i> Hint
+          </button>
+          <button class="control-btn btn-secondary" id="resultsBtn">
+            <i class="fas fa-chart-pie"></i> Results
+          </button>
+          <button class="control-btn btn-tertiary" id="restartBtn">
+            <i class="fas fa-redo"></i> Restart
+          </button>
+        </div>
+      </div>
+
+      <div class="question-container" id="questionContainer">
+        <!-- Questions will be loaded here dynamically -->
+      </div>
+
+      <div class="submit-section">
+        <button class="submit-btn" id="submitBtn" disabled>
+          <i class="fas fa-paper-plane"></i> Submit Answer
+        </button>
+      </div>
+
+      <div class="feedback-section" id="feedbackSection"></div>
+    </div>
+
+    <div class="results-container" id="resultsContainer">
+      <div class="results-header">
+        <h2><i class="fas fa-trophy"></i> Quiz Results</h2>
+        <div class="results-score" id="finalScore">0/30</div>
+        <p id="resultMessage">Based on your performance</p>
+      </div>
+
+      <div class="results-grid">
+        <div class="category-results">
+          <div class="category-header" style="border-color: #3498db;">
+            <h3><i class="fas fa-bullseye"></i> TSA</h3>
+            <div class="category-score" id="tsaScore">0/7</div>
+          </div>
+          <div class="results-breakdown">
+            <ul class="breakdown-list" id="tsaBreakdown"></ul>
+          </div>
+        </div>
+
+        <div class="category-results">
+          <div class="category-header" style="border-color: #2ecc71;">
+            <h3><i class="fas fa-chart-bar"></i> PSA</h3>
+            <div class="category-score" id="psaScore">0/8</div>
+          </div>
+          <div class="results-breakdown">
+            <ul class="breakdown-list" id="psaBreakdown"></ul>
+          </div>
+        </div>
+
+        <div class="category-results">
+          <div class="category-header" style="border-color: #e74c3c;">
+            <h3><i class="fas fa-graduation-cap"></i> LNA</h3>
+            <div class="category-score" id="lnaScore">0/8</div>
+          </div>
+          <div class="results-breakdown">
+            <ul class="breakdown-list" id="lnaBreakdown"></ul>
+          </div>
+        </div>
+
+        <div class="category-results">
+          <div class="category-header" style="border-color: #f39c12;">
+            <h3><i class="fas fa-cogs"></i> Means Analysis</h3>
+            <div class="category-score" id="maScore">0/7</div>
+          </div>
+          <div class="results-breakdown">
+            <ul class="breakdown-list" id="maBreakdown"></ul>
+          </div>
+        </div>
+      </div>
+
+      <button class="restart-btn" id="restartResultsBtn">
+        <i class="fas fa-redo"></i> Take Quiz Again
+      </button>
+    </div>
+  </div>
+
+  <div class="notification" id="notification"></div>
+
+  <script>
+    // Quiz Data - 30 questions categorized by approach
+    const quizData = [
+      // Target Situation Analysis (7 questions)
+      {
+        id: 1,
+        category: "tsa",
+        question: "Which approach would you use to identify the specific English skills needed by a doctor to read medical journals?",
+        options: [
+          "Target Situation Analysis",
+          "Present Situation Analysis", 
+          "Learning Needs Analysis",
+          "Means Analysis"
+        ],
+        correct: 0,
+        explanation: "Target Situation Analysis focuses on what the learner needs to do in the target situation - in this case, reading medical journals in English.",
+        hint: "Think about analyzing the requirements of the future/target situation."
+      },
+      {
+        id: 2,
+        category: "tsa",
+        question: "A business professional needs English for conference presentations. Which analysis helps identify the specific presentation skills required?",
+        options: [
+          "Means Analysis",
+          "Learning Needs Analysis",
+          "Target Situation Analysis",
+          "Present Situation Analysis"
+        ],
+        correct: 2,
+        explanation: "Target Situation Analysis examines the language requirements of specific tasks like conference presentations in professional contexts.",
+        hint: "Focus is on the target/task requirements."
+      },
+      {
+        id: 3,
+        category: "tsa",
+        question: "What is the primary focus of Target Situation Analysis?",
+        options: [
+          "Current proficiency level of learners",
+          "Environmental constraints in learning",
+          "Future language requirements and tasks",
+          "Preferred learning styles of students"
+        ],
+        correct: 2,
+        explanation: "TSA focuses on what learners will need to do with the language in future situations.",
+        hint: "Think about 'target' or future-oriented analysis."
+      },
+      {
+        id: 4,
+        category: "tsa",
+        question: "Which question is most relevant to Target Situation Analysis?",
+        options: [
+          "What is the student's current vocabulary size?",
+          "What type of classroom activities does the student prefer?",
+          "What specific communication tasks will the learner perform at work?",
+          "How much time is available for the course?"
+        ],
+        correct: 2,
+        explanation: "TSA asks about the specific language tasks required in the target situation.",
+        hint: "Look for questions about future language use."
+      },
+      {
+        id: 5,
+        category: "tsa",
+        question: "When designing an English course for pilots, which analysis helps identify the aviation-specific vocabulary needed?",
+        options: [
+          "Present Situation Analysis",
+          "Learning Needs Analysis",
+          "Target Situation Analysis",
+          "Means Analysis"
+        ],
+        correct: 2,
+        explanation: "TSA identifies the specific language requirements for particular professional contexts like aviation.",
+        hint: "This analysis focuses on specific professional requirements."
+      },
+      {
+        id: 6,
+        category: "tsa",
+        question: "Which of these is an example of Target Situation Analysis data collection?",
+        options: [
+          "Administering a proficiency test",
+          "Observing classroom interactions",
+          "Interviewing professionals about their workplace communication",
+          "Surveying students about learning preferences"
+        ],
+        correct: 2,
+        explanation: "Interviewing professionals provides information about the language requirements of target situations.",
+        hint: "Think about gathering data from the target context."
+      },
+      {
+        id: 7,
+        category: "tsa",
+        question: "A university needs to prepare international students for academic writing. Which analysis identifies the specific writing genres required?",
+        options: [
+          "Means Analysis",
+          "Present Situation Analysis",
+          "Learning Needs Analysis",
+          "Target Situation Analysis"
+        ],
+        correct: 3,
+        explanation: "TSA would analyze the specific academic writing genres students need to master.",
+        hint: "Focus is on the requirements of the academic context."
+
+      // Present Situation Analysis (8 questions)
+      },
+      {
+        id: 8,
+        category: "psa",
+        question: "Which approach assesses a learner's current language proficiency level?",
+        options: [
+          "Target Situation Analysis",
+          "Present Situation Analysis",
+          "Learning Needs Analysis",
+          "Means Analysis"
+        ],
+        correct: 1,
+        explanation: "Present Situation Analysis focuses on the learner's current abilities and proficiency level.",
+        hint: "Think about assessing the 'present' or current state."
+      },
+      {
+        id: 9,
+        category: "psa",
+        question: "What type of assessment would be most useful for Present Situation Analysis?",
+        options: [
+          "Analyzing job requirements",
+          "Conducting a placement test",
+          "Surveying learning preferences",
+          "Evaluating classroom resources"
+        ],
+        correct: 1,
+        explanation: "Placement tests help determine current proficiency levels, which is the focus of PSA.",
+        hint: "This involves measuring current abilities."
+      },
+      {
+        id: 10,
+        category: "psa",
+        question: "Which question is central to Present Situation Analysis?",
+        options: [
+          "What resources are available for teaching?",
+          "How does the student prefer to learn?",
+          "What is the gap between current and required proficiency?",
+          "What are the institutional constraints?"
+        ],
+        correct: 2,
+        explanation: "PSA identifies gaps between current abilities and required levels.",
+        hint: "Focus is on identifying gaps from current state."
+      },
+      {
+        id: 11,
+        category: "psa",
+        question: "A teacher administers a diagnostic test at the beginning of a course. This is part of:",
+        options: [
+          "Target Situation Analysis",
+          "Present Situation Analysis",
+          "Learning Needs Analysis",
+          "Means Analysis"
+        ],
+        correct: 1,
+        explanation: "Diagnostic tests assess current proficiency, which is the focus of PSA.",
+        hint: "This assesses the 'present' situation."
+      },
+      {
+        id: 12,
+        category: "psa",
+        question: "Which data collection method is most appropriate for Present Situation Analysis?",
+        options: [
+          "Job shadowing professionals",
+          "Proficiency testing and error analysis",
+          "Learning style inventories",
+          "Institutional resource audits"
+        ],
+        correct: 1,
+        explanation: "Proficiency testing provides data about current language abilities.",
+        hint: "Think about methods that measure current skills."
+      },
+      {
+        id: 13,
+        category: "psa",
+        question: "When identifying that students struggle with verb tenses but excel in vocabulary, you're conducting:",
+        options: [
+          "Target Situation Analysis",
+          "Present Situation Analysis",
+          "Learning Needs Analysis",
+          "Means Analysis"
+        ],
+        correct: 1,
+        explanation: "Identifying current strengths and weaknesses is central to PSA.",
+        hint: "This involves analyzing current abilities."
+      },
+      {
+        id: 14,
+        category: "psa",
+        question: "Which component is NOT typically part of Present Situation Analysis?",
+        options: [
+          "Current proficiency level assessment",
+          "Identification of learning gaps",
+          "Analysis of learning preferences",
+          "Evaluation of language skills strengths"
+        ],
+        correct: 2,
+        explanation: "Learning preferences are part of Learning Needs Analysis, not Present Situation Analysis.",
+        hint: "PSA focuses on current abilities, not preferences."
+      },
+      {
+        id: 15,
+        category: "psa",
+        question: "What is the main purpose of comparing current proficiency with target requirements?",
+        options: [
+          "To design enjoyable classroom activities",
+          "To allocate institutional resources efficiently",
+          "To identify what needs to be learned",
+          "To determine the learning environment constraints"
+        ],
+        correct: 2,
+        explanation: "This comparison in PSA helps identify the learning needs and gaps.",
+        hint: "This helps determine what needs to be taught."
+
+      // Learning Needs Analysis (8 questions)
+      },
+      {
+        id: 16,
+        category: "lna",
+        question: "Which approach focuses on how learners prefer to learn?",
+        options: [
+          "Target Situation Analysis",
+          "Present Situation Analysis",
+          "Learning Needs Analysis",
+          "Means Analysis"
+        ],
+        correct: 2,
+        explanation: "Learning Needs Analysis examines learners' preferences, styles, and strategies for learning.",
+        hint: "Think about the 'how' of learning."
+      },
+      {
+        id: 17,
+        category: "lna",
+        question: "A student prefers visual aids and group work. Identifying this is part of:",
+        options: [
+          "Target Situation Analysis",
+          "Present Situation Analysis",
+          "Learning Needs Analysis",
+          "Means Analysis"
+        ],
+        correct: 2,
+        explanation: "Learning preferences and styles are the focus of LNA.",
+        hint: "This is about learning preferences."
+      },
+      {
+        id: 18,
+        category: "lna",
+        question: "Which question is most relevant to Learning Needs Analysis?",
+        options: [
+          "What specific tasks will the learner perform?",
+          "What is the learner's current level?",
+          "How does the learner prefer to acquire new knowledge?",
+          "What time constraints exist for the course?"
+        ],
+        correct: 2,
+        explanation: "LNA focuses on the process of learning - how learners prefer to learn.",
+        hint: "Look for questions about learning processes."
+      },
+      {
+        id: 19,
+        category: "lna",
+        question: "When surveying students about whether they prefer individual or collaborative work, you're conducting:",
+        options: [
+          "Target Situation Analysis",
+          "Present Situation Analysis",
+          "Learning Needs Analysis",
+          "Means Analysis"
+        ],
+        correct: 2,
+        explanation: "Learning preferences regarding collaboration styles are part of LNA.",
+        hint: "This is about how students prefer to learn."
+      },
+      {
+        id: 20,
+        category: "lna",
+        question: "Which of these is NOT typically part of Learning Needs Analysis?",
+        options: [
+          "Learning style preferences",
+          "Motivational factors",
+          "Preferred feedback methods",
+          "Institutional budget constraints"
+        ],
+        correct: 3,
+        explanation: "Institutional budget constraints are part of Means Analysis, not Learning Needs Analysis.",
+        hint: "LNA focuses on learner preferences, not institutional factors."
+      },
+      {
+        id: 21,
+        category: "lna",
+        question: "What type of data collection is most appropriate for Learning Needs Analysis?",
+        options: [
+          "Proficiency testing",
+          "Job analysis interviews",
+          "Learning style questionnaires",
+          "Resource inventory checks"
+        ],
+        correct: 2,
+        explanation: "Learning style questionnaires provide data about how learners prefer to learn.",
+        hint: "This involves gathering data about learning preferences."
+      },
+      {
+        id: 22,
+        category: "lna",
+        question: "Identifying that students need more hands-on practice rather than theoretical explanation is part of:",
+        options: [
+          "Target Situation Analysis",
+          "Present Situation Analysis",
+          "Learning Needs Analysis",
+          "Means Analysis"
+        ],
+        correct: 2,
+        explanation: "This relates to how students prefer to learn, which is the focus of LNA.",
+        hint: "This is about the learning process."
+      },
+      {
+        id: 23,
+        category: "lna",
+        question: "Which factor is most directly related to Learning Needs Analysis?",
+        options: [
+          "Required workplace vocabulary",
+          "Current grammar proficiency",
+          "Classroom equipment availability",
+          "Student motivation and interests"
+        ],
+        correct: 3,
+        explanation: "Student motivation and interests directly affect how they prefer to learn.",
+        hint: "Think about factors that influence the learning process."
+
+      // Means Analysis (7 questions)
+      },
+      {
+        id: 24,
+        category: "ma",
+        question: "Which approach examines the constraints and resources of the learning environment?",
+        options: [
+          "Target Situation Analysis",
+          "Present Situation Analysis",
+          "Learning Needs Analysis",
+          "Means Analysis"
+        ],
+        correct: 3,
+        explanation: "Means Analysis focuses on the practical constraints and available resources.",
+        hint: "Think about the 'means' or resources available."
+      },
+      {
+        id: 25,
+        category: "ma",
+        question: "Limited class time and outdated textbooks are concerns for:",
+        options: [
+          "Target Situation Analysis",
+          "Present Situation Analysis",
+          "Learning Needs Analysis",
+          "Means Analysis"
+        ],
+        correct: 3,
+        explanation: "These are practical constraints that are examined in Means Analysis.",
+        hint: "These are practical/environmental constraints."
+      },
+      {
+        id: 26,
+        category: "ma",
+        question: "Which question is central to Means Analysis?",
+        options: [
+          "What language skills are required?",
+          "What is the current proficiency level?",
+          "How do learners prefer to learn?",
+          "What resources and time are available?"
+        ],
+        correct: 3,
+        explanation: "Means Analysis focuses on practical constraints like resources and time.",
+        hint: "Look for questions about practical limitations."
+      },
+      {
+        id: 27,
+        category: "ma",
+        question: "When evaluating whether the classroom has adequate technology for language teaching, you're conducting:",
+        options: [
+          "Target Situation Analysis",
+          "Present Situation Analysis",
+          "Learning Needs Analysis",
+          "Means Analysis"
+        ],
+        correct: 3,
+        explanation: "Evaluating available resources is part of Means Analysis.",
+        hint: "This involves assessing physical resources."
+      },
+      {
+        id: 28,
+        category: "ma",
+        question: "Which factor is NOT typically part of Means Analysis?",
+        options: [
+          "Classroom size and layout",
+          "Available teaching materials",
+          "Institutional policies",
+          "Student learning style preferences"
+        ],
+        correct: 3,
+        explanation: "Learning style preferences are part of Learning Needs Analysis, not Means Analysis.",
+        hint: "Means Analysis focuses on environmental/practical factors."
+      },
+      {
+        id: 29,
+        category: "ma",
+        question: "What type of information is most relevant to Means Analysis?",
+        options: [
+          "Job requirements for graduates",
+          "Current student proficiency levels",
+          "Class schedule and duration",
+          "Preferred learning activities"
+        ],
+        correct: 2,
+        explanation: "Class schedule and duration are practical constraints examined in Means Analysis.",
+        hint: "Think about logistical constraints."
+      },
+      {
+        id: 30,
+        category: "ma",
+        question: "When considering how institutional policies affect course design, you're engaging in:",
+        options: [
+          "Target Situation Analysis",
+          "Present Situation Analysis",
+          "Learning Needs Analysis",
+          "Means Analysis"
+        ],
+        correct: 3,
+        explanation: "Institutional constraints are examined in Means Analysis.",
+        hint: "This involves external/administrative constraints."
+      }
+    ];
+
+    // Quiz State
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let userAnswers = new Array(quizData.length).fill(null);
+    let selectedOption = null;
+    let quizCompleted = false;
+
+    // DOM Elements
+    const questionContainer = document.getElementById('questionContainer');
+    const submitBtn = document.getElementById('submitBtn');
+    const feedbackSection = document.getElementById('feedbackSection');
+    const currentQuestionElement = document.getElementById('currentQuestion');
+    const scoreElement = document.getElementById('score');
+    const remainingElement = document.getElementById('remaining');
+    const progressFill = document.getElementById('progressFill');
+    const resultsContainer = document.getElementById('resultsContainer');
+    const finalScoreElement = document.getElementById('finalScore');
+    const resultMessageElement = document.getElementById('resultMessage');
+    const notification = document.getElementById('notification');
+
+    // Category score elements
+    const tsaScoreElement = document.getElementById('tsaScore');
+    const psaScoreElement = document.getElementById('psaScore');
+    const lnaScoreElement = document.getElementById('lnaScore');
+    const maScoreElement = document.getElementById('maScore');
+
+    // Category breakdown elements
+    const tsaBreakdownElement = document.getElementById('tsaBreakdown');
+    const psaBreakdownElement = document.getElementById('psaBreakdown');
+    const lnaBreakdownElement = document.getElementById('lnaBreakdown');
+    const maBreakdownElement = document.getElementById('maBreakdown');
+
+    // Initialize Quiz
+    function initQuiz() {
+      currentQuestionIndex = 0;
+      score = 0;
+      userAnswers.fill(null);
+      selectedOption = null;
+      quizCompleted = false;
+      
+      updateStats();
+      loadQuestion();
+      resultsContainer.style.display = 'none';
+      document.querySelector('.quiz-section').style.display = 'block';
+    }
+
+    // Load Current Question
+    function loadQuestion() {
+      const question = quizData[currentQuestionIndex];
+      
+      // Create question card
+      questionContainer.innerHTML = `
+        <div class="question-card">
+          <div class="question-header">
+            <div class="question-number">${question.id}</div>
+            <div class="question-category category-${question.category}">
+              ${getCategoryFullName(question.category)}
+            </div>
+          </div>
+          <div class="question-text">${question.question}</div>
+          <div class="options-grid" id="optionsGrid">
+            ${question.options.map((option, index) => `
+              <div class="option" data-index="${index}">
+                <input type="radio" name="answer" id="option${index}" value="${index}">
+                <label for="option${index}">${option}</label>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      // Add event listeners to options
+      const options = document.querySelectorAll('.option');
+      options.forEach(option => {
+        option.addEventListener('click', function() {
+          // Remove selected class from all options
+          options.forEach(opt => opt.classList.remove('selected'));
+          
+          // Add selected class to clicked option
+          this.classList.add('selected');
+          
+          // Mark the radio button
+          const radio = this.querySelector('input');
+          radio.checked = true;
+          
+          // Store selected option
+          selectedOption = parseInt(this.dataset.index);
+          
+          // Enable submit button
+          submitBtn.disabled = false;
+        });
+      });
+
+      // Reset feedback
+      feedbackSection.style.display = 'none';
+      feedbackSection.innerHTML = '';
+      
+      // Reset submit button
+      submitBtn.disabled = true;
+      
+      // Update stats
+      updateStats();
+    }
+
+    // Submit Answer
+    function submitAnswer() {
+      if (selectedOption === null) return;
+
+      const question = quizData[currentQuestionIndex];
+      const isCorrect = selectedOption === question.correct;
+      
+      // Store user answer
+      userAnswers[currentQuestionIndex] = {
+        option: selectedOption,
+        correct: isCorrect
+      };
+
+      // Update score if correct
+      if (isCorrect) {
+        score++;
+        showNotification('Correct!', 'success');
+      } else {
+        showNotification('Incorrect', 'error');
+      }
+
+      // Show feedback
+      showFeedback(isCorrect, question);
+
+      // Disable options
+      const options = document.querySelectorAll('.option');
+      options.forEach((option, index) => {
+        option.style.pointerEvents = 'none';
+        if (index === question.correct) {
+          option.classList.add('correct');
+        } else if (index === selectedOption && !isCorrect) {
+          option.classList.add('incorrect');
+        }
+      });
+
+      // Update submit button
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Next Question';
+      submitBtn.onclick = nextQuestion;
+
+      // Update stats
+      updateStats();
+    }
+
+    // Show Feedback
+    function showFeedback(isCorrect, question) {
+      feedbackSection.className = `feedback-section ${isCorrect ? 'feedback-correct' : 'feedback-incorrect'}`;
+      feedbackSection.innerHTML = `
+        <div class="feedback-header">
+          <div class="feedback-icon ${isCorrect ? 'icon-correct' : 'icon-incorrect'}">
+            ${isCorrect ? '✓' : '✗'}
+          </div>
+          <div>
+            <div class="feedback-title">${isCorrect ? 'Correct Answer!' : 'Incorrect Answer'}</div>
+            <p>The correct answer is: <strong>${question.options[question.correct]}</strong></p>
+          </div>
+        </div>
+        <div class="feedback-content">
+          <div class="explanation">
+            <strong>Explanation:</strong> ${question.explanation}
+          </div>
+        </div>
+      `;
+      feedbackSection.style.display = 'block';
+    }
+
+    // Next Question
+    function nextQuestion() {
+      currentQuestionIndex++;
+      
+      if (currentQuestionIndex < quizData.length) {
+        loadQuestion();
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Answer';
+        submitBtn.onclick = submitAnswer;
+      } else {
+        completeQuiz();
+      }
+    }
+
+    // Complete Quiz
+    function completeQuiz() {
+      quizCompleted = true;
+      calculateResults();
+      showResults();
+    }
+
+    // Calculate Results
+    function calculateResults() {
+      const categoryScores = {
+        tsa: { correct: 0, total: 0, questions: [] },
+        psa: { correct: 0, total: 0, questions: [] },
+        lna: { correct: 0, total: 0, questions: [] },
+        ma: { correct: 0, total: 0, questions: [] }
+      };
+
+      // Calculate scores per category
+      quizData.forEach((question, index) => {
+        const category = question.category;
+        const userAnswer = userAnswers[index];
+        
+        categoryScores[category].total++;
+        categoryScores[category].questions.push({
+          id: question.id,
+          text: question.question,
+          userAnswer: userAnswer ? question.options[userAnswer.option] : 'Not answered',
+          correctAnswer: question.options[question.correct],
+          isCorrect: userAnswer ? userAnswer.correct : false
+        });
+
+        if (userAnswer && userAnswer.correct) {
+          categoryScores[category].correct++;
+        }
+      });
+
+      return categoryScores;
+    }
+
+    // Show Results
+    function showResults() {
+      const categoryScores = calculateResults();
+      const totalScore = score;
+      const percentage = Math.round((totalScore / quizData.length) * 100);
+
+      // Update final score
+      finalScoreElement.textContent = `${totalScore}/${quizData.length}`;
+      
+      // Update result message
+      let message = '';
+      if (percentage >= 90) message = 'Excellent! You have mastered the needs analysis approaches!';
+      else if (percentage >= 75) message = 'Great job! You have a strong understanding of needs analysis.';
+      else if (percentage >= 60) message = 'Good work! You have a solid foundation in needs analysis.';
+      else if (percentage >= 50) message = 'Not bad! Review the approaches to improve your understanding.';
+      else message = 'Keep learning! Review the approaches and try again.';
+      
+      resultMessageElement.textContent = message;
+
+      // Update category scores
+      tsaScoreElement.textContent = `${categoryScores.tsa.correct}/${categoryScores.tsa.total}`;
+      psaScoreElement.textContent = `${categoryScores.psa.correct}/${categoryScores.psa.total}`;
+      lnaScoreElement.textContent = `${categoryScores.lna.correct}/${categoryScores.lna.total}`;
+      maScoreElement.textContent = `${categoryScores.ma.correct}/${categoryScores.ma.total}`;
+
+      // Populate category breakdowns
+      populateBreakdown(tsaBreakdownElement, categoryScores.tsa.questions);
+      populateBreakdown(psaBreakdownElement, categoryScores.psa.questions);
+      populateBreakdown(lnaBreakdownElement, categoryScores.lna.questions);
+      populateBreakdown(maBreakdownElement, categoryScores.ma.questions);
+
+      // Show results container
+      document.querySelector('.quiz-section').style.display = 'none';
+      resultsContainer.style.display = 'block';
+    }
+
+    // Populate Breakdown List
+    function populateBreakdown(element, questions) {
+      element.innerHTML = '';
+      questions.forEach(q => {
+        const li = document.createElement('li');
+        li.className = `breakdown-item ${q.isCorrect ? 'item-correct' : 'item-incorrect'}`;
+        li.innerHTML = `
+          <strong>Q${q.id}:</strong> ${q.text.substring(0, 60)}...
+          <br><strong>Your answer:</strong> ${q.userAnswer}
+          <br><strong>Correct answer:</strong> ${q.correctAnswer}
+        `;
+        element.appendChild(li);
+      });
+    }
+
+    // Update Stats Display
+    function updateStats() {
+      currentQuestionElement.textContent = currentQuestionIndex + 1;
+      scoreElement.textContent = score;
+      remainingElement.textContent = quizData.length - (currentQuestionIndex + 1);
+      
+      const progress = ((currentQuestionIndex + 1) / quizData.length) * 100;
+      progressFill.style.width = `${progress}%`;
+    }
+
+    // Show Notification
+    function showNotification(message, type) {
+      notification.textContent = message;
+      notification.className = `notification notification-${type}`;
+      notification.style.display = 'block';
+      
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 3000);
+    }
+
+    // Get Full Category Name
+    function getCategoryFullName(category) {
+      const names = {
+        tsa: 'Target Situation',
+        psa: 'Present Situation',
+        lna: 'Learning Needs',
+        ma: 'Means Analysis'
+      };
+      return names[category] || category.toUpperCase();
+    }
+
+    // Event Listeners for Buttons
+    document.getElementById('hintBtn').addEventListener('click', () => {
+      const question = quizData[currentQuestionIndex];
+      showNotification(`Hint: ${question.hint}`, 'success');
+    });
+
+    document.getElementById('resultsBtn').addEventListener('click', () => {
+      if (quizCompleted) {
+        showResults();
+      } else {
+        showNotification('Complete the quiz first to see results!', 'error');
+      }
+    });
+
+    document.getElementById('restartBtn').addEventListener('click', () => {
+      if (confirm('Are you sure you want to restart the quiz? All progress will be lost.')) {
+        initQuiz();
+      }
+    });
+
+    document.getElementById('restartResultsBtn').addEventListener('click', initQuiz);
+
+    // Initialize Submit Button
+    submitBtn.addEventListener('click', submitAnswer);
+
+    // Initialize the quiz
+    initQuiz();
+  </script>
+</body>
+</html>
