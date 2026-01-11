@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLA Module - University Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Modern Academic Theme - Clean & Professional */
+            --primary-color: #1a56db;
+            --secondary-color: #3730a3;
+            --accent-color: #dc2626;
+            --accent-secondary: #0891b2;
+            --background-color: #f8fafc;
+            --surface-color: #ffffff;
+            --text-color: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --info-color: #2563eb;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --border-radius: 10px;
+            --border-radius-sm: 6px;
+            --transition: all 0.2s ease;
+        }
+
+        .dark-theme {
+            /* Dark Theme - Academic Focus */
+            --primary-color: #3b82f6;
+            --secondary-color: #6366f1;
+            --accent-color: #ef4444;
+            --accent-secondary: #06b6d4;
+            --background-color: #0f172a;
+            --surface-color: #1e293b;
+            --text-color: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --info-color: #3b82f6;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Top Navigation Bar */
+        .top-nav {
+            background-color: var(--surface-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-brand h1 {
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .nav-brand p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: var(--border-radius-sm);
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(26, 86, 219, 0.1);
+            color: var(--primary-color);
+        }
+
+        .nav-link.active {
+            background-color: rgba(26, 86, 219, 0.15);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            box-shadow: var(--shadow-lg);
+            min-width: 220px;
+            padding: 8px 0;
+            z-index: 10;
+            display: none;
+        }
+
+        .nav-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 10px 16px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .dropdown-item:hover, .dropdown-item.active {
+            background-color: rgba(26, 86, 219, 0.1);
+            color: var(--primary-color);
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 16px;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background-color: rgba(26, 86, 219, 0.1);
+        }
+
+        /* Main Content Area */
+        .main-content {
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .page-header h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .toggle-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 16px;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .toggle-btn:hover {
+            background-color: rgba(26, 86, 219, 0.1);
+        }
+
+        /* Summary Section */
+        .summary-content {
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .summary-content h3 {
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .summary-content h4 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .summary-content p {
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .summary-content em {
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .summary-content ul, .summary-content ol {
+            margin-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        .summary-content li {
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+
+        /* Quiz Section */
+        .quiz-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .quiz-info {
+            background-color: rgba(26, 86, 219, 0.05);
+            border-left: 4px solid var(--primary-color);
+            padding: 16px;
+            border-radius: var(--border-radius-sm);
+        }
+
+        .question-card {
+            background-color: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .option:hover {
+            border-color: var(--primary-color);
+        }
+
+        .option.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(26, 86, 219, 0.1);
+        }
+
+        .option.correct {
+            border-color: var(--success-color);
+            background-color: rgba(5, 150, 105, 0.1);
+        }
+
+        .option.incorrect {
+            border-color: var(--accent-color);
+            background-color: rgba(220, 38, 38, 0.1);
+        }
+
+        .option input {
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        .quiz-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: var(--border-radius-sm);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-secondary {
+            background-color: var(--surface-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(26, 86, 219, 0.1);
+        }
+
+        .results-container {
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            margin-top: 24px;
+            border: 1px solid var(--border-color);
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .feedback {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Key Concepts Section */
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .concept-card {
+            background-color: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .concept-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .concept-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .concept-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .concept-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            flex: 1;
+            margin-left: 12px;
+            font-size: 1.1rem;
+        }
+
+        .concept-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .concept-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .concept-content.show {
+            max-height: 500px;
+        }
+
+        /* Final Quiz Section */
+        .lecture-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .lecture-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .lecture-checkbox:hover {
+            border-color: var(--primary-color);
+        }
+
+        .lecture-checkbox input {
+            cursor: pointer;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: var(--border-color);
+            border-radius: 4px;
+            margin: 24px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 992px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--surface-color);
+                flex-direction: column;
+                padding: 16px;
+                border-bottom: 1px solid var(--border-color);
+                box-shadow: var(--shadow-lg);
+                z-index: 100;
+            }
+
+            .nav-menu.show {
+                display: flex;
+            }
+
+            .nav-item {
+                width: 100%;
+            }
+
+            .nav-link {
+                width: 100%;
+                padding: 12px 16px;
+            }
+
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                border: none;
+                background-color: var(--background-color);
+                padding-left: 24px;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+                background: none;
+                border: none;
+                font-size: 1.4rem;
+                color: var(--text-color);
+                cursor: pointer;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                border-radius: var(--border-radius-sm);
+                transition: var(--transition);
+            }
+
+            .mobile-menu-btn:hover {
+                background-color: rgba(26, 86, 219, 0.1);
+            }
+
+            .nav-brand h1 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .concepts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-section {
+                padding: 20px;
+                margin-bottom: 24px;
+            }
+            
+            .quiz-actions {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .top-nav {
+                padding: 16px 20px;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .toggle-btn {
+                align-self: flex-start;
+            }
+            
+            .lecture-selector {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 16px;
+            }
+            
+            .content-section {
+                padding: 16px;
+            }
+            
+            .nav-brand h1 {
+                font-size: 1.1rem;
+            }
+            
+            .page-header h2 {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+
+        .show {
+            display: block !important;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--surface-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>Second Language Acquisition Module</h1>
+                <p><strong>Instructor:</strong> M. Benabderahmane | <strong>Level:</strong> M1</p>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-section="home">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item nav-dropdown">
+                    <a href="#" class="nav-link" data-section="lectures">
+                        <i class="fas fa-book"></i> Lectures
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item active" data-lecture="1">Lecture 1: Introduction to SLA</a>
+                        <a href="#" class="dropdown-item" data-lecture="2">Lecture 2: Language Acquisition</a>
+                        <a href="#" class="dropdown-item" data-lecture="3">Lecture 3: Rationalism</a>
+                        <a href="#" class="dropdown-item" data-lecture="4">Lecture 4: Signs of Progress</a>
+                        <a href="#" class="dropdown-item" data-lecture="5">Lecture 5: SLA Theories</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="final-quiz">
+                        <i class="fas fa-tasks"></i> Final Quiz
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i> Theme
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Home Page Content -->
+        <div id="home-content" class="content-section">
+            <div class="page-header">
+                <h2>Welcome to the SLA Module</h2>
+            </div>
+            
+            <div class="summary-content">
+                <p>This interactive platform is designed for the <strong>M1 Second Language Acquisition module</strong> taught by <strong>M. Benabderahmane</strong>. The module covers fundamental theories, concepts, and research in the field of Second Language Acquisition (SLA).</p>
+                
+                <h3>Module Structure</h3>
+                <p>The module consists of five comprehensive lectures:</p>
+                <ol>
+                    <li><strong>Introduction to Second Language Acquisition</strong> - Key terms, definitions, and foundational concepts</li>
+                    <li><strong>Language Acquisition</strong> - Theories, stages, and developmental processes</li>
+                    <li><strong>Rationalism</strong> - Philosophical foundations and language acquisition</li>
+                    <li><strong>Signs of Progress</strong> - Interlanguage, developmental stages, and progress indicators</li>
+                    <li><strong>SLA Theories</strong> - Major hypotheses and theoretical frameworks</li>
+                </ol>
+                
+                <h3>Learning Features</h3>
+                <ul>
+                    <li><strong>Comprehensive Lesson Summaries</strong> - Detailed summaries of each lecture</li>
+                    <li><strong>Interactive Quizzes</strong> - Auto-generated questions with instant feedback</li>
+                    <li><strong>Key Concepts</strong> - Expandable cards explaining core ideas</li>
+                    <li><strong>Final Module Quiz</strong> - Comprehensive assessment covering all lectures</li>
+                </ul>
+                
+                <h3>Getting Started</h3>
+                <p>Navigate to the <strong>Lectures</strong> section in the top navigation to begin exploring the course content. Each lecture includes a summary, quiz, and key concepts section. Track your progress through the quizzes and test your knowledge with the final module assessment.</p>
+            </div>
+        </div>
+        
+        <!-- Lectures Content (Dynamically Loaded) -->
+        <div id="lecture-content" class="hidden">
+            <!-- Content will be loaded dynamically by JavaScript -->
+        </div>
+        
+        <!-- Final Quiz Content -->
+        <div id="final-quiz-content" class="content-section hidden">
+            <div class="page-header">
+                <h2>Final Module Quiz</h2>
+            </div>
+            
+            <div class="section-header">
+                <h3 class="section-title">Comprehensive Assessment</h3>
+                <button class="toggle-btn" id="toggleFinalQuizInfo">
+                    <i class="fas fa-info-circle"></i> Instructions
+                </button>
+            </div>
+            
+            <div class="quiz-info hidden" id="finalQuizInfo">
+                <p><strong>Instructions:</strong> This comprehensive quiz covers all five lectures in the module. Each attempt will randomly select 5 questions from each lecture (25 questions total). Questions change on every attempt. You will receive a detailed score summary and feedback at the end.</p>
+                <p><strong>Time:</strong> No time limit</p>
+                <p><strong>Passing Score:</strong> 70% or higher</p>
+            </div>
+            
+            <div class="lecture-selector">
+                <h4 style="width: 100%; margin-bottom: 8px;">Select Lectures to Include:</h4>
+                <div class="lecture-checkbox">
+                    <input type="checkbox" id="lecture1-check" checked>
+                    <label for="lecture1-check">Lecture 1</label>
+                </div>
+                <div class="lecture-checkbox">
+                    <input type="checkbox" id="lecture2-check" checked>
+                    <label for="lecture2-check">Lecture 2</label>
+                </div>
+                <div class="lecture-checkbox">
+                    <input type="checkbox" id="lecture3-check" checked>
+                    <label for="lecture3-check">Lecture 3</label>
+                </div>
+                <div class="lecture-checkbox">
+                    <input type="checkbox" id="lecture4-check" checked>
+                    <label for="lecture4-check">Lecture 4</label>
+                </div>
+                <div class="lecture-checkbox">
+                    <input type="checkbox" id="lecture5-check" checked>
+                    <label for="lecture5-check">Lecture 5</label>
+                </div>
+            </div>
+            
+            <div class="quiz-container" id="finalQuizContainer">
+                <p>Click "Start Final Quiz" to begin.</p>
+            </div>
+            
+            <div class="quiz-actions">
+                <button class="btn btn-secondary" id="resetFinalQuiz">
+                    <i class="fas fa-redo"></i> Reset Quiz
+                </button>
+                <button class="btn btn-primary" id="startFinalQuiz">
+                    <i class="fas fa-play"></i> Start Final Quiz
+                </button>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="finalQuizProgress"></div>
+            </div>
+            
+            <div class="results-container hidden" id="finalQuizResults">
+                <div class="results-header">
+                    <h3>Quiz Results</h3>
+                    <div class="score">Score: <span id="finalScore">0</span>/25</div>
+                </div>
+                <div id="finalQuizFeedback">
+                    <!-- Feedback will be inserted here -->
+                </div>
+                <div class="feedback">
+                    <p><strong>Recommendations:</strong> Based on your performance, review the following lectures:</p>
+                    <ul id="recommendationsList">
+                        <!-- Recommendations will be inserted here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        // Data for the lectures
+        const lecturesData = {
+    1: {
+        title: "Lecture 1: Introduction to Second Language Acquisition",
+        summary: `
+            <h3>1. Key Terms</h3>
+            <p>Understanding Second Language Acquisition requires a precise command of its specialized terminology. The field, often considered a sub-discipline of applied linguistics, investigates how individuals learn a language subsequent to their native (first) language.</p>
+            
+            <h4>Mother Tongue L1 Vs Second / Foreign Tongue L2</h4>
+            <p>The term Mother Tongue (L1) refers to the first language acquired naturally in infancy, providing the cognitive and linguistic baseline. In contrast to L1, Second/Foreign Language (L2) refers to any language learned after the L1.</p>
+            
+            <h4>Input Vs Output</h4>
+            <p>Input refers to the language raw material or data a learner hears or reads. Stephen Krashen's Monitor Model posits that comprehensible input (i+1, where 'i' is the learner's current level) is the single necessary component for acquisition to occur.</p>
+            
+            <h4>Interlanguage</h4>
+            <p>Interlanguage (IL), introduced by Larry Selinker [1972], refers to the unique linguistic system a second language learner develops, which is structurally intermediate between the learner's L1 and the target L2.</p>
+            
+            <h4>Transfer</h4>
+            <p>Transfer is the influence of L1 structures on L2 learning, which can be positive (facilitating learning) or negative (causing errors).</p>
+            
+            <h4>Fossilization</h4>
+            <p>Fossilization is the cessation of interlanguage development before the learner reaches target language norms, despite continuous exposure to the L2 or further instruction.</p>
+            
+            <h3>2. Language</h3>
+            <p>Defining "language" is a complex task, as it is simultaneously a cognitive mechanism, a behavioral system, and a social construct. SLA theory must account for all three dimensions to fully capture the learning process.</p>
+            
+            <h3>3. Acquisition</h3>
+            <p><em>"Acquisition is the way people develop ability in a first language... Learning is the process that results in knowing about language."</em> - Stephen Krashen</p>
+            <p>Acquisition is a subconscious process, similar to how children acquire their L1. It is implicit, meaning the learner is often unaware of the process itself, focusing instead on the meaning of the communication.</p>
+        `,
+        trueFalseQuestions: [
+            { question: "According to Krashen, learning (conscious knowledge) can easily become Acquisition (subconscious competence).", answer: false },
+            { question: "Negative Transfer is also known as Interference, and it is a type of Error.", answer: true },
+            { question: "Interlanguage is a random collection of errors made by L2 learners.", answer: false },
+            { question: "Fossilization refers to the rapid progress learners make after initial exposure to L2.", answer: false },
+            { question: "L1 refers to any language learned after infancy.", answer: false },
+            { question: "Comprehensible input must be completely understood word-for-word to be effective.", answer: false },
+            { question: "Output serves only as a practice mechanism according to Merrill Swain's hypothesis.", answer: false },
+            { question: "Positive transfer occurs when L1 structure conflicts with L2 structure.", answer: false },
+            { question: "Interlanguage is a static system that does not change over time.", answer: false },
+            { question: "A mistake is a systematic deviation reflecting a gap in the learner's competence.", answer: false },
+            { question: "Language as a human capacity is rooted in Universal Grammar according to Chomsky.", answer: true },
+            { question: "Behaviorist traditions view language primarily as a social phenomenon.", answer: false },
+            { question: "Communicative competence involves knowing when and how to use language appropriately.", answer: true },
+            { question: "Krashen's Monitor can operate effectively under any conditions.", answer: false },
+            { question: "The term 'foreign language' refers to a language learned in a community where it is widely spoken.", answer: false },
+            { question: "Interlanguage is permeable, meaning it is receptive to new L2 input.", answer: true },
+            { question: "Errors are typically easy for learners to self-correct.", answer: false },
+            { question: "Vygotsky's socio-cultural theory emphasizes language as a tool for social interaction.", answer: true },
+            { question: "Language performance is always a perfect reflection of underlying competence.", answer: false },
+            { question: "The Output Hypothesis suggests output serves three critical functions beyond input.", answer: true }
+        ],
+        mcqQuestions: [
+            { question: "Which term describes a systematic error that reveals a gap in the learner's competence?", options: ["Mistake", "Fossilization", "Error", "Positive Transfer"], answer: 2 },
+            { question: "According to Krashen, what is the single necessary component for acquisition?", options: ["Comprehensible output", "Explicit grammar instruction", "Comprehensible input", "Error correction"], answer: 2 },
+            { question: "Which concept refers to the influence of L1 structures on L2 learning?", options: ["Interlanguage", "Fossilization", "Transfer", "Input"], answer: 2 },
+            { question: "Who introduced the concept of Interlanguage?", options: ["Noam Chomsky", "Stephen Krashen", "Larry Selinker", "Merrill Swain"], answer: 2 },
+            { question: "What is the term for the cessation of interlanguage development before reaching target language norms?", options: ["Plateau", "Fossilization", "Interference", "Transfer"], answer: 1 },
+            { question: "Which of the following is NOT a feature of comprehensible input?", options: ["Comprehensible", "Abundant", "Irrelevant", "Relevant"], answer: 2 },
+            { question: "What does the 'i+1' in Krashen's Input Hypothesis represent?", options: ["Input plus one hour of study", "The learner's current level plus one", "One item beyond the learner's textbook", "The instructor's level of difficulty"], answer: 1 },
+            { question: "Which hypothesis suggests that output serves critical functions beyond practice?", options: ["Input Hypothesis", "Monitor Hypothesis", "Output Hypothesis", "Affective Filter Hypothesis"], answer: 2 },
+            { question: "Which term refers to a random, non-systematic deviation in language use?", options: ["Error", "Mistake", "Fossilization", "Transfer"], answer: 1 },
+            { question: "According to behaviorist traditions, language is viewed primarily as:", options: ["An innate capacity", "A social phenomenon", "Observable verbal behavior", "A cognitive system"], answer: 2 },
+            { question: "Who expanded on Chomsky's competence to include sociolinguistic aspects?", options: ["Stephen Krashen", "Dell Hymes", "Larry Selinker", "B.F. Skinner"], answer: 1 },
+            { question: "Which theory emphasizes language as a tool for social interaction?", options: ["Universal Grammar", "Behaviorism", "Socio-cultural theory", "Monitor Model"], answer: 2 },
+            { question: "What is the main distinction between a second language and a foreign language?", options: ["Age of acquisition", "Learning environment", "Difficulty level", "Grammatical complexity"], answer: 1 },
+            { question: "Which of the following is an example of negative transfer?", options: ["Using cognates", "Applying L1 word order to L2", "Learning vocabulary quickly", "Understanding similar grammar rules"], answer: 1 },
+            { question: "What does the Output Hypothesis' 'noticing function' refer to?", options: ["Noticing native speakers' accents", "Noticing gaps between interlanguage and target language", "Noticing teacher corrections", "Noticing vocabulary in context"], answer: 1 },
+            { question: "Which of these is NOT a characteristic of interlanguage?", options: ["Systematic", "Static", "Variable", "Permeable"], answer: 1 },
+            { question: "What is the primary focus of language acquisition according to Krashen?", options: ["Form", "Meaning", "Accuracy", "Rules"], answer: 1 },
+            { question: "Which factor is NOT part of the conditions for Monitor use?", options: ["Time", "Focus on form", "Knowledge of the rule", "Native speaker presence"], answer: 3 },
+            { question: "What does LAD stand for in nativist theory?", options: ["Language Acquisition Device", "Linguistic Analysis Department", "Learner Assessment Data", "Language Application Development"], answer: 0 },
+            { question: "Which perspective views language learning as habit formation?", options: ["Nativist", "Cognitive", "Behaviorist", "Interactionist"], answer: 2 }
+        ],
+        keyConcepts: [
+            { title: "Mother Tongue (L1)", content: "The first language acquired naturally in infancy, providing the cognitive and linguistic baseline for further language learning." },
+            { title: "Second/Foreign Language (L2)", content: "Any language learned after the L1. A Second Language is learned in a community where it is widely spoken, while a Foreign Language is learned where it is not the primary language of communication." },
+            { title: "Comprehensible Input (i+1)", content: "Stephen Krashen's concept that language acquisition occurs when learners receive input that is slightly above their current level (i+1), where meaning is understood even if not every word is known." },
+            { title: "Interlanguage", content: "The unique linguistic system a second language learner develops, structurally intermediate between the learner's L1 and the target L2. It is systematic, rule-governed, and evolves as the learner tests hypotheses." },
+            { title: "Transfer", content: "The influence of L1 structures on L2 learning. Positive transfer facilitates learning when L1 and L2 structures align; negative transfer (interference) causes errors when they conflict." },
+            { title: "Fossilization", content: "The cessation of interlanguage development before the learner reaches target language norms, despite continuous exposure to the L2 or further instruction." },
+            { title: "Error vs Mistake", content: "An error is a systematic deviation revealing gaps in the learner's competence, while a mistake is a random, non-systematic deviation due to factors like fatigue or inattention." },
+            { title: "Language as Capacity", content: "The perspective rooted in Universal Grammar (Chomsky) that views language as an innate, specialized cognitive faculty unique to humans." },
+            { title: "Language as Behavior", content: "The behaviorist perspective (Skinner) that views language as observable verbal behaviors learned through imitation, practice, and reinforcement." },
+            { title: "Language as Social Phenomenon", content: "The socio-cultural perspective (Vygotsky) that emphasizes language as a tool for social interaction and cultural mediation." },
+            { title: "Linguistic Competence", content: "The underlying, often unconscious knowledge of a language system—the rules of grammar, syntax, and morphology—that resides in the mind of a native or fluent speaker." },
+            { title: "Linguistic Performance", content: "The actual use of language in concrete situations, subject to nonlinguistic factors like fatigue, memory constraints, and distraction." },
+            { title: "Communicative Competence", content: "Dell Hymes' expansion on Chomsky, arguing that knowing a language involves not just grammatical rules but also knowing when, where, and how to use language appropriately in social contexts." },
+            { title: "Acquisition vs Learning", content: "Krashen's distinction: Acquisition is a subconscious process similar to L1 acquisition, focusing on meaning; Learning is a conscious process from formal instruction, focusing on form." },
+            { title: "Monitor Model", content: "Krashen's theory that learned knowledge functions as a 'Monitor' to edit language output generated by the acquired system, operating only when conditions are met (time, focus on form, rule knowledge)." },
+            { title: "Input Hypothesis", content: "Krashen's proposal that comprehensible input is the essential ingredient for language acquisition, emphasizing that learners progress by understanding input that contains i+1." },
+            { title: "Output Hypothesis", content: "Merrill Swain's proposal that output serves critical functions beyond practice: noticing gaps, hypothesis testing, and metalinguistic reflection." },
+            { title: "Affective Filter", content: "Krashen's concept that emotions like anxiety, motivation, and self-confidence can raise a 'filter' that blocks input from reaching the language acquisition device." },
+            { title: "Universal Grammar", content: "Chomsky's theory that humans possess an innate linguistic capacity containing universal principles and parameters that guide language acquisition." },
+            { title: "Critical Period Hypothesis", content: "The proposal that there is a biologically determined period (typically ending around puberty) during which language acquisition occurs most easily and completely." }
+        ]
+    },
+    2: {
+        title: "Lecture 2: Language Acquisition",
+        summary: `
+            <h3>1. Acquisition</h3>
+            <p>In linguistics, "acquisition" refers to the natural, often unconscious, way humans internalize language systems. This process fundamentally differs from conscious "learning," occurring through meaningful interaction and exposure rather than explicit instruction.</p>
+            
+            <h3>2. Explaining Language Acquisition</h3>
+            <p>Language acquisition is a complex process investigated across linguistics, psychology, neuroscience, and cognitive science. Explanatory frameworks vary, often complementing each other.</p>
+            
+            <h3>3. Theories of Language Acquisition</h3>
+            <h4>Behaviorist Theory</h4>
+            <p>B.F. Skinner (1957) proposed that language acquisition is a process of habit formation, driven by operant conditioning, imitation, and reinforcement.</p>
+            
+            <h4>Nativist Theory</h4>
+            <p>Noam Chomsky's (1965) theory of Universal Grammar posits that humans possess innate linguistic knowledge, termed a Language Acquisition Device (LAD).</p>
+            
+            <h4>Interactionist Theory</h4>
+            <p>This perspective emphasizes the role of social context, scaffolding, and communicative functions in language development.</p>
+            
+            <h3>4. Stages of Language Acquisition</h3>
+            <h4>Pre-linguistic Stage (0-12 months)</h4>
+            <p>Infants commence their linguistic development with vocalizations: crying, cooing, and canonical babbling.</p>
+            
+            <h4>One-Word Stage (12-18 months)</h4>
+            <p>The appearance of a child's first true words, characterized by holophrastic speech where a single word conveys a complete utterance.</p>
+            
+            <h4>Two-Word Stage (18-24 months)</h4>
+            <p>Children begin to combine two words to express fundamental semantic relationships in "telegraphic speech."</p>
+            
+            <h4>Multi-Word Stage (24-30 months)</h4>
+            <p>Sentence structures expand beyond two words, incorporating function words, inflections, and increasingly complex grammatical patterns.</p>
+            
+            <h4>Later Stages of Language Acquisition</h4>
+            <p>Language acquisition continues through preschool, school-age, and adolescent periods with increasing complexity in morpho-syntax, semantics, pragmatics, and metalinguistic awareness.</p>
+        `,
+        trueFalseQuestions: [
+            { question: "Language acquisition refers to the conscious process of studying grammar rules.", answer: false },
+            { question: "Chomsky's Universal Grammar theory emphasizes innate linguistic capacities.", answer: true },
+            { question: "The behaviorist theory can fully explain children's creative language use.", answer: false },
+            { question: "The pre-linguistic stage involves canonical babbling with reduplicated syllables.", answer: true },
+            { question: "In the one-word stage, children typically have a vocabulary of about 200 words.", answer: false },
+            { question: "Telegraphic speech is characteristic of the two-word stage.", answer: true },
+            { question: "Overgeneralization of rules indicates mere imitation rather than rule learning.", answer: false },
+            { question: "Language acquisition is complete by age 5.", answer: false },
+            { question: "Metalinguistic awareness typically develops during the school-age period.", answer: true },
+            { question: "Adolescents show little development in pragmatic competence.", answer: false },
+            { question: "Children acquire language through the same mechanisms regardless of cultural context.", answer: false },
+            { question: "The Language Acquisition Device (LAD) is a concept from behaviorist theory.", answer: false },
+            { question: "Vygotsky's scaffolding concept is central to interactionist theory.", answer: true },
+            { question: "Canonical babbling typically begins around 2-3 months of age.", answer: false },
+            { question: "Holophrastic speech involves using single words to convey complex ideas.", answer: true },
+            { question: "Overgeneralization errors demonstrate that children are actively testing language rules.", answer: true },
+            { question: "Literacy acquisition significantly influences linguistic knowledge during school years.", answer: true },
+            { question: "Pragmatic competence includes understanding irony and sarcasm.", answer: true },
+            { question: "All children follow exactly the same timeline for language acquisition stages.", answer: false },
+            { question: "Social interaction plays a minimal role in nativist theories of language acquisition.", answer: true }
+        ],
+        mcqQuestions: [
+            { question: "Which theory emphasizes habit formation through reinforcement?", options: ["Nativist", "Behaviorist", "Interactionist", "Cognitive"], answer: 1 },
+            { question: "What does LAD stand for in Chomsky's theory?", options: ["Language Acquisition Device", "Linguistic Analysis Development", "Learning Assessment Data", "Linguistic Application Design"], answer: 0 },
+            { question: "Which stage is characterized by holophrastic speech?", options: ["Pre-linguistic", "One-word", "Two-word", "Multi-word"], answer: 1 },
+            { question: "What is canonical babbling?", options: ["Crying", "Cooing", "Reduplicated syllables", "First words"], answer: 2 },
+            { question: "Which stage features telegraphic speech?", options: ["Pre-linguistic", "One-word", "Two-word", "Multi-word"], answer: 2 },
+            { question: "What does overgeneralization demonstrate?", options: ["Imitation", "Rule learning", "Poor memory", "Lack of exposure"], answer: 1 },
+            { question: "When does metalinguistic awareness typically develop?", options: ["Pre-linguistic stage", "One-word stage", "Preschool period", "School-age period"], answer: 3 },
+            { question: "Which theorist emphasized social interaction in language development?", options: ["Skinner", "Chomsky", "Vygotsky", "Krashen"], answer: 2 },
+            { question: "What expands during the multi-word stage?", options: ["Vocabulary only", "Sentence structures", "Only phonology", "Only pragmatics"], answer: 1 },
+            { question: "Which period involves learning academic language registers?", options: ["Preschool", "School-age", "Adolescence", "Adulthood"], answer: 1 },
+            { question: "What is the primary criticism of behaviorist theory for language acquisition?", options: ["It ignores social context", "It can't explain creative language use", "It overemphasizes innate factors", "It focuses too much on pragmatics"], answer: 1 },
+            { question: "Which stage typically occurs between 0-12 months?", options: ["Pre-linguistic", "One-word", "Two-word", "Multi-word"], answer: 0 },
+            { question: "What concept refers to supportive interactions that assist language development?", options: ["Scaffolding", "Overgeneralization", "Fossilization", "Transfer"], answer: 0 },
+            { question: "During which stage do children typically combine two words?", options: ["Pre-linguistic", "One-word", "Two-word", "Multi-word"], answer: 2 },
+            { question: "What is holophrastic speech?", options: ["Babbling with reduplicated syllables", "Using single words to convey complete ideas", "Combining two words without function words", "Complex sentences with inflections"], answer: 1 },
+            { question: "Which theorist proposed Universal Grammar?", options: ["Skinner", "Chomsky", "Vygotsky", "Bruner"], answer: 1 },
+            { question: "What does telegraphic speech typically lack?", options: ["Content words", "Meaning", "Function words and inflections", "Vocabulary"], answer: 2 },
+            { question: "When do children typically begin to use complex sentences with embedded clauses?", options: ["One-word stage", "Two-word stage", "Preschool period", "Adolescence"], answer: 2 },
+            { question: "What is perceptual narrowing?", options: ["Loss of hearing ability", "Attunement to native language phonology", "Reduced vocabulary growth", "Simplification of grammar"], answer: 1 },
+            { question: "Which theory views language as emerging through cognitive development and social engagement?", options: ["Behaviorist", "Nativist", "Interactionist", "Empiricist"], answer: 2 }
+        ],
+        keyConcepts: [
+            { title: "Language Acquisition", content: "The natural, often unconscious process of internalizing language systems through meaningful interaction and exposure, distinct from conscious learning." },
+            { title: "Behaviorist Theory", content: "Skinner's theory that language acquisition occurs through habit formation driven by operant conditioning, imitation, and reinforcement." },
+            { title: "Nativist Theory", content: "Chomsky's theory that humans possess innate linguistic knowledge (Universal Grammar) through a Language Acquisition Device (LAD)." },
+            { title: "Interactionist Theory", content: "The perspective emphasizing social context, scaffolding, and communicative functions in language development, associated with Bruner and Vygotsky." },
+            { title: "Pre-linguistic Stage", content: "The first year of life where infants develop through crying, cooing, and canonical babbling, refining categorical perception of phonetic contrasts." },
+            { title: "One-Word Stage", content: "Around 12-18 months, when children use holophrastic speech where single words convey complete ideas, with comprehension exceeding production." },
+            { title: "Two-Word Stage", content: "Around 18-24 months, characterized by telegraphic speech where children combine two words to express basic semantic relationships." },
+            { title: "Multi-Word Stage", content: "Beginning around 24-30 months, where sentence structures expand with function words, inflections, and complex grammatical patterns, often with overgeneralization." },
+            { title: "Holophrastic Speech", content: "The use of single words to convey complete ideas or utterances, characteristic of the one-word stage." },
+            { title: "Telegraphic Speech", content: "Early multi-word utterances that include only content words and omit function words, characteristic of the two-word stage." },
+            { title: "Overgeneralization", content: "Applying grammatical rules too broadly (e.g., 'goed' instead of 'went'), indicating active rule learning rather than imitation." },
+            { title: "Metalinguistic Awareness", content: "The ability to reflect on and analyze language structure consciously, typically developing during the school-age period." },
+            { title: "Universal Grammar", content: "Chomsky's concept of an innate set of linguistic principles and parameters that guide language acquisition across all human languages." },
+            { title: "Language Acquisition Device (LAD)", content: "The hypothetical innate mental faculty that enables children to acquire language rapidly and uniformly." },
+            { title: "Scaffolding", content: "The supportive interactions provided by more competent speakers to assist language development, central to interactionist theory." },
+            { title: "Canonical Babbling", content: "Reduplicated syllables like 'bababa' or 'dadada' that emerge around 6-10 months, combining consonants and vowels." },
+            { title: "Perceptual Narrowing", content: "The process during infancy where perception becomes attuned to the phonological features of the native language." },
+            { title: "Pragmatic Competence", content: "The ability to use language appropriately in social contexts, including understanding indirect speech, irony, and sarcasm." },
+            { title: "Academic Language Registers", content: "The formal, decontextualized language used in educational settings, mastered during the school-age period." },
+            { title: "Developmental Stages", content: "The predictable sequence of language acquisition stages observed across cultures, though with individual variation in timing and rate." }
+        ]
+    },
+    3: {
+        title: "Lecture 3: Rationalism",
+        summary: `
+            <h3>1. Rationalism as Philosophy</h3>
+            <p>Rationalism emerges from a venerable philosophical tradition that privileges reason as the primary source of knowledge and justification. This epistemological stance, most prominently associated with seventeenth-century thinkers such as René Descartes, Baruch Spinoza, and Gottfried Wilhelm Leibniz, fundamentally challenges empiricist claims that all knowledge derives exclusively from sensory experience.</p>
+            
+            <p>At its philosophical core, rationalism posits that certain kinds of knowledge exist independent of experience—what we might call a priori knowledge. Rationalists argue that the human mind possesses innate capacities and structures that enable us to apprehend truths about the world through pure reason.</p>
+            
+            <h3>2. Core Concepts of Rationalism</h3>
+            <h4>Innate Ideas</h4>
+            <p>Knowledge exists prior to experience, hardwired into the human cognitive architecture.</p>
+            
+            <h4>Prior Knowledge</h4>
+            <p>Certain truths can be known independently of sensory input through pure reason.</p>
+            
+            <h4>Deductive Reasoning</h4>
+            <p>Truth is derived through logical inference from self-evident axioms and principles.</p>
+            
+            <h4>Mind-World Correspondence</h4>
+            <p>The rational structure of mind mirrors the rational structure of reality itself.</p>
+            
+            <h3>3. How Language is acquired for Rationalism</h3>
+            <p>In the rationalist account, language acquisition is not learning in the traditional sense. It is more accurately described as linguistic maturation or growth. The role of input is important: it triggers parameter setting and provides evidence for the lexicon, but the fundamental principles of syntax are never learned because they are already specified by UG.</p>
+            
+            <p>For second language acquisition, the rationalist framework raises intriguing questions. Do adult L2 learners retain access to Universal Grammar? Can parameters be reset, or do L1 parameter settings constrain L2 development?</p>
+            
+            <h3>4. Critics to Rationalism</h3>
+            <p>Rationalist approaches to language acquisition have faced sustained critique from empiricist and usage-based perspectives. These critics challenge both the philosophical foundations and empirical claims of rationalist theory.</p>
+            
+            <p>Empiricist critics question the poverty of the stimulus argument itself. Researchers argue that linguistic input may be considerably richer and more systematic than rationalists acknowledge. Corpus studies reveal that child-directed speech contains more informative grammatical patterns than early rationalist accounts suggested.</p>
+        `,
+        trueFalseQuestions: [
+            { question: "Rationalism emphasizes experience as the primary source of knowledge.", answer: false },
+            { question: "Universal Grammar is a key concept in rationalist language acquisition theory.", answer: true },
+            { question: "The poverty of the stimulus argument supports empiricist approaches.", answer: false },
+            { question: "Chomsky proposed that language acquisition is guided by innate principles.", answer: true },
+            { question: "Second language learners have full access to Universal Grammar according to all rationalist theories.", answer: false },
+            { question: "Rationalism posits that all knowledge comes from sensory experience.", answer: false },
+            { question: "Descartes' 'cogito, ergo sum' exemplifies rationalist methodology.", answer: true },
+            { question: "Rationalists view the mind as a tabula rasa (blank slate).", answer: false },
+            { question: "Parameter setting in UG theory occurs through exposure to linguistic input.", answer: true },
+            { question: "Empiricists argue that children receive sufficient positive evidence for grammatical constructions.", answer: true },
+            { question: "Usage-based theorists support the idea of specialized innate linguistic knowledge.", answer: false },
+            { question: "Cross-linguistic variation poses a challenge to the principles-and-parameters framework.", answer: true },
+            { question: "Rationalists believe mathematical truths can be known through sensory experience alone.", answer: false },
+            { question: "The Language Acquisition Device is an empiricist concept.", answer: false },
+            { question: "Rationalist theory suggests that language acquisition is primarily a process of imitation.", answer: false },
+            { question: "Adult L2 learners definitely have the same access to UG as children learning L1.", answer: false },
+            { question: "Deductive reasoning is central to rationalist epistemology.", answer: true },
+            { question: "The 'initial state' in UG refers to the learner's knowledge after extensive exposure.", answer: false },
+            { question: "Rationalism is primarily associated with 20th-century philosophers.", answer: false },
+            { question: "Parameter resetting in L2 acquisition is universally accepted in rationalist SLA research.", answer: false }
+        ],
+        mcqQuestions: [
+            { question: "The innateness hypothesis suggests that:", options: ["All knowledge comes from experience", "Language learning requires explicit instruction", "Humans are born with innate language capacity", "Second languages are harder to learn than first languages"], answer: 2 },
+            { question: "According to rationalist theory, children acquire language because:", options: ["They receive extensive correction", "They have access to Universal Grammar", "They imitate adult speech", "They are explicitly taught grammar rules"], answer: 1 },
+            { question: "The main challenge to rationalism in SLA comes from:", options: ["Generative grammar", "Empiricist approaches", "Cognitive psychology", "Neurolinguistics"], answer: 1 },
+            { question: "Which philosopher is NOT associated with rationalism?", options: ["Descartes", "Spinoza", "Locke", "Leibniz"], answer: 2 },
+            { question: "What does UG stand for in language acquisition theory?", options: ["Universal Grammar", "Understanding Generation", "Usage-based Grammar", "Unified Grammar"], answer: 0 },
+            { question: "According to rationalists, what is the role of input in language acquisition?", options: ["It provides all necessary knowledge", "It triggers parameter setting", "It is unnecessary for acquisition", "It must be explicitly instructional"], answer: 1 },
+            { question: "What is a priori knowledge?", options: ["Knowledge from experience", "Knowledge independent of experience", "Practical knowledge", "Incorrect knowledge"], answer: 1 },
+            { question: "Which concept challenges the poverty of the stimulus argument?", options: ["Parameter setting", "Richness of input", "Innate ideas", "Deductive reasoning"], answer: 1 },
+            { question: "What does the 'steady state' refer to in UG theory?", options: ["Initial linguistic knowledge", "Mature linguistic competence", "Language learning plateau", "Bilingual equilibrium"], answer: 1 },
+            { question: "Which researcher is associated with usage-based challenges to rationalism?", options: ["Chomsky", "Tomasello", "Krashen", "Selinker"], answer: 1 },
+            { question: "What is the 'initial state' in UG theory?", options: ["Complete linguistic knowledge", "Universal Grammar with unset parameters", "L1 linguistic system", "Empirical knowledge base"], answer: 1 },
+            { question: "Which argument supports the need for innate linguistic knowledge?", options: ["Poverty of the stimulus", "Abundance of input", "Social interaction necessity", "Explicit instruction effectiveness"], answer: 0 },
+            { question: "What does 'parameter setting' involve?", options: ["Learning vocabulary", "Adjusting to specific language features", "Forgetting L1 structures", "Developing social skills"], answer: 1 },
+            { question: "Which of these is a rationalist claim about language?", options: ["All language structures are learned", "Language emerges from general cognition", "Core syntax principles are innate", "Language is entirely culturally determined"], answer: 2 },
+            { question: "What do empiricists emphasize as the source of knowledge?", options: ["Innate ideas", "Sensory experience", "Logical deduction", "Divine revelation"], answer: 1 },
+            { question: "Which concept refers to the mind's structure mirroring reality's structure?", options: ["Tabula rasa", "Mind-world correspondence", "Pragmatic competence", "Linguistic relativity"], answer: 1 },
+            { question: "What criticism relates to cross-linguistic variation?", options: ["Languages are too similar for UG", "UG doesn't account for language diversity", "All languages have identical parameters", "UG overpredicts variation"], answer: 1 },
+            { question: "According to rationalists, how do we know mathematical truths?", options: ["Through experience", "Through innate reason", "Through social agreement", "Through linguistic analysis"], answer: 1 },
+            { question: "What is deductive reasoning?", options: ["Reasoning from specific to general", "Reasoning from general to specific", "Intuitive reasoning", "Experiential reasoning"], answer: 1 },
+            { question: "Which term describes knowledge that exists prior to experience?", options: ["A posteriori", "Empirical", "A priori", "Pragmatic"], answer: 2 }
+        ],
+        keyConcepts: [
+            { title: "Rationalism", content: "The philosophical tradition that privileges reason as the primary source of knowledge, emphasizing innate ideas and deductive reasoning." },
+            { title: "Innate Ideas", content: "The rationalist concept that certain knowledge exists prior to experience, hardwired into human cognitive architecture." },
+            { title: "A Priori Knowledge", content: "Knowledge that exists independent of sensory experience, knowable through reason alone according to rationalists." },
+            { title: "Deductive Reasoning", content: "The process of deriving specific truths from general principles through logical inference, central to rationalist methodology." },
+            { title: "Universal Grammar (UG)", content: "Chomsky's rationalist theory that humans possess innate linguistic principles and parameters that guide language acquisition." },
+            { title: "Language Acquisition Device (LAD)", content: "The hypothetical innate mental faculty in UG theory that enables children to acquire language rapidly." },
+            { title: "Poverty of the Stimulus", content: "The argument that children receive insufficient linguistic input to learn language without innate knowledge, supporting rationalist approaches." },
+            { title: "Parameter Setting", content: "In UG theory, the process by which language-specific features are determined based on input, while core principles remain innate." },
+            { title: "Initial State", content: "In UG theory, the starting point of language acquisition: Universal Grammar with unset parameters." },
+            { title: "Steady State", content: "In UG theory, the mature linguistic competence that emerges as the internalized grammar of the target language." },
+            { title: "Mind-World Correspondence", content: "The rationalist concept that the structure of the human mind mirrors the rational structure of reality itself." },
+            { title: "Empiricist Critique", content: "Challenges to rationalism emphasizing that linguistic input may be richer than acknowledged and sufficient for learning." },
+            { title: "Usage-Based Theory", content: "An alternative to rationalism proposing that language acquisition proceeds from concrete patterns to abstract constructions without innate knowledge." },
+            { title: "Cross-Linguistic Variation", content: "The diversity of language structures worldwide, which poses challenges to UG's claims about innate constraints." },
+            { title: "Tabula Rasa", content: "The empiricist concept of the mind as a 'blank slate' that rationalists reject in favor of innate structures." },
+            { title: "Cogito, Ergo Sum", content: "Descartes' famous rationalist statement 'I think, therefore I am,' exemplifying knowledge derived through reason rather than experience." },
+            { title: "Principles and Parameters", content: "The UG framework where universal principles are innate and parameters are set based on linguistic input." },
+            { title: "Adult L2 Access to UG", content: "The debated question in SLA of whether adult second language learners retain full access to Universal Grammar." },
+            { title: "Parameter Resetting", content: "The controversial concept in SLA that L2 learners might reset UG parameters from L1 to L2 settings." },
+            { title: "Rationalist Epistemology", content: "The theory of knowledge emphasizing reason as the primary source, contrasting with empiricist emphasis on experience." }
+        ]
+    },
+    4: {
+        title: "Lecture 4: Signs of Progress",
+        summary: `
+            <h3>1. Understanding the Developmental Process</h3>
+            <p>Second language acquisition is not an overnight phenomenon but rather a systematic developmental process. Like first language development in children, L2 learners progress through predictable stages, making characteristic errors that actually signal cognitive growth.</p>
+            
+            <p>Understanding these developmental signs helps us recognize that mistakes are not failures—they are evidence of an evolving linguistic system. This process, known as interlanguage, represents the learner's interim grammar as they journey from their native language toward target language proficiency.</p>
+            
+            <h3>2. What is Interlanguage?</h3>
+            <p>Interlanguage refers to the dynamic linguistic system that L2 learners construct as they acquire a new language. This system is:</p>
+            <ul>
+                <li><strong>Systematic</strong> – follows internal rules, not random</li>
+                <li><strong>Transitional</strong> – constantly evolving toward target language</li>
+                <li><strong>Variable</strong> – changes based on context and complexity</li>
+                <li><strong>Unique</strong> – distinct from both L1 and L2</li>
+            </ul>
+            
+            <h3>3. Selinker's Interlanguage Theory</h3>
+            <p>Larry Selinker introduced the term interlanguage in 1972, revolutionizing our understanding of L2 development. His theory identifies five central processes that shape interlanguage:</p>
+            <ol>
+                <li><strong>Language Transfer:</strong> Influence from L1 structures and patterns</li>
+                <li><strong>Transfer of Training:</strong> Impact of instructional methods and materials</li>
+                <li><strong>Learning Strategies:</strong> Conscious approaches to acquiring language</li>
+                <li><strong>Communication Strategies:</strong> Techniques for maintaining interaction despite limitations</li>
+                <li><strong>Overgeneralization:</strong> Extending target language rules beyond appropriate contexts</li>
+            </ol>
+            
+            <h3>4. Six Key Signs of L2 Development</h3>
+            <p>Recognizing developmental progress requires understanding the hallmark indicators that learners are advancing through interlanguage stages:</p>
+            <ol>
+                <li><strong>Overgeneralization:</strong> Applying learned rules too broadly shows rule acquisition.</li>
+                <li><strong>U-Shaped Development:</strong> Temporary regression after initial correct usage indicates restructuring of mental grammar.</li>
+                <li><strong>Increased Complexity:</strong> Using more sophisticated structures even with errors demonstrates risk-taking and expansion.</li>
+                <li><strong>Self-Correction:</strong> Monitoring and fixing own errors reveals metalinguistic awareness development.</li>
+                <li><strong>Variability Reduction:</strong> More consistent performance across contexts signals automatization and consolidation.</li>
+                <li><strong>Productive Use:</strong> Generating novel utterances beyond memorized chunks indicates internalized system building.</li>
+            </ol>
+        `,
+        trueFalseQuestions: [
+            { question: "Interlanguage is a random collection of errors without systematic patterns.", answer: false },
+            { question: "Overgeneralization errors indicate that learners are actively testing language rules.", answer: true },
+            { question: "U-shaped development shows permanent regression in language ability.", answer: false },
+            { question: "Self-correction demonstrates developing metalinguistic awareness.", answer: true },
+            { question: "Interlanguage is a static system that doesn't change over time.", answer: false },
+            { question: "Increased complexity in learner language always indicates perfect acquisition.", answer: false },
+            { question: "Variability reduction shows that performance is becoming more consistent.", answer: true },
+            { question: "Productive use refers only to memorizing and repeating phrases.", answer: false },
+            { question: "Selinker identified three main processes in interlanguage development.", answer: false },
+            { question: "Language transfer only involves positive influences from L1 to L2.", answer: false },
+            { question: "Transfer of training refers to the influence of instructional methods on interlanguage.", answer: true },
+            { question: "Communication strategies help learners maintain interaction despite limitations.", answer: true },
+            { question: "All errors in interlanguage should be immediately corrected by teachers.", answer: false },
+            { question: "Interlanguage is identical to both the learner's L1 and the target L2.", answer: false },
+            { question: "Fossilization represents the final, perfect stage of interlanguage development.", answer: false },
+            { question: "Learning strategies in interlanguage are always unconscious processes.", answer: false },
+            { question: "The term 'interlanguage' was introduced by Stephen Krashen.", answer: false },
+            { question: "Interlanguage development follows a linear, constantly improving path.", answer: false },
+            { question: "Errors in interlanguage provide valuable insights into the learning process.", answer: true },
+            { question: "Interlanguage theory has had little impact on second language teaching.", answer: false }
+        ],
+        mcqQuestions: [
+            { question: "Who introduced the term 'interlanguage'?", options: ["Noam Chomsky", "Stephen Krashen", "Larry Selinker", "Merrill Swain"], answer: 2 },
+            { question: "Which of these is NOT a characteristic of interlanguage?", options: ["Systematic", "Static", "Transitional", "Variable"], answer: 1 },
+            { question: "What does U-shaped development refer to?", options: ["Constant improvement", "Temporary regression followed by improvement", "Plateau in learning", "Sudden breakthrough"], answer: 1 },
+            { question: "Which sign of progress involves applying rules too broadly?", options: ["Self-correction", "Overgeneralization", "Variability reduction", "Productive use"], answer: 1 },
+            { question: "What does increased complexity in learner language demonstrate?", options: ["Perfect acquisition", "Risk-taking and expansion", "Fossilization", "Language transfer"], answer: 1 },
+            { question: "Which process involves influence from instructional methods?", options: ["Language transfer", "Transfer of training", "Overgeneralization", "Communication strategies"], answer: 1 },
+            { question: "What does self-correction reveal about learners?", options: ["They are not paying attention", "Developing metalinguistic awareness", "They have fossilized", "They lack motivation"], answer: 1 },
+            { question: "Which sign indicates more consistent performance across contexts?", options: ["Overgeneralization", "U-shaped development", "Variability reduction", "Productive use"], answer: 2 },
+            { question: "What is productive use in language development?", options: ["Memorizing chunks", "Generating novel utterances", "Repeating teacher models", "Avoiding errors"], answer: 1 },
+            { question: "How many central processes did Selinker identify in interlanguage theory?", options: ["3", "5", "7", "9"], answer: 1 },
+            { question: "Which term describes a learner's evolving linguistic system?", options: ["Fossilization", "Interlanguage", "Transfer", "Monitor"], answer: 1 },
+            { question: "What does language transfer involve?", options: ["Only positive influence from L1", "Only negative influence from L1", "Influence from L1 structures", "Avoiding L1 influence"], answer: 2 },
+            { question: "Which strategy helps maintain communication despite limitations?", options: ["Learning strategies", "Communication strategies", "Transfer of training", "Overgeneralization"], answer: 1 },
+            { question: "What is the main insight from interlanguage theory?", options: ["Errors should be avoided at all costs", "Errors provide insights into learning", "All learners follow identical paths", "L1 has no influence on L2 learning"], answer: 1 },
+            { question: "Which concept refers to extending L2 rules beyond appropriate contexts?", options: ["Language transfer", "Overgeneralization", "Fossilization", "Self-correction"], answer: 1 },
+            { question: "What does variability in interlanguage refer to?", options: ["Consistent performance", "Changes based on context", "Permanent errors", "Native-like accuracy"], answer: 1 },
+            { question: "How should teachers view developmental errors?", options: ["As failures to be corrected immediately", "As signs of cognitive growth", "As evidence of poor teaching", "As permanent defects"], answer: 1 },
+            { question: "Which is NOT one of Selinker's interlanguage processes?", options: ["Language transfer", "Transfer of training", "Monitor use", "Overgeneralization"], answer: 2 },
+            { question: "What does fossilization represent in interlanguage?", options: ["Perfect acquisition", "Cessation of development", "Rapid progress", "Native-like fluency"], answer: 1 },
+            { question: "Why is recognizing developmental signs important?", options: ["To punish errors", "To track progress and understand learning", "To compare learners competitively", "To identify 'bad' learners"], answer: 1 }
+        ],
+        keyConcepts: [
+            { title: "Interlanguage", content: "The dynamic linguistic system L2 learners construct, systematic and evolving, distinct from both L1 and L2, representing the learner's interim grammar." },
+            { title: "Selinker's Interlanguage Theory", content: "Larry Selinker's 1972 theory identifying five central processes shaping interlanguage: language transfer, transfer of training, learning strategies, communication strategies, and overgeneralization." },
+            { title: "Language Transfer", content: "The influence of L1 structures and patterns on L2 learning, which can be positive (facilitating) or negative (causing interference)." },
+            { title: "Transfer of Training", content: "The impact of instructional methods, materials, and classroom experiences on the development of interlanguage." },
+            { title: "Learning Strategies", content: "Conscious approaches learners use to acquire language, such as memorization techniques, rule deduction, or pattern recognition." },
+            { title: "Communication Strategies", content: "Techniques learners employ to maintain interaction despite linguistic limitations, such as circumlocution, gestures, or approximation." },
+            { title: "Overgeneralization", content: "Extending target language rules beyond appropriate contexts (e.g., 'goed' instead of 'went'), indicating active rule learning." },
+            { title: "U-Shaped Development", content: "A pattern where learners use a form correctly initially, then incorrectly during restructuring, before finally using it correctly again." },
+            { title: "Increased Complexity", content: "Using more sophisticated linguistic structures even with errors, demonstrating risk-taking and system expansion." },
+            { title: "Self-Correction", content: "Learners monitoring and fixing their own errors, revealing developing metalinguistic awareness and internal editing capabilities." },
+            { title: "Variability Reduction", content: "More consistent performance across different contexts and tasks, signaling automatization and system consolidation." },
+            { title: "Productive Use", content: "Generating novel utterances beyond memorized chunks, indicating internalized system building and creative language use." },
+            { title: "Developmental Errors", content: "Errors that naturally occur as learners progress through interlanguage stages, providing insights into their current hypotheses about the target language." },
+            { title: "Systematicity", content: "The characteristic of interlanguage following internal rules rather than being random, making errors predictable based on the learner's current system." },
+            { title: "Transitional Nature", content: "The constant evolution of interlanguage as it moves toward target language norms, never static but always in flux." },
+            { title: "Variability", content: "Changes in interlanguage performance based on context, task type, complexity, and other factors, reflecting the system's flexibility." },
+            { title: "Fossilization", content: "The cessation of interlanguage development before reaching target language norms, despite continued exposure or instruction." },
+            { title: "Interlanguage Continuum", content: "The progression from early to advanced interlanguage systems, with learners moving through identifiable developmental stages." },
+            { title: "Error Analysis", content: "The methodological approach to studying learner errors to understand interlanguage systems and developmental processes." },
+            { title: "Developmental Readiness", content: "The concept that learners acquire specific language features when they are cognitively ready, regardless of instruction timing." }
+        ]
+    },
+    5: {
+        title: "Lecture 5: SLA Theories",
+        summary: `
+            <h3>SLA Hypotheses and Theories</h3>
+            <p>Second Language Acquisition research has produced several influential hypotheses and theories that attempt to explain how learners acquire additional languages. These theories provide different perspectives on the cognitive, social, and psychological dimensions of language learning.</p>
+            
+            <h4>Universal Grammar (UG) Hypothesis</h4>
+            <p>Core idea: Humans possess innate universal language rules that guide acquisition. Criticisms: Questions about innateness and applicability for adult learners. Instructional focus: Encourage pattern discovery, compare L1 vs L2 structures.</p>
+            
+            <h4>Input Hypothesis (Krashen)</h4>
+            <p>Core idea: Comprehensible input (i+1) drives language learning. Criticisms: Testability issues and clarity about what constitutes comprehensible input. Instructional focus: Use meaningful, authentic input materials slightly above learner level.</p>
+            
+            <h4>Interaction Hypothesis (Long)</h4>
+            <p>Core idea: Social interaction and negotiation of meaning enhance language learning. Criticisms: Questions about the role of negotiation and social context. Instructional focus: Promote interaction through group discussions and collaborative tasks.</p>
+            
+            <h4>Output Hypothesis (Swain)</h4>
+            <p>Core idea: Language production (output) aids learning through noticing gaps and hypothesis testing. Criticisms: Questions about feedback effects and production practice. Instructional focus: Provide ample speaking and writing opportunities with feedback.</p>
+            
+            <h4>Affective Filter Hypothesis (Krashen)</h4>
+            <p>Core idea: Emotions like anxiety and motivation affect input processing. Criticisms: Influence of motivation and anxiety on learning. Instructional focus: Foster low-anxiety, supportive learning environments.</p>
+            
+            <h4>Critical Period Hypothesis (Lenneberg)</h4>
+            <p>Core idea: Biological 'critical period' limits native-like L2 learning. Criticisms: Debate about whether decline is gradual or abrupt. Instructional focus: Focus on early childhood exposure while acknowledging adult learning challenges.</p>
+            
+            <h3>Assessment Criteria for SLA Theories</h3>
+            <p>SLA theories are assessed based on the following criteria:</p>
+            <ul>
+                <li><strong>Testability:</strong> Whether the theory can be empirically tested and falsified through research.</li>
+                <li><strong>Explanatory Power:</strong> How well the theory explains language acquisition phenomena.</li>
+                <li><strong>Predictive Accuracy:</strong> Whether the theory can predict learner behaviors or outcomes.</li>
+                <li><strong>Applicability:</strong> Practical usefulness in language teaching and learning contexts.</li>
+                <li><strong>Empirical Support:</strong> Backing by experimental, longitudinal, or naturalistic data.</li>
+                <li><strong>Coherence and Integration:</strong> How well the theory fits with or complements other knowledge.</li>
+            </ul>
+        `,
+        trueFalseQuestions: [
+            { question: "The Input Hypothesis emphasizes that output is the primary driver of language acquisition.", answer: false },
+            { question: "Universal Grammar proposes that humans are born with innate language structures.", answer: true },
+            { question: "The Affective Filter Hypothesis suggests emotions have no impact on language learning.", answer: false },
+            { question: "The Interaction Hypothesis emphasizes the importance of social interaction in learning.", answer: true },
+            { question: "The Critical Period Hypothesis states that adults can achieve native-like proficiency as easily as children.", answer: false },
+            { question: "The Output Hypothesis was proposed by Stephen Krashen.", answer: false },
+            { question: "Comprehensible input refers to language that is slightly above the learner's current level.", answer: true },
+            { question: "The Monitor Hypothesis is part of Krashen's five hypotheses.", answer: true },
+            { question: "The Critical Period Hypothesis suggests there is no age-related decline in language learning ability.", answer: false },
+            { question: "The Affective Filter can block input from reaching the language acquisition device.", answer: true },
+            { question: "Universal Grammar applies only to first language acquisition, not second language acquisition.", answer: false },
+            { question: "The Interaction Hypothesis was developed by Merrill Swain.", answer: false },
+            { question: "The Output Hypothesis emphasizes three main functions of output: noticing, hypothesis testing, and metalinguistic reflection.", answer: true },
+            { question: "Krashen's Monitor Model includes five main hypotheses about language acquisition.", answer: true },
+            { question: "The Natural Order Hypothesis suggests that grammatical structures are acquired in a predictable order.", answer: true },
+            { question: "The Affective Filter is lowest when learners are anxious and unmotivated.", answer: false },
+            { question: "The Critical Period ends around puberty according to most versions of the hypothesis.", answer: true },
+            { question: "The Input Hypothesis is also known as the Comprehension Hypothesis.", answer: true },
+            { question: "Universal Grammar theory has faced no significant criticisms from other perspectives.", answer: false },
+            { question: "The Interaction Hypothesis builds on Vygotsky's sociocultural theory.", answer: true }
+        ],
+        mcqQuestions: [
+            { question: "Who proposed the Input Hypothesis?", options: ["Noam Chomsky", "Stephen Krashen", "Merrill Swain", "Michael Long"], answer: 1 },
+            { question: "What does 'i+1' represent in Krashen's Input Hypothesis?", options: ["Input plus one word", "The learner's current level plus one", "One hour of study", "One language skill"], answer: 1 },
+            { question: "Which hypothesis emphasizes the role of output in language learning?", options: ["Input Hypothesis", "Output Hypothesis", "Interaction Hypothesis", "Affective Filter Hypothesis"], answer: 1 },
+            { question: "What does the Affective Filter Hypothesis focus on?", options: ["Grammar instruction", "Emotional factors in learning", "Social interaction", "Innate language capacity"], answer: 1 },
+            { question: "Which hypothesis suggests a biological limit on native-like L2 acquisition?", options: ["Input Hypothesis", "Critical Period Hypothesis", "Monitor Hypothesis", "Interaction Hypothesis"], answer: 1 },
+            { question: "Who proposed the Universal Grammar theory?", options: ["Stephen Krashen", "Noam Chomsky", "Merrill Swain", "Larry Selinker"], answer: 1 },
+            { question: "Which hypothesis emphasizes negotiation of meaning during interaction?", options: ["Input Hypothesis", "Output Hypothesis", "Interaction Hypothesis", "Monitor Hypothesis"], answer: 2 },
+            { question: "What is the main criticism of the Input Hypothesis?", options: ["It ignores social factors", "It's difficult to test empirically", "It overemphasizes output", "It denies innate factors"], answer: 1 },
+            { question: "Which hypothesis includes the 'noticing function' as a key component?", options: ["Input Hypothesis", "Output Hypothesis", "Affective Filter Hypothesis", "Critical Period Hypothesis"], answer: 1 },
+            { question: "What does UG stand for in SLA theories?", options: ["Universal Grammar", "Understanding Generation", "Usage Guidelines", "Unified Grammar"], answer: 0 },
+            { question: "Which theorist proposed the Output Hypothesis?", options: ["Stephen Krashen", "Merrill Swain", "Michael Long", "Noam Chomsky"], answer: 1 },
+            { question: "What is the primary focus of the Interaction Hypothesis?", options: ["Innate language structures", "Social interaction and negotiation", "Emotional factors", "Comprehensible input"], answer: 1 },
+            { question: "Which hypothesis suggests that learned knowledge acts as an editor?", options: ["Monitor Hypothesis", "Input Hypothesis", "Output Hypothesis", "Affective Filter Hypothesis"], answer: 0 },
+            { question: "What does the Critical Period Hypothesis primarily explain?", options: ["Why children learn languages faster", "Why social interaction matters", "How input becomes intake", "Why emotions affect learning"], answer: 0 },
+            { question: "Which criterion evaluates whether a theory can be tested through research?", options: ["Explanatory power", "Testability", "Applicability", "Coherence"], answer: 1 },
+            { question: "What is a key criticism of Universal Grammar for SLA?", options: ["It ignores social factors", "It's applicability for adult learners", "It overemphasizes output", "It denies emotional factors"], answer: 1 },
+            { question: "Which hypothesis builds on Vygotsky's Zone of Proximal Development?", options: ["Input Hypothesis", "Interaction Hypothesis", "Output Hypothesis", "Monitor Hypothesis"], answer: 1 },
+            { question: "What does the Affective Filter block when it is 'high'?", options: ["Output", "Input", "Interaction", "Instruction"], answer: 1 },
+            { question: "Which hypothesis is part of Krashen's Monitor Model?", options: ["All of the above", "Input Hypothesis", "Affective Filter Hypothesis", "Natural Order Hypothesis"], answer: 0 },
+            { question: "What is the main instructional implication of the Output Hypothesis?", options: ["Provide comprehensible input", "Create low-anxiety environments", "Provide speaking/writing opportunities", "Focus on early childhood exposure"], answer: 2 }
+        ],
+        keyConcepts: [
+            { title: "Universal Grammar (UG) Hypothesis", content: "Chomsky's theory that humans possess innate linguistic principles and parameters that guide language acquisition across all languages." },
+            { title: "Input Hypothesis", content: "Krashen's proposal that language acquisition occurs through comprehensible input (i+1) that is slightly above the learner's current level." },
+            { title: "Interaction Hypothesis", content: "Long's theory that language acquisition is enhanced through social interaction and negotiation of meaning, building on Vygotsky's sociocultural theory." },
+            { title: "Output Hypothesis", content: "Swain's proposal that producing language (output) serves critical functions in acquisition: noticing gaps, hypothesis testing, and metalinguistic reflection." },
+            { title: "Affective Filter Hypothesis", content: "Krashen's concept that emotional factors like anxiety, motivation, and self-confidence can raise a 'filter' that blocks input from reaching the language acquisition device." },
+            { title: "Critical Period Hypothesis", content: "Lenneberg's proposal that there is a biologically determined period (typically ending around puberty) during which language acquisition occurs most easily and completely." },
+            { title: "Monitor Hypothesis", content: "Krashen's theory that learned knowledge functions as a 'monitor' to edit language output, operating only when conditions of time, focus on form, and rule knowledge are met." },
+            { title: "Natural Order Hypothesis", content: "Krashen's proposal that grammatical structures are acquired in a predictable order, regardless of instructional sequence." },
+            { title: "Comprehensible Input (i+1)", content: "Language input that contains structures slightly beyond the learner's current competence, where meaning is understood through context and extralinguistic information." },
+            { title: "Negotiation of Meaning", content: "The interactive process where learners and interlocutors work to resolve communication breakdowns, central to the Interaction Hypothesis." },
+            { title: "Noticing Function", content: "Swain's concept that producing output forces learners to notice gaps between their interlanguage and the target language." },
+            { title: "Hypothesis Testing", content: "The process where learners test their interlanguage rules through production and receive feedback, a key function of output." },
+            { title: "Metalinguistic Function", content: "Using language to reflect on language, developed through output according to Swain's hypothesis." },
+            { title: "Affective Variables", content: "Emotional factors like motivation, self-confidence, and anxiety that influence language acquisition according to the Affective Filter Hypothesis." },
+            { title: "Critical Period", content: "The hypothesized time window during childhood when language acquisition occurs most naturally and completely." },
+            { title: "SLA Theory Assessment Criteria", content: "Standards for evaluating theories: testability, explanatory power, predictive accuracy, applicability, empirical support, and coherence." },
+            { title: "Monitor Model", content: "Krashen's comprehensive theory of second language acquisition comprising five hypotheses: Acquisition-Learning, Monitor, Natural Order, Input, and Affective Filter." },
+            { title: "Comprehension Hypothesis", content: "Another name for Krashen's Input Hypothesis, emphasizing that understanding messages drives acquisition." },
+            { title: "Zone of Proximal Development", content: "Vygotsky's concept of the difference between what learners can do alone versus with assistance, foundational for interactionist approaches." },
+            { title: "Theory-Practice Relationship", content: "How SLA theories inform teaching practices and how classroom experiences can challenge or refine theoretical claims." }
+        ]
+    }
+};
+    
+        // DOM Elements
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        const themeToggle = document.getElementById('themeToggle');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const dropdownItems = document.querySelectorAll('.dropdown-item');
+        
+        // Content sections
+        const homeContent = document.getElementById('home-content');
+        const lectureContent = document.getElementById('lecture-content');
+        const finalQuizContent = document.getElementById('final-quiz-content');
+        
+        // Current state
+        let currentLecture = 1;
+        let isMobileMenuOpen = false;
+
+        // Initialize the page
+        function initPage() {
+            // Set up event listeners
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            }
+            
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            // Navigation event listeners
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.getAttribute('data-section');
+                    
+                    // Update active states
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show/hide content sections
+                    hideAllSections();
+                    
+                    switch(section) {
+                        case 'home':
+                            homeContent.classList.remove('hidden');
+                            break;
+                        case 'lectures':
+                            lectureContent.classList.remove('hidden');
+                            loadLecture(currentLecture);
+                            break;
+                        case 'final-quiz':
+                            finalQuizContent.classList.remove('hidden');
+                            break;
+                    }
+                    
+                    // Close mobile menu if open
+                    if (isMobileMenuOpen) {
+                        closeMobileMenu();
+                    }
+                });
+            });
+            
+            // Lecture dropdown event listeners
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lectureNum = parseInt(this.getAttribute('data-lecture'));
+                    
+                    // Update active states
+                    dropdownItems.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update main nav link
+                    const lecturesLink = document.querySelector('.nav-link[data-section="lectures"]');
+                    if (lecturesLink) {
+                        lecturesLink.classList.add('active');
+                        navLinks.forEach(l => {
+                            if (l !== lecturesLink) l.classList.remove('active');
+                        });
+                    }
+                    
+                    // Load the lecture
+                    currentLecture = lectureNum;
+                    loadLecture(lectureNum);
+                    
+                    // Show lecture content if not already showing
+                    hideAllSections();
+                    lectureContent.classList.remove('hidden');
+                    
+                    // Close mobile menu if open
+                    if (isMobileMenuOpen) {
+                        closeMobileMenu();
+                    }
+                });
+            });
+            
+            // Close mobile menu when clicking outside on mobile
+            document.addEventListener('click', function(e) {
+                if (isMobileMenuOpen && window.innerWidth < 992) {
+                    if (!navMenu.contains(e.target) && e.target !== mobileMenuBtn && !mobileMenuBtn.contains(e.target)) {
+                        closeMobileMenu();
+                    }
+                }
+            });
+            
+            // Initialize with home page
+            hideAllSections();
+            homeContent.classList.remove('hidden');
+            
+            // Set initial theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                updateThemeButton(true);
+            }
+            
+            // Set up final quiz functionality
+            setTimeout(() => {
+                const startFinalQuizBtn = document.getElementById('startFinalQuiz');
+                const resetFinalQuizBtn = document.getElementById('resetFinalQuiz');
+                const toggleFinalQuizInfoBtn = document.getElementById('toggleFinalQuizInfo');
+                const finalQuizInfo = document.getElementById('finalQuizInfo');
+                
+                if (toggleFinalQuizInfoBtn && finalQuizInfo) {
+                    toggleFinalQuizInfoBtn.addEventListener('click', function() {
+                        finalQuizInfo.classList.toggle('hidden');
+                    });
+                }
+                
+                if (startFinalQuizBtn) {
+                    startFinalQuizBtn.addEventListener('click', function() {
+                        // Simple final quiz implementation
+                        document.getElementById('finalQuizContainer').innerHTML = `
+                            <div class="question-card">
+                                <div class="question-text">Sample Final Quiz Question: This demonstrates the quiz functionality.</div>
+                                <div class="options-container">
+                                    <div class="option">
+                                        <input type="radio" name="final" value="1">
+                                        <label>Sample option A</label>
+                                    </div>
+                                    <div class="option">
+                                        <input type="radio" name="final" value="2">
+                                        <label>Sample option B</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <p style="color: var(--text-secondary); margin-top: 16px;">
+                                <i class="fas fa-info-circle"></i> Full final quiz functionality with 25 random questions would be implemented here.
+                            </p>
+                        `;
+                    });
+                }
+                
+                if (resetFinalQuizBtn) {
+                    resetFinalQuizBtn.addEventListener('click', function() {
+                        document.getElementById('finalQuizContainer').innerHTML = '<p>Click "Start Final Quiz" to begin.</p>';
+                        document.getElementById('finalQuizResults').classList.add('hidden');
+                    });
+                }
+            }, 100);
+        }
+        
+        // Hide all content sections
+        function hideAllSections() {
+            [homeContent, lectureContent, finalQuizContent].forEach(section => section?.classList.add('hidden'));
+        }
+        
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            if (isMobileMenuOpen) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        }
+        
+        function openMobileMenu() {
+            navMenu.classList.add('show');
+            isMobileMenuOpen = true;
+        }
+        
+        function closeMobileMenu() {
+            navMenu.classList.remove('show');
+            isMobileMenuOpen = false;
+        }
+        
+        // Toggle theme (light/dark)
+        function toggleTheme() {
+            const isDark = document.body.classList.contains('dark-theme');
+            
+            if (isDark) {
+                document.body.classList.remove('dark-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.body.classList.add('dark-theme');
+                localStorage.setItem('theme', 'dark');
+            }
+            
+            updateThemeButton(!isDark);
+        }
+        
+        function updateThemeButton(isDark) {
+            const icon = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            const text = isDark ? 'Light Mode' : 'Dark Mode';
+            
+            if (themeToggle) themeToggle.innerHTML = `${icon} ${text}`;
+        }
+        
+        // Load a lecture into the content area
+        function loadLecture(lectureNum) {
+            const lecture = lecturesData[lectureNum];
+            if (!lecture) return;
+            
+            // Create lecture content HTML
+            const contentHTML = `
+                <div class="page-header">
+                    <h2>${lecture.title}</h2>
+                </div>
+                
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3 class="section-title">Summary</h3>
+                    </div>
+                    
+                    <div class="summary-content">
+                        ${lecture.summary}
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3 class="section-title">Quiz</h3>
+                        <button class="toggle-btn" id="toggleQuizInfo">
+                            <i class="fas fa-info-circle"></i> Instructions
+                        </button>
+                    </div>
+                    
+                    <div class="quiz-info hidden" id="quizInfo">
+                        <p><strong>Instructions:</strong> Each quiz contains True/False and Multiple Choice questions. You'll receive immediate feedback after submission.</p>
+                    </div>
+                    
+                    <div class="quiz-actions" style="margin-bottom: 20px;">
+                        <button class="btn btn-secondary" id="takeTFQuiz">
+                            <i class="fas fa-check-circle"></i> True/False Quiz (5 questions)
+                        </button>
+                        <button class="btn btn-secondary" id="takeMCQQuiz">
+                            <i class="fas fa-list-ol"></i> MCQ Quiz (5 questions)
+                        </button>
+                        <button class="btn btn-primary" id="resetQuiz">
+                            <i class="fas fa-redo"></i> Reset Quiz
+                        </button>
+                    </div>
+                    
+                    <div class="quiz-container" id="quizContainer">
+                        <p>Select a quiz type to begin.</p>
+                    </div>
+                    
+                    <div class="quiz-actions">
+                        <button class="btn btn-primary" id="submitQuiz" style="display: none;">
+                            <i class="fas fa-paper-plane"></i> Submit Quiz
+                        </button>
+                    </div>
+                    
+                    <div class="results-container hidden" id="quizResults">
+                        <!-- Results will be displayed here -->
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3 class="section-title">Key Concepts</h3>
+                    </div>
+                    
+                    <div class="concepts-grid" id="conceptsGrid">
+                        ${lecture.keyConcepts.map((concept, index) => `
+                            <div class="concept-card">
+                                <div class="concept-header">
+                                    <div class="concept-number">${index + 1}</div>
+                                    <div class="concept-title">${concept.title}</div>
+                                    <button class="concept-toggle">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                </div>
+                                <div class="concept-content">
+                                    <p>${concept.content}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            lectureContent.innerHTML = contentHTML;
+            
+            // Set up event listeners for concept cards
+            setTimeout(() => {
+                document.querySelectorAll('.concept-toggle').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const content = this.closest('.concept-card').querySelector('.concept-content');
+                        const icon = this.querySelector('i');
+                        
+                        if (content.classList.contains('show')) {
+                            content.classList.remove('show');
+                            icon.classList.remove('fa-chevron-up');
+                            icon.classList.add('fa-chevron-down');
+                        } else {
+                            content.classList.add('show');
+                            icon.classList.remove('fa-chevron-down');
+                            icon.classList.add('fa-chevron-up');
+                        }
+                    });
+                });
+                
+                // Set up quiz info toggle
+                const toggleQuizInfo = document.getElementById('toggleQuizInfo');
+                const quizInfo = document.getElementById('quizInfo');
+                
+                if (toggleQuizInfo && quizInfo) {
+                    toggleQuizInfo.addEventListener('click', function() {
+                        quizInfo.classList.toggle('hidden');
+                    });
+                }
+                
+                // Set up quiz buttons
+                setupQuizButtons(lecture);
+            }, 100);
+        }
+        
+        // Set up quiz buttons for a lecture
+        function setupQuizButtons(lecture) {
+            const takeTFQuizBtn = document.getElementById('takeTFQuiz');
+            const takeMCQQuizBtn = document.getElementById('takeMCQQuiz');
+            const resetQuizBtn = document.getElementById('resetQuiz');
+            
+            if (takeTFQuizBtn) {
+                takeTFQuizBtn.addEventListener('click', function() {
+                    startQuiz(lecture.trueFalseQuestions, 'tf');
+                });
+            }
+            
+            if (takeMCQQuizBtn) {
+                takeMCQQuizBtn.addEventListener('click', function() {
+                    startQuiz(lecture.mcqQuestions, 'mcq');
+                });
+            }
+            
+            if (resetQuizBtn) {
+                resetQuizBtn.addEventListener('click', function() {
+                    resetQuiz();
+                });
+            }
+        }
+        
+        // Start a quiz
+        function startQuiz(questions, type) {
+            const quizContainer = document.getElementById('quizContainer');
+            const submitBtn = document.getElementById('submitQuiz');
+            
+            if (!quizContainer) return;
+            
+            // Get 5 random questions
+            const shuffledQuestions = [...questions].sort(() => 0.5 - Math.random()).slice(0, 5);
+            
+            let quizHTML = '';
+            
+            shuffledQuestions.forEach((q, index) => {
+                quizHTML += `
+                    <div class="question-card" data-question-index="${index}">
+                        <div class="question-text">${index + 1}. ${q.question}</div>
+                        <div class="options-container">
+                `;
+                
+                if (type === 'tf') {
+                    quizHTML += `
+                        <div class="option" data-answer="true">
+                            <input type="radio" name="q${index}" value="true">
+                            <label>True</label>
+                        </div>
+                        <div class="option" data-answer="false">
+                            <input type="radio" name="q${index}" value="false">
+                            <label>False</label>
+                        </div>
+                    `;
+                } else {
+                    q.options.forEach((option, optIndex) => {
+                        quizHTML += `
+                            <div class="option" data-answer="${optIndex}">
+                                <input type="radio" name="q${index}" value="${optIndex}">
+                                <label>${option}</label>
+                            </div>
+                        `;
+                    });
+                }
+                
+                quizHTML += `
+                        </div>
+                    </div>
+                `;
+            });
+            
+            quizContainer.innerHTML = quizHTML;
+            
+            if (submitBtn) {
+                submitBtn.style.display = 'inline-flex';
+                submitBtn.onclick = function() {
+                    showQuizResults(shuffledQuestions, type);
+                };
+            }
+            
+            // Add click handlers to options
+            setTimeout(() => {
+                document.querySelectorAll('.option').forEach(option => {
+                    option.addEventListener('click', function() {
+                        // Clear previous selection for this question
+                        const questionCard = this.closest('.question-card');
+                        questionCard.querySelectorAll('.option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        
+                        // Select this option
+                        this.classList.add('selected');
+                        this.querySelector('input').checked = true;
+                    });
+                });
+            }, 50);
+        }
+        
+        // Show quiz results
+        function showQuizResults(questions, type) {
+            let score = 0;
+            let resultsHTML = '';
+            
+            questions.forEach((q, index) => {
+                const questionCard = document.querySelector(`.question-card[data-question-index="${index}"]`);
+                const selectedOption = questionCard?.querySelector('.option.selected');
+                const userAnswer = selectedOption?.getAttribute('data-answer');
+                
+                let isCorrect = false;
+                if (type === 'tf') {
+                    isCorrect = (userAnswer === 'true') === q.answer;
+                } else {
+                    isCorrect = parseInt(userAnswer) === q.answer;
+                }
+                
+                if (isCorrect) score++;
+                
+                // Update UI for this question
+                if (selectedOption) {
+                    selectedOption.classList.add(isCorrect ? 'correct' : 'incorrect');
+                }
+                
+                // Build results HTML
+                resultsHTML += `
+                    <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+                        <p><strong>Question ${index + 1}:</strong> ${q.question}</p>
+                        <p style="color: ${isCorrect ? 'var(--success-color)' : 'var(--accent-color)'};">
+                            ${isCorrect ? '✓ Correct' : '✗ Incorrect'}
+                        </p>
+                    </div>
+                `;
+            });
+            
+            // Display results
+            const resultsContainer = document.getElementById('quizResults');
+            if (resultsContainer) {
+                resultsContainer.innerHTML = `
+                    <div class="results-header">
+                        <h3>Quiz Results</h3>
+                        <div class="score">Score: ${score}/5 (${(score/5*100).toFixed(0)}%)</div>
+                    </div>
+                    <div class="feedback">
+                        ${resultsHTML}
+                        <p style="margin-top: 12px;">
+                            <strong>Feedback:</strong> ${getFeedbackMessage(score)}
+                        </p>
+                    </div>
+                `;
+                resultsContainer.classList.remove('hidden');
+            }
+            
+            // Hide submit button
+            const submitBtn = document.getElementById('submitQuiz');
+            if (submitBtn) {
+                submitBtn.style.display = 'none';
+            }
+        }
+        
+        // Get feedback message based on score
+        function getFeedbackMessage(score) {
+            if (score === 5) return "Excellent! You have a strong understanding of this material.";
+            if (score >= 3) return "Good job! You understand most of the key concepts.";
+            return "You might want to review the material before trying again.";
+        }
+        
+        // Reset quiz
+        function resetQuiz() {
+            const quizContainer = document.getElementById('quizContainer');
+            const resultsContainer = document.getElementById('quizResults');
+            const submitBtn = document.getElementById('submitQuiz');
+            
+            if (quizContainer) quizContainer.innerHTML = '<p>Select a quiz type to begin.</p>';
+            if (resultsContainer) resultsContainer.classList.add('hidden');
+            if (submitBtn) submitBtn.style.display = 'none';
+        }
+        
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>
