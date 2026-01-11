@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP Needs Analysis Quiz</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .instructions {
+            background-color: #e8f4fc;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .quiz-section {
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        .question {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .question.paragraph {
+            border-left-color: #9b59b6;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        
+        .true-false-options {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .option-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 15px;
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .option-label:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .option-label.selected-true {
+            border-color: #2ecc71;
+            background-color: rgba(46, 204, 113, 0.1);
+        }
+        
+        .option-label.selected-false {
+            border-color: #e74c3c;
+            background-color: rgba(231, 76, 60, 0.1);
+        }
+        
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .paragraph-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        
+        .paragraph-answer.show {
+            max-height: 500px;
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+        
+        .toggle-answer {
+            background-color: #9b59b6;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        .toggle-answer:hover {
+            background-color: #8e44ad;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        #submitBtn {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        #submitBtn:hover {
+            background-color: #2980b9;
+        }
+        
+        #resetBtn {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        #resetBtn:hover {
+            background-color: #c0392b;
+        }
+        
+        #newQuizBtn {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        #newQuizBtn:hover {
+            background-color: #27ae60;
+        }
+        
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .feedback.correct {
+            background-color: rgba(46, 204, 113, 0.2);
+            border: 1px solid #2ecc71;
+            color: #27ae60;
+        }
+        
+        .feedback.incorrect {
+            background-color: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+            color: #c0392b;
+        }
+        
+        .score {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .results-summary {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .results-summary h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .results-table th, .results-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .results-table th {
+            background-color: #e8f4fc;
+            color: #2c3e50;
+        }
+        
+        .results-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .correct-answer {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .incorrect-answer {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .score-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .score-excellent {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .score-good {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .score-average {
+            background-color: #f39c12;
+            color: white;
+        }
+        
+        .score-poor {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .true-false-options {
+                flex-direction: column;
+            }
+            
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            .results-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ESP Needs Analysis Quiz</h1>
+            <p class="subtitle">Review your knowledge of Needs Analysis in English for Specific Purposes</p>
+        </header>
+        
+        <div class="instructions">
+            <p><strong>Instructions:</strong> This quiz contains 5 random true/false questions and 1 random paragraph question about ESP Needs Analysis. Select your answers, then click "Submit Quiz" to check your responses and see explanations. Click "New Random Quiz" to generate a new set of questions.</p>
+        </div>
+        
+        <div class="quiz-section">
+            <h2>True/False Questions</h2>
+            <div id="trueFalseQuestions"></div>
+        </div>
+        
+        <div class="quiz-section">
+            <h2>Paragraph Question</h2>
+            <div id="paragraphQuestion"></div>
+        </div>
+        
+        <div id="resultsContainer" style="display:none;">
+            <div id="scoreDisplay" class="score"></div>
+            
+            <div class="results-summary">
+                <h3>Quiz Results Summary</h3>
+                <table class="results-table" id="resultsTable">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Your Answer</th>
+                            <th>Correct Answer</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsBody">
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="results-summary">
+                <h3>Performance Analysis</h3>
+                <div id="performanceAnalysis"></div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button id="submitBtn">Submit Quiz</button>
+            <button id="resetBtn">Reset Answers</button>
+            <button id="newQuizBtn">New Random Quiz</button>
+        </div>
+        
+        <footer>
+            <p>Based on the ESP Needs Analysis course material from University Ziane Achour, Djelfa</p>
+            <p>Master One Students - Didactics of Teaching ESP - First Term</p>
+        </footer>
+    </div>
+
+    <script>
+        // True/False Questions Database
+        const trueFalseQuestions = [
+            {
+                question: "Needs analysis is exclusive to ESP and not used in general English courses.",
+                answer: false,
+                explanation: "Needs analysis theory and application can be applied in general English courses as well, though it's more central to ESP."
+            },
+            {
+                question: "The term 'needs analysis' first appeared in the 1960s with the emergence of ESP.",
+                answer: false,
+                explanation: "The term 'needs analysis' first appeared in the 1920s but became central to ESP in the 1960s."
+            },
+            {
+                question: "Objective needs refer to factual information about learners, while subjective needs refer to cognitive and affective factors.",
+                answer: true,
+                explanation: "Brindley (1989) and Richterich (1980) distinguish between objective needs (factual information) and subjective needs (cognitive and affective factors)."
+            },
+            {
+                question: "Hutchinson and Waters (1987) make a distinction between target needs and learning needs.",
+                answer: true,
+                explanation: "Target needs are what the learner needs to do in the target situation, while learning needs are what the learners need to do in order to learn."
+            },
+            {
+                question: "Questionnaires are more time-consuming than interviews for gathering needs analysis data.",
+                answer: false,
+                explanation: "Interviews are more time-consuming than questionnaires. Questionnaires can gather data from many respondents quickly."
+            },
+            {
+                question: "According to Brown (1995), needs analysis involves only three steps: planning, gathering information, and using the information.",
+                answer: true,
+                explanation: "Brown (1995) identifies three steps: making basic decisions, gathering information, and using the information."
+            },
+            {
+                question: "The resource group in needs analysis includes only the students who are learning English.",
+                answer: false,
+                explanation: "The resource group consists of any people who may serve as sources of information about the target group, including students, teachers, and content experts."
+            },
+            {
+                question: "Validity refers to the consistency with which a procedure obtains information.",
+                answer: false,
+                explanation: "Reliability refers to consistency, while validity refers to the degree to which an instrument measures what it claims to measure."
+            },
+            {
+                question: "Needs analysis should only be conducted at the beginning of a course.",
+                answer: false,
+                explanation: "Needs analysis can be ongoing throughout a course to adapt to changing learner needs and perceptions."
+            },
+            {
+                question: "ESP is defined solely by the specific vocabulary it teaches.",
+                answer: false,
+                explanation: "ESP is defined by its focus on learners' specific needs and contexts, not just vocabulary."
+            },
+            {
+                question: "Register analysis focuses on the regularities of structure that distinguish one type of text from another.",
+                answer: false,
+                explanation: "Register analysis focuses on vocabulary and grammar of texts, while genre analysis focuses on structural regularities."
+            },
+            {
+                question: "According to Dudley-Evans and St. John (1998), needs analysis is a linear process in course development.",
+                answer: false,
+                explanation: "Dudley-Evans and St. John viewed needs analysis as a cyclical process, not strictly linear."
+            },
+            {
+                question: "Felt needs are based on experts' perceptions of learners' educational gaps.",
+                answer: false,
+                explanation: "Felt needs are related to learners' feelings and thoughts, while perceived needs are experts' thoughts about educational gaps."
+            },
+            {
+                question: "In ESP, the 'S' stands for 'Specific' and the 'P' stands for 'Purposes'.",
+                answer: true,
+                explanation: "ESP stands for English for Specific Purposes, distinguishing it from general English courses."
+            },
+            {
+                question: "Means analysis focuses on the environment in which the course will be run.",
+                answer: true,
+                explanation: "Means analysis considers the teaching/learning environment, including resources and constraints."
+            },
+            {
+                question: "Needs analysis is considered less important in ESP than in general English teaching.",
+                answer: false,
+                explanation: "Needs analysis is considered fundamental and central to ESP course development."
+            },
+            {
+                question: "Present Situation Analysis estimates learners' strengths and weaknesses in language skills.",
+                answer: true,
+                explanation: "Present Situation Analysis assesses current language proficiency to identify gaps."
+            },
+            {
+                question: "According to the text, ESP has an advantage over EGP because it brought into focus the concept of 'needs analysis'.",
+                answer: true,
+                explanation: "The text states that ESP has an advantage over EGP (English for General Purposes) in its focus on needs analysis."
+            },
+            {
+                question: "Richterich and Trim (1980) defined needs analysis as focusing only on linguistic factors.",
+                answer: false,
+                explanation: "They defined it broadly to include many factors beyond just language, such as social dynamics and career expectations."
+            },
+            {
+                question: "A deficiency analysis considers learners' future aspirations rather than current needs.",
+                answer: false,
+                explanation: "Deficiency analysis considers learners' present needs and wants, identifying gaps between current and desired proficiency."
+            },
+            {
+                question: "Target Situation Analysis includes subjective, felt and process-oriented needs.",
+                answer: false,
+                explanation: "Target Situation Analysis includes objective, perceived and product-oriented needs."
+            },
+            {
+                question: "Discourse analysis investigates how sentences combine into discourse.",
+                answer: true,
+                explanation: "Discourse analysis examines language beyond the sentence level, looking at how sentences connect."
+            },
+            {
+                question: "The same needs analysis instruments should be used in all ESP contexts.",
+                answer: false,
+                explanation: "Different instruments should be selected based on the specific context and type of information needed."
+            },
+            {
+                question: "According to Brown (1995), reliability, validity, and usability are equally important in needs analysis.",
+                answer: true,
+                explanation: "Brown emphasizes that all three qualities are important for sound information gathering."
+            },
+            {
+                question: "ESP course designers can ignore learners' subjective needs and focus only on objective requirements.",
+                answer: false,
+                explanation: "Both objective and subjective needs are important for effective ESP course design."
+            },
+            {
+                question: "The sample needs analysis questionnaire in the text includes sections on learners' preferred teaching styles.",
+                answer: true,
+                explanation: "The sample questionnaire asks about preferred teaching style in Section II, question 10."
+            },
+            {
+                question: "Needs analysis is only important for course design but not for assessment.",
+                answer: false,
+                explanation: "Needs analysis informs all aspects of ESP including assessment, materials selection, and teaching approaches."
+            },
+            {
+                question: "According to Hutchinson and Waters (1987), an awareness of needs distinguishes ESP from general English.",
+                answer: true,
+                explanation: "They highlighted that needs awareness is a key distinction between ESP and general English."
+            },
+            {
+                question: "All ESP courses should follow exactly the same structure regardless of the specific field.",
+                answer: false,
+                explanation: "ESP courses should be tailored to the specific needs of learners in their particular fields."
+            },
+            {
+                question: "Ongoing needs analysis can lead to successful revision of an ESP programme.",
+                answer: true,
+                explanation: "The text states that ongoing needs analysis may lead to successful programme revision."
+            },
+            {
+                question: "The audience in needs analysis refers only to the teachers who will teach the course.",
+                answer: false,
+                explanation: "The audience includes all people who will apply the results, such as teachers, administrators, and materials developers."
+            },
+            {
+                question: "Needs analysis questionnaires should avoid open-ended questions to ensure standardization.",
+                answer: false,
+                explanation: "Questionnaires can include open-ended questions to gather more detailed information, though they require more analysis."
+            },
+            {
+                question: "ESP practitioners can design effective courses without conducting a needs analysis.",
+                answer: false,
+                explanation: "Needs analysis is fundamental to developing effective ESP courses that meet learners' specific requirements."
+            },
+            {
+                question: "Berwick (1989) states that needs assessment is unimportant for decision planners in course design.",
+                answer: false,
+                explanation: "Berwick states that needs assessment is important for decision planners to design the course."
+            },
+            {
+                question: "Situational needs focus only on the linguistic requirements of the target situation.",
+                answer: false,
+                explanation: "Situational needs involve broader parameters including goals, learning styles, and proficiency levels."
+            },
+            {
+                question: "According to the text, ESP places great emphasis on needs analysis at every stage.",
+                answer: true,
+                explanation: "The text states that ESP emphasizes needs analysis in course design, teaching/learning, and application."
+            },
+            {
+                question: "The 'jigsaw' model of needs analysis shows that different approaches can be combined.",
+                answer: true,
+                explanation: "The jigsaw model illustrates how different needs analysis approaches can complement each other."
+            },
+            {
+                question: "Interviews in needs analysis have the disadvantage of not allowing for spontaneous responses.",
+                answer: false,
+                explanation: "This is a disadvantage of questionnaires, not interviews. Interviews allow for spontaneous, in-depth responses."
+            },
+            {
+                question: "Language needs are only about grammatical accuracy in the target situation.",
+                answer: false,
+                explanation: "Language needs encompass all linguistic behaviors needed in the target situation, including skills, functions, and discourse features."
+            },
+            {
+                question: "Needs analysis is a static process that should not change once a course begins.",
+                answer: false,
+                explanation: "Needs analysis should be ongoing and adaptable as learner needs and contexts evolve."
+            }
+        ];
+
+        // Paragraph Questions Database
+        const paragraphQuestions = [
+            {
+                question: "Explain the difference between objective and subjective needs in ESP needs analysis, providing examples of each.",
+                answer: "Objective needs are derivable from factual information about learners, such as their current language proficiency, difficulties, and how they use language in real-life communication situations. Examples include: learners' country of origin, age, educational background, and specific language skills required for their profession. Subjective needs refer to cognitive and affective factors, including learners' personality, confidence, attitudes, wants, and expectations regarding English learning. Examples include: a learner's preference for collaborative activities, anxiety about speaking, or desire to learn specific vocabulary for career advancement. Both types are important for comprehensive ESP course design."
+            },
+            {
+                question: "Describe the three main steps in conducting a needs analysis according to Brown (1995), and explain why each step is important.",
+                answer: "According to Brown (1995), the three main steps are: 1) Making basic decisions about the needs analysis - This involves deciding who will be involved (target group, audience, analysts, resource group) and what information will be gathered. This step is important because it establishes the scope and methodology. 2) Gathering information - Using techniques like tests, observations, interviews, and questionnaires to collect data. This step is crucial for obtaining accurate, relevant data about learners' needs. 3) Using the information - Analyzing data with statistical techniques and interpreting results for curriculum design. This step transforms raw data into actionable insights for course development. Each step ensures the needs analysis is systematic, relevant, and useful for ESP course design."
+            },
+            {
+                question: "Compare and contrast the advantages and disadvantages of questionnaires and interviews as needs analysis instruments.",
+                answer: "Questionnaires are efficient for gathering data from many respondents quickly and offer greater anonymity, which may encourage honesty. However, they have limitations: self-selecting bias (only certain respondents complete them), lack of opportunity to clarify questions, and inability to probe responses deeply. Interviews allow for in-depth exploration, clarification of questions and responses, and collection of nuanced information. Disadvantages include being time-consuming, requiring skilled interviewers, potential interviewer bias, and less standardization. In practice, ESP practitioners often use both methods complementarily: questionnaires for broad data collection and interviews for deeper understanding of specific issues."
+            },
+            {
+                question: "Explain the concept of 'ongoing needs analysis' in ESP and discuss its importance for course development and revision.",
+                answer: "Ongoing needs analysis refers to conducting needs assessment at various points throughout a course, not just at the beginning. This is important because learners' perceptions, teachers' understandings, and contextual factors may change as the course progresses. Ongoing analysis allows for course adjustments based on emerging needs, unexpected difficulties, or changing circumstances. It supports continuous improvement of the ESP programme by enabling revisions to objectives, materials, teaching approaches, and assessment methods. This cyclical approach recognizes that needs are not static and that effective ESP courses must be responsive to evolving requirements throughout the learning process."
+            },
+            {
+                question: "Discuss the importance of needs analysis in ESP course development, referencing at least three different scholars mentioned in the text.",
+                answer: "Needs analysis is fundamental to ESP course development. Berwick (1989) emphasizes its importance for decision planners in course design, helping identify what parts of the language should be learned based on specific purposes. Hutchinson and Waters (1987) highlight that awareness of needs distinguishes ESP from general English, making needs analysis central to ESP's identity. Riddell (1991) points to its crucial role in syllabus and course design, enabling matching of program content with student requirements. Collectively, these perspectives show that needs analysis ensures ESP courses are relevant, targeted, and effective in helping learners acquire language skills specifically needed in their professional or academic contexts."
+            },
+            {
+                question: "Explain the difference between target needs and learning needs as conceptualized by Hutchinson and Waters (1987), and provide examples of each.",
+                answer: "Hutchinson and Waters (1987) distinguish between target needs and learning needs. Target needs refer to what learners need to do in the target situation - the language requirements of their professional or academic context. Examples include: a nurse needing to understand medical terminology, an engineer needing to write technical reports, or a business professional needing to participate in meetings. Learning needs refer to what learners need to do in order to learn - the processes, strategies, and conditions that facilitate acquisition of the target language. Examples include: needing visual aids for comprehension, preferring collaborative activities, requiring frequent feedback, or needing to connect new vocabulary to existing knowledge. Effective ESP addresses both types of needs."
+            },
+            {
+                question: "Describe the various types of needs identified by different researchers in the field of ESP needs analysis, providing examples of at least four types.",
+                answer: "Different researchers have identified various types of needs: 1) Objective vs. subjective needs (Brindley, 1989) - Objective: factual data like proficiency levels; Subjective: attitudes and preferences. 2) Target vs. learning needs (Hutchinson & Waters, 1987) - Target: language for specific situations; Learning: how learners best acquire language. 3) Situational vs. communicative needs (Richards, 1990) - Situational: program parameters and learner characteristics; Communicative: specific communication tasks. 4) Felt vs. perceived needs (Berwick, 1989) - Felt: learners' own wants; Perceived: experts' views of what learners need. Understanding these distinctions helps ESP practitioners design more comprehensive and effective courses."
+            },
+            {
+                question: "Explain the concepts of reliability, validity, and usability in needs analysis procedures as defined by Brown (1995), and discuss their interrelationship.",
+                answer: "Brown (1995) defines reliability as the consistency with which a procedure obtains information - if repeated or used by different analysts, it should yield similar results. Validity refers to the degree to which an instrument measures what it claims to measure - it should accurately assess the intended aspects of needs. Usability concerns how practical a procedure is to use, administer, score, and interpret - considering time, cost, equipment, and simplicity. These three qualities are interrelated: a procedure must be usable to be implemented consistently (reliability), must measure the right things (validity), and must be practical enough for regular use (usability). All three are equally important for sound needs analysis."
+            },
+            {
+                question: "Discuss how needs analysis informs different aspects of ESP course development beyond just syllabus design.",
+                answer: "Needs analysis informs multiple aspects of ESP course development: 1) Syllabus design - determining content and sequencing based on identified needs. 2) Materials selection/development - choosing or creating materials relevant to learners' specific requirements. 3) Pedagogical approaches - selecting teaching methods appropriate for the learners and context. 4) Assessment design - creating evaluations that measure progress toward specific objectives. 5) Course evaluation - establishing criteria for judging course effectiveness. 6) Resource allocation - determining necessary equipment, time, and personnel. By systematically identifying needs, ESP practitioners can make informed decisions across all these dimensions, creating more effective, targeted courses."
+            },
+            {
+                question: "Explain the 'jigsaw' model of needs analysis approaches and how different approaches can complement each other in ESP course development.",
+                answer: "The 'jigsaw' model illustrates how different needs analysis approaches fit together to provide a comprehensive understanding of learners' requirements. Key approaches include: Target Situation Analysis (objective, product-oriented needs), Present Situation Analysis (current strengths/weaknesses), Learning Needs Analysis (subjective, process-oriented needs), Means Analysis (teaching/learning environment), Deficiency Analysis (gaps between current and desired proficiency), Register Analysis (vocabulary/grammar), Discourse Analysis (sentence combinations), and Genre Analysis (text structure regularities). Each approach provides different but complementary insights. For example, Target Situation Analysis identifies what language is needed, while Learning Needs Analysis reveals how learners can best acquire it. Using multiple approaches creates a more complete picture for effective ESP course design."
+            },
+            {
+                question: "Describe the four categories of people involved in a needs analysis according to Brown (1995), and explain the role of each category.",
+                answer: "Brown (1995) identifies four categories: 1) Target group - The people about whom information is collected (the learners). They provide data about their needs, preferences, and current abilities. 2) Audience - All people who will apply the results (teachers, administrators, materials developers). They use the findings to make decisions about course design and implementation. 3) Analysts - Those responsible for conducting the needs analysis (often ESP teachers or researchers). They design the study, collect and analyze data, and interpret results. 4) Resource group - People who serve as information sources about the target group (students, content teachers, employers). They provide additional perspectives on learners' needs. Each category plays a distinct but interconnected role in ensuring comprehensive needs assessment."
+            },
+            {
+                question: "Explain why needs analysis is particularly important in ESP compared to general English teaching, referencing key principles of ESP.",
+                answer: "Needs analysis is particularly important in ESP because of key ESP principles: 1) Specificity - ESP focuses on specific language needs of particular learner groups, requiring precise identification of those needs. 2) Purpose-driven learning - ESP is designed for specific purposes (academic, professional), making needs analysis essential for defining those purposes. 3) Efficiency - ESP aims to teach only the language needed for specific contexts, avoiding irrelevant content. 4) Relevance - Content must be immediately applicable to learners' real-world requirements. 5) The ESP maxim: 'Tell me what you need English for and I will tell you the English that you need' (Hutchinson & Waters, 1987). This principle makes needs analysis the foundation of ESP, distinguishing it from general English's broader, less targeted approach."
+            },
+            {
+                question: "Discuss the role of ongoing needs analysis in addressing changing learner perceptions and needs throughout an ESP course.",
+                answer: "Ongoing needs analysis addresses changing perceptions and needs by recognizing that these evolve during a course. Initially, learners may not fully understand their language needs or may have unrealistic expectations. As the course progresses, their awareness deepens, priorities may shift, and new needs may emerge. Teachers' understanding of learners also develops over time. Ongoing analysis allows for mid-course adjustments to: 1) Content - adding or removing material based on emerging needs. 2) Methodology - adapting teaching approaches based on what works best. 3) Pace - speeding up or slowing down based on learner progress. 4) Assessment - modifying evaluations to better measure relevant skills. This responsiveness increases course effectiveness and learner satisfaction by ensuring the ESP programme remains relevant throughout the learning journey."
+            },
+            {
+                question: "Explain how different types of needs analysis instruments can be combined for more comprehensive data collection in ESP contexts.",
+                answer: "Combining different instruments provides more comprehensive data through triangulation. For example: 1) Questionnaires can gather broad quantitative data from many learners about their perceived needs, then interviews can explore selected responses in depth. 2) Observations of learners in target situations can reveal actual language use, supplemented by self-report data from questionnaires. 3) Analysis of existing documents (syllabi, textbooks, workplace materials) can identify required language, complemented by tests assessing current proficiency. 4) Focus groups can generate ideas about needs, followed by surveys to validate findings across the larger population. This mixed-methods approach compensates for individual instruments' limitations, increases validity through multiple data sources, and provides both breadth and depth of understanding for more effective ESP course design."
+            },
+            {
+                question: "Discuss the statement: 'Needs analysis should be the starting point for devising syllabus, course materials and classroom activities' (Jordan, 1997) in the context of ESP course development.",
+                answer: "Jordan's statement captures a fundamental principle of ESP: that all course components should derive from identified needs. The syllabus should reflect specific language requirements identified through analysis of target situations. Course materials should provide practice with precisely those language forms, functions, and skills needed for learners' purposes. Classroom activities should simulate real-world tasks learners will encounter. Starting with needs analysis ensures: 1) Relevance - content matches learners' actual requirements. 2) Efficiency - time is spent on necessary rather than peripheral language. 3) Motivation - learners see immediate applicability. 4) Effectiveness - courses achieve their intended outcomes. Without this needs-based foundation, ESP risks becoming generic language teaching that fails to address learners' specific purposes, undermining the rationale for ESP itself."
+            }
+        ];
+
+        // Variables to track current questions and user answers
+        let currentTrueFalseQuestions = [];
+        let currentParagraphQuestion = null;
+        let userAnswers = {};
+        let quizSubmitted = false;
+        let resultsData = [];
+
+        // Initialize the quiz
+        function initializeQuiz() {
+            // Reset state
+            userAnswers = {};
+            quizSubmitted = false;
+            resultsData = [];
+            
+            // Select 5 random true/false questions
+            currentTrueFalseQuestions = getRandomQuestions(trueFalseQuestions, 5);
+            
+            // Select 1 random paragraph question
+            currentParagraphQuestion = getRandomQuestions(paragraphQuestions, 1)[0];
+            
+            // Display questions
+            displayTrueFalseQuestions();
+            displayParagraphQuestion();
+            
+            // Hide results container
+            document.getElementById('resultsContainer').style.display = 'none';
+            
+            // Reset all feedback elements
+            document.querySelectorAll('.feedback').forEach(fb => {
+                fb.style.display = 'none';
+                fb.classList.remove('correct', 'incorrect');
+            });
+        }
+
+        // Get random questions from array
+        function getRandomQuestions(questionArray, count) {
+            const shuffled = [...questionArray].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        // Display true/false questions
+        function displayTrueFalseQuestions() {
+            const container = document.getElementById('trueFalseQuestions');
+            container.innerHTML = '';
+            
+            currentTrueFalseQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${index + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="true-false-options">
+                        <label class="option-label" for="q${index}_true">
+                            <input type="radio" id="q${index}_true" name="q${index}" value="true">
+                            True
+                        </label>
+                        <label class="option-label" for="q${index}_false">
+                            <input type="radio" id="q${index}_false" name="q${index}" value="false">
+                            False
+                        </label>
+                    </div>
+                    <div class="feedback" id="feedback${index}"></div>
+                `;
+                container.appendChild(questionDiv);
+                
+                // Add event listeners to radio buttons
+                const trueRadio = document.getElementById(`q${index}_true`);
+                const falseRadio = document.getElementById(`q${index}_false`);
+                const trueLabel = trueRadio.parentElement;
+                const falseLabel = falseRadio.parentElement;
+                
+                trueRadio.addEventListener('change', function() {
+                    userAnswers[index] = true;
+                    trueLabel.classList.add('selected-true');
+                    falseLabel.classList.remove('selected-false');
+                });
+                
+                falseRadio.addEventListener('change', function() {
+                    userAnswers[index] = false;
+                    falseLabel.classList.add('selected-false');
+                    trueLabel.classList.remove('selected-true');
+                });
+                
+                // Restore previous answer if exists
+                if (userAnswers[index] !== undefined) {
+                    if (userAnswers[index] === true) {
+                        trueRadio.checked = true;
+                        trueLabel.classList.add('selected-true');
+                    } else {
+                        falseRadio.checked = true;
+                        falseLabel.classList.add('selected-false');
+                    }
+                }
+            });
+        }
+
+        // Display paragraph question
+        function displayParagraphQuestion() {
+            const container = document.getElementById('paragraphQuestion');
+            container.innerHTML = '';
+            
+            if (!currentParagraphQuestion) return;
+            
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question paragraph';
+            questionDiv.innerHTML = `
+                <div class="question-number">Paragraph Question</div>
+                <div class="question-text">${currentParagraphQuestion.question}</div>
+                <button class="toggle-answer" id="toggleAnswer">Show/Hide Answer</button>
+                <div class="paragraph-answer" id="paragraphAnswer">
+                    <p><strong>Model Answer:</strong></p>
+                    <p>${currentParagraphQuestion.answer}</p>
+                </div>
+            `;
+            container.appendChild(questionDiv);
+            
+            // Add event listener to toggle button
+            document.getElementById('toggleAnswer').addEventListener('click', function() {
+                const answerDiv = document.getElementById('paragraphAnswer');
+                answerDiv.classList.toggle('show');
+                this.textContent = answerDiv.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+            });
+        }
+
+        // Submit quiz and check answers
+        function submitQuiz() {
+            if (quizSubmitted) return;
+            
+            let score = 0;
+            const totalTrueFalseQuestions = currentTrueFalseQuestions.length;
+            resultsData = [];
+            
+            // Check true/false answers
+            currentTrueFalseQuestions.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                const correctAnswer = q.answer;
+                const feedbackDiv = document.getElementById(`feedback${index}`);
+                
+                // Check if question was answered
+                if (userAnswer === undefined) {
+                    feedbackDiv.textContent = "You did not answer this question.";
+                    feedbackDiv.className = "feedback incorrect";
+                    feedbackDiv.style.display = 'block';
+                    
+                    resultsData.push({
+                        question: q.question,
+                        userAnswer: "Not answered",
+                        correctAnswer: correctAnswer ? "True" : "False",
+                        result: "Incorrect",
+                        explanation: q.explanation
+                    });
+                    return;
+                }
+                
+                // Check if answer is correct
+                if (userAnswer === correctAnswer) {
+                    score++;
+                    feedbackDiv.innerHTML = `<strong>Correct!</strong> ${q.explanation}`;
+                    feedbackDiv.className = "feedback correct";
+                    
+                    resultsData.push({
+                        question: q.question,
+                        userAnswer: userAnswer ? "True" : "False",
+                        correctAnswer: correctAnswer ? "True" : "False",
+                        result: "Correct",
+                        explanation: q.explanation
+                    });
+                } else {
+                    feedbackDiv.innerHTML = `<strong>Incorrect.</strong> The correct answer is ${correctAnswer ? 'True' : 'False'}. ${q.explanation}`;
+                    feedbackDiv.className = "feedback incorrect";
+                    
+                    resultsData.push({
+                        question: q.question,
+                        userAnswer: userAnswer ? "True" : "False",
+                        correctAnswer: correctAnswer ? "True" : "False",
+                        result: "Incorrect",
+                        explanation: q.explanation
+                    });
+                }
+                feedbackDiv.style.display = 'block';
+            });
+            
+            // Display results
+            displayResults(score, totalTrueFalseQuestions);
+            quizSubmitted = true;
+        }
+
+        // Display results and feedback
+        function displayResults(score, totalQuestions) {
+            const percentage = Math.round((score / totalQuestions) * 100);
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            
+            // Determine score badge
+            let scoreBadgeClass, scoreBadgeText;
+            if (percentage >= 90) {
+                scoreBadgeClass = "score-excellent";
+                scoreBadgeText = "Excellent!";
+            } else if (percentage >= 80) {
+                scoreBadgeClass = "score-excellent";
+                scoreBadgeText = "Very Good!";
+            } else if (percentage >= 70) {
+                scoreBadgeClass = "score-good";
+                scoreBadgeText = "Good!";
+            } else if (percentage >= 60) {
+                scoreBadgeClass = "score-average";
+                scoreBadgeText = "Average";
+            } else {
+                scoreBadgeClass = "score-poor";
+                scoreBadgeText = "Needs Improvement";
+            }
+            
+            scoreDisplay.innerHTML = `
+                <h2>Quiz Results</h2>
+                <p>Your Score: ${score} out of ${totalQuestions} (${percentage}%) 
+                <span class="score-badge ${scoreBadgeClass}">${scoreBadgeText}</span></p>
+                <p>${getPerformanceMessage(percentage)}</p>
+            `;
+            
+            // Populate results table
+            const resultsBody = document.getElementById('resultsBody');
+            resultsBody.innerHTML = '';
+            
+            resultsData.forEach((result, index) => {
+                const row = document.createElement('tr');
+                const resultClass = result.result === "Correct" ? "correct-answer" : "incorrect-answer";
+                
+                row.innerHTML = `
+                    <td>${result.question.substring(0, 80)}...</td>
+                    <td class="${resultClass}">${result.userAnswer}</td>
+                    <td>${result.correctAnswer}</td>
+                    <td class="${resultClass}">${result.result}</td>
+                `;
+                
+                // Add click to show explanation
+                row.addEventListener('click', function() {
+                    alert(`Explanation: ${result.explanation}`);
+                });
+                
+                resultsBody.appendChild(row);
+            });
+            
+            // Generate performance analysis
+            const performanceAnalysis = document.getElementById('performanceAnalysis');
+            const correctCount = resultsData.filter(r => r.result === "Correct").length;
+            const incorrectCount = resultsData.filter(r => r.result === "Incorrect").length;
+            const unansweredCount = resultsData.filter(r => r.userAnswer === "Not answered").length;
+            
+            performanceAnalysis.innerHTML = `
+                <p><strong>Breakdown:</strong></p>
+                <ul>
+                    <li>Correct Answers: ${correctCount} (${Math.round((correctCount/totalQuestions)*100)}%)</li>
+                    <li>Incorrect Answers: ${incorrectCount} (${Math.round((incorrectCount/totalQuestions)*100)}%)</li>
+                    <li>Unanswered Questions: ${unansweredCount}</li>
+                </ul>
+                <p><strong>Recommendations:</strong></p>
+                <ul>
+                    <li>${getRecommendations(percentage)}</li>
+                    <li>Review the questions you answered incorrectly</li>
+                    <li>Pay attention to the explanations provided</li>
+                    <li>Try a new quiz to test your improved knowledge</li>
+                </ul>
+            `;
+            
+            // Show results container
+            document.getElementById('resultsContainer').style.display = 'block';
+            
+            // Scroll to results
+            document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Get performance message based on percentage
+        function getPerformanceMessage(percentage) {
+            if (percentage >= 90) {
+                return "Outstanding! You have an excellent understanding of ESP Needs Analysis concepts.";
+            } else if (percentage >= 80) {
+                return "Great job! You have a solid grasp of ESP Needs Analysis principles.";
+            } else if (percentage >= 70) {
+                return "Good work! You understand most ESP Needs Analysis concepts.";
+            } else if (percentage >= 60) {
+                return "Fair understanding. Review the material to strengthen your knowledge.";
+            } else {
+                return "You need to review the ESP Needs Analysis material. Focus on the key concepts.";
+            }
+        }
+
+        // Get recommendations based on performance
+        function getRecommendations(percentage) {
+            if (percentage >= 80) {
+                return "You're doing well! Consider exploring more advanced ESP topics.";
+            } else if (percentage >= 60) {
+                return "Focus on reviewing the different types of needs analysis and their applications.";
+            } else {
+                return "Start by reviewing the basic definitions and concepts of needs analysis in ESP.";
+            }
+        }
+
+        // Reset all answers
+        function resetAnswers() {
+            userAnswers = {};
+            quizSubmitted = false;
+            resultsData = [];
+            
+            // Clear all radio button selections
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+            });
+            
+            // Clear all styling from option labels
+            document.querySelectorAll('.option-label').forEach(label => {
+                label.classList.remove('selected-true', 'selected-false');
+            });
+            
+            // Hide all feedback
+            document.querySelectorAll('.feedback').forEach(fb => {
+                fb.style.display = 'none';
+            });
+            
+            // Hide results container
+            document.getElementById('resultsContainer').style.display = 'none';
+            
+            // Hide paragraph answer if shown
+            const answerDiv = document.getElementById('paragraphAnswer');
+            if (answerDiv) {
+                answerDiv.classList.remove('show');
+                const toggleBtn = document.getElementById('toggleAnswer');
+                if (toggleBtn) toggleBtn.textContent = 'Show Answer';
+            }
+        }
+
+        // Event listeners
+        document.getElementById('submitBtn').addEventListener('click', submitQuiz);
+        document.getElementById('resetBtn').addEventListener('click', resetAnswers);
+        document.getElementById('newQuizBtn').addEventListener('click', initializeQuiz);
+
+        // Initialize the quiz when page loads
+        window.addEventListener('DOMContentLoaded', initializeQuiz);
+    </script>
+</body>
+</html>
