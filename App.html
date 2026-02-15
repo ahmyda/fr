@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>this · that · these · those ✦  random sentence game</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      padding: 1rem;
+      margin: 0;
+    }
+
+    .game-panel {
+      max-width: 750px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 2.5rem;
+      padding: 2rem 2rem 2.5rem;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      word-spacing: 8px;
+      text-align: center;
+      color: #f0e9db;
+      text-shadow: 0 4px 10px #b4530960, 2px 2px 0 #00000030;
+      margin-bottom: 0.25rem;
+    }
+
+    .subhead {
+      text-align: center;
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      border-bottom: 1px dashed #fbbf2460;
+      padding-bottom: 0.9rem;
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    .subhead span {
+      background: #2d3b4f;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #fbbf24;
+      font-style: normal;
+    }
+
+    .sentence-display {
+      background: #0b1622;
+      border-radius: 3rem;
+      padding: 2rem 2rem;
+      margin: 1rem 0 2rem 0;
+      border: 2px solid #f1c40f30;
+      box-shadow: inset 0 5px 8px #00000055, 0 12px 18px -10px black;
+    }
+
+    .sentence {
+      font-size: 2.4rem;
+      line-height: 1.4;
+      font-weight: 600;
+      text-align: center;
+      word-break: break-word;
+      color: #fef9e6;
+    }
+
+    .blank-highlight {
+      display: inline-block;
+      background: #1e2c41;
+      color: #fbbf24;
+      font-weight: 800;
+      font-size: 2.6rem;
+      min-width: 150px;
+      padding: 0 0.8rem;
+      border-bottom: 5px solid #fbbf24;
+      border-radius: 15px;
+      text-shadow: 0 0 6px #ffb347;
+      transition: 0.15s;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+      margin: 2.8rem 0 2rem;
+    }
+
+    .option-btn {
+      background: #1e2c3e;
+      border: 2px solid #4b5d73;
+      color: #ece9e0;
+      font-size: 2rem;
+      font-weight: 700;
+      padding: 0.8rem 2.2rem;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: 0.1s ease;
+      min-width: 140px;
+      letter-spacing: 1px;
+      box-shadow: 0 10px 0 #0f1a24, 0 4px 12px black;
+      text-transform: lowercase;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      background: #2f405a;
+      border-color: #fbbf24;
+      transform: translateY(-3px);
+      box-shadow: 0 13px 0 #0f1a24, 0 7px 14px black;
+    }
+
+    .option-btn:active:not(:disabled) {
+      transform: translateY(4px);
+      box-shadow: 0 6px 0 #0f1a24;
+    }
+
+    .option-btn.selected-correct {
+      background: #059669;
+      border-color: #a7f3d0;
+      color: white;
+      box-shadow: 0 0 15px #10b981;
+      pointer-events: none;
+    }
+
+    .option-btn.selected-wrong {
+      background: #b91c1c;
+      border-color: #fca5a5;
+      color: #fee2e2;
+      box-shadow: 0 0 15px #ef4444;
+      transform: scale(1.02);
+    }
+
+    .option-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      filter: grayscale(0.5);
+      transform: translateY(4px);
+      box-shadow: 0 6px 0 #0f1a24;
+    }
+
+    .feedback-area {
+      background: #111e2b;
+      border-radius: 50px;
+      padding: 1rem 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.2rem 0 1.8rem;
+      border-left: 10px solid #fbbf24;
+    }
+
+    .message {
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: #f1e7d6;
+    }
+
+    .counter {
+      background: #2f3e56;
+      padding: 0.45rem 1.4rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: #fcd34d;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .action-btn {
+      background: transparent;
+      border: 2px solid #fbbf2480;
+      color: #fbebc5;
+      font-weight: 600;
+      font-size: 1.2rem;
+      padding: 0.7rem 2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
+      transition: 0.15s;
+      flex: 1 0 auto;
+      box-shadow: 0 5px 10px #00000030;
+    }
+
+    .action-btn:hover {
+      background: #fbbf2410;
+      border-color: #fbbf24;
+      color: white;
+      transform: scale(1.02);
+    }
+
+    .rule-hint {
+      color: #94a3b8;
+      background: #16212e;
+      border-radius: 3rem;
+      padding: 0.8rem 1.8rem;
+      font-size: 1rem;
+      text-align: center;
+      margin-top: 2.2rem;
+      border: 1px solid #f1c40f30;
+    }
+
+    .rule-hint kbd {
+      background: #2d3f54;
+      color: #ffd966;
+      border-radius: 30px;
+      padding: 0.2rem 1rem;
+      font-weight: 600;
+      margin: 0 2px;
+    }
+
+    @media (max-width: 500px) {
+      .game-panel { padding: 1.5rem; }
+      .sentence { font-size: 1.8rem; }
+      .blank-highlight { font-size: 2rem; min-width: 100px; }
+      .option-btn { font-size: 1.6rem; padding: 0.5rem 0.2rem; min-width: 100px; }
+    }
+  </style>
+</head>
+<body>
+<div class="game-panel">
+  <h1>◈ this / that / these / those ◈</h1>
+  <div class="subhead"><span>✦ fill the blank ✦</span> &nbsp; one word – distance & number</div>
+
+  <!-- main sentence card -->
+  <div class="sentence-display">
+    <div class="sentence" id="sentenceContainer">⚡ click [new sentence] ⚡</div>
+  </div>
+
+  <!-- four choice buttons -->
+  <div class="options-grid" id="optionButtons">
+    <button class="option-btn" id="optThis">this</button>
+    <button class="option-btn" id="optThat">that</button>
+    <button class="option-btn" id="optThese">these</button>
+    <button class="option-btn" id="optThose">those</button>
+  </div>
+
+  <!-- feedback & progress -->
+  <div class="feedback-area">
+    <span class="message" id="feedbackMessage">✨ choose a word</span>
+    <span class="counter" id="scoreDisplay">0 / 10</span>
+  </div>
+
+  <!-- control buttons -->
+  <div class="action-buttons">
+    <button class="action-btn" id="newSentenceBtn">⟳ new sentence</button>
+    <button class="action-btn" id="resetGameBtn">↺ reset score</button>
+  </div>
+
+  <!-- quick rule reminder (proximity & number) -->
+  <div class="rule-hint">
+    <kbd>this</kbd> ➔ near / singular • <kbd>that</kbd> ➔ far / singular • <kbd>these</kbd> ➔ near / plural • <kbd>those</kbd> ➔ far / plural
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ---------- SENTENCE POOL (randomised with proximity & number hints) ----------
+    const sentences = [
+      { text: "_______ apple on my desk is fresh.", correct: "this", hint: "near + singular" },
+      { text: "_______ clouds over the mountain look dark.", correct: "those", hint: "far + plural" },
+      { text: "Look at _______ birds in the tree near us.", correct: "these", hint: "near + plural" },
+      { text: "_______ castle across the river is ancient.", correct: "that", hint: "far + singular" },
+      { text: "_______ cookies I'm holding are warm.", correct: "these", hint: "near + plural" },
+      { text: "_______ car parked far away is mine.", correct: "that", hint: "far + singular" },
+      { text: "_______ pens here on my desk need ink.", correct: "these", hint: "near + plural" },
+      { text: "Can you see _______ stars in the sky tonight?", correct: "those", hint: "far + plural" },
+      { text: "_______ book in my hand is exciting.", correct: "this", hint: "near + singular" },
+      { text: "_______ mountains far away are snowy.", correct: "those", hint: "far + plural" },
+      { text: "_______ phone right here is ringing.", correct: "this", hint: "near + singular" },
+      { text: "_______ shoes under the bed are dirty.", correct: "those", hint: "far + plural" },
+      { text: "_______ flowers in the garden (just beside us) smell nice.", correct: "these", hint: "near + plural" },
+      { text: "_______ building across the street is old.", correct: "that", hint: "far + singular" },
+      { text: "_______ pencil I'm using is sharp.", correct: "this", hint: "near + singular" },
+      { text: "Please bring _______ chairs from the other room.", correct: "those", hint: "far + plural" },
+      { text: "_______ pizza on this table tastes great.", correct: "this", hint: "near + singular" },
+      { text: "_______ children in the park (far away) are playing.", correct: "those", hint: "far + plural" },
+      { text: "_______ cookies in the jar (next to me) are for you.", correct: "these", hint: "near + plural" },
+      { text: "_______ mountain peak far in the distance is beautiful.", correct: "that", hint: "far + singular" }
+    ];
+
+    // ---------- game state ----------
+    let currentSentence = null;           // current sentence object
+    let selectedOption = null;            // 'this'/'that'/... or null if not answered
+    let score = 0;
+    let roundCount = 0;                   // how many sentences generated (for score max 10)
+    const MAX_SCORE = 10;
+
+    // DOM elements
+    const sentenceContainer = document.getElementById('sentenceContainer');
+    const feedbackEl = document.getElementById('feedbackMessage');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const optionBtns = {
+      this: document.getElementById('optThis'),
+      that: document.getElementById('optThat'),
+      these: document.getElementById('optThese'),
+      those: document.getElementById('optThose')
+    };
+
+    // helper: reset button styles and enable all
+    function enableAllButtons(clearSelectedClass = true) {
+      for (let key in optionBtns) {
+        const btn = optionBtns[key];
+        btn.disabled = false;
+        if (clearSelectedClass) {
+          btn.classList.remove('selected-correct', 'selected-wrong');
+        }
+      }
+    }
+
+    // disable all option buttons (after answer)
+    function disableAllButtons() {
+      for (let key in optionBtns) {
+        optionBtns[key].disabled = true;
+      }
+    }
+
+    // update score display
+    function updateScoreUI() {
+      scoreDisplay.textContent = `${score} / ${MAX_SCORE}`;
+    }
+
+    // generate a random sentence (different from current if possible, but not strictly enforced)
+    function pickRandomSentence() {
+      if (sentences.length === 0) return null;
+      const randomIndex = Math.floor(Math.random() * sentences.length);
+      return sentences[randomIndex];
+    }
+
+    // display new sentence, reset selection state
+    function loadNewSentence() {
+      const newSent = pickRandomSentence();
+      if (!newSent) return;
+      currentSentence = newSent;
+
+      // replace blank ___ with a highlighted span (but keep the original structure)
+      const displayText = newSent.text.replace('_______', '<span class="blank-highlight"> ______ </span>');
+      sentenceContainer.innerHTML = displayText;
+
+      // reset selection visuals + enable buttons
+      enableAllButtons(true);
+      selectedOption = null;
+
+      // update feedback message (simple hint)
+      feedbackEl.innerHTML = `🤔 choose: ${newSent.hint}`;
+
+      // increment round counter, but we only track score separately
+      roundCount++;
+    }
+
+    // check answer when user clicks a button
+    function handleOptionClick(optionValue) {
+      // prevent double answer / if already answered
+      if (selectedOption !== null) return;
+      if (!currentSentence) {
+        // no sentence yet – force a new one
+        loadNewSentence();
+        return;
+      }
+
+      selectedOption = optionValue;
+
+      // disable all buttons to lock further answers
+      disableAllButtons();
+
+      const isCorrect = (optionValue === currentSentence.correct);
+
+      // mark the clicked button as correct or wrong
+      const clickedBtn = optionBtns[optionValue];
+      if (isCorrect) {
+        clickedBtn.classList.add('selected-correct');
+        feedbackEl.innerHTML = `✅ perfect! “${optionValue}” is right (${currentSentence.hint}).`;
+        // increase score if not already max
+        if (score < MAX_SCORE) {
+          score++;
+        }
+      } else {
+        clickedBtn.classList.add('selected-wrong');
+
+        // also highlight the correct answer (to teach)
+        const correctBtn = optionBtns[currentSentence.correct];
+        if (correctBtn) {
+          correctBtn.classList.add('selected-correct');
+        }
+
+        feedbackEl.innerHTML = `❌ “${optionValue}” isn't correct. The right word is “${currentSentence.correct}” (${currentSentence.hint}).`;
+        // score not increased (no penalty)
+      }
+
+      // update score display
+      updateScoreUI();
+    }
+
+    // reset score to 0 (game progress reset)
+    function resetScoreOnly() {
+      score = 0;
+      updateScoreUI();
+      // if a sentence is loaded, we keep it BUT clear any answer selection (so user can try again on same sentence)
+      if (currentSentence) {
+        // re-enable buttons, remove any highlighting
+        enableAllButtons(true);
+        selectedOption = null;
+        // re-show the hint
+        feedbackEl.innerHTML = `🤔 try again: ${currentSentence.hint}`;
+      } else {
+        // if no sentence, load one
+        loadNewSentence();
+      }
+    }
+
+    // reset everything (score + fresh sentence)
+    function resetFullGame() {
+      score = 0;
+      updateScoreUI();
+      loadNewSentence();   // also resets buttons and hint
+    }
+
+    // attach click listeners to each option
+    optionBtns.this.addEventListener('click', () => handleOptionClick('this'));
+    optionBtns.that.addEventListener('click', () => handleOptionClick('that'));
+    optionBtns.these.addEventListener('click', () => handleOptionClick('these'));
+    optionBtns.those.addEventListener('click', () => handleOptionClick('those'));
+
+    // new sentence button
+    document.getElementById('newSentenceBtn').addEventListener('click', () => {
+      // load new sentence, keep score as is
+      loadNewSentence();
+      // feedback updated inside loadNewSentence
+    });
+
+    // reset game button (reset score + new sentence)
+    document.getElementById('resetGameBtn').addEventListener('click', () => {
+      resetFullGame();
+    });
+
+    // optional: resetScoreOnly function if we wanted, but we use full reset. 
+    // for extra flexibility, we also attach a double-click or we can keep only reset full.
+
+    // initialise: load first sentence
+    (function init() {
+      resetFullGame(); // loads sentence and sets score 0
+    })();
+
+    // extra: if the user somehow clicks on blank when no sentence, safety
+    window.addEventListener('load', function() {
+      // already called init
+    });
+  })();
+</script>
+</body>
+</html>
